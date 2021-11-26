@@ -38,13 +38,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BlackBox\GetInfo.cs" />
-    <Compile Include="Class1.cs" />
+    <Compile Include="API\ApiData.cs" />
+    <Compile Include="BlackBox\LiveData.cs" />
+    <Compile Include="BlackBox\LiveDataElem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
-    <Folder Include="API\" />
-    <Folder Include="DataFile\" />
+    <None Include="DataFile\DefaultElem.json" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

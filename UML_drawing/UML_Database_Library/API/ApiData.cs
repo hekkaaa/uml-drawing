@@ -7,7 +7,7 @@ using UML_Database_Library.BlackBox;
 
 namespace UML_Database_Library.API
 {
-    internal class ApiData
+    public class ApiData
     {
         public LiveData CreateProj()
         {

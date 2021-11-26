@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace UML_Database_Library.BlackBox
 {
-    internal class LiveData
+    public class LiveData
     {
         public string nameproject { get; set; }
         List<LiveDataElem> _liveDataProjects = new List<LiveDataElem> { };
