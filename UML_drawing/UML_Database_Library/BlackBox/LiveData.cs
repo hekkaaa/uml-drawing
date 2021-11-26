@@ -9,41 +9,57 @@ namespace UML_Database_Library.BlackBox
     public class LiveData
     {
         public string nameproject { get; set; }
-        List<LiveDataElem> _liveDataProjects = new List<LiveDataElem> { };
+        List<LiveDataElem> _listObjectFigure = new List<LiveDataElem> { };
 
         public LiveData() { }
+
+        public LiveData(string name) { this.nameproject = name; }
+      
         public LiveData(string name, object obj)
         {
             this.nameproject = name;
-            LiveDataProjects.Add((LiveDataElem)obj);
+            ListObjectFigure.Add((LiveDataElem)obj);
         }
 
-        public List<LiveDataElem> LiveDataProjects
+        public List<LiveDataElem> ListObjectFigure
         {
-            get { return this._liveDataProjects; }
-            set { this._liveDataProjects = value; }
+            get { return this._listObjectFigure; }
+            set { this._listObjectFigure = value; }
         }
 
         internal bool RemoveEl(int id)
         {
 
-            for (int i = 0; i < LiveDataProjects.Count; i++)
+            for (int i = 0; i < ListObjectFigure.Count; i++)
             {
-                if (_liveDataProjects[i].id == id)
+                if (_listObjectFigure[i]._id == id)
                 {
                     try
                     {
-                        _liveDataProjects.RemoveAt(i);
+                        _listObjectFigure.RemoveAt(i);
                         return true;
                     }
                     catch (Exception ex)
                     {
-                        throw new Exception();
+                        throw new Exception(ex.Message);
                     }
                 }
             }
             return false;
         }
 
+        internal bool AddEl(LiveData obj, LiveDataElem obj2)
+        {   
+        
+            try
+            {
+                obj._listObjectFigure.Add(obj2);
+                return true;
+            }
+            catch(Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
     }
 }
