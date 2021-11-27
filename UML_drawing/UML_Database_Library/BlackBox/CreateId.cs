@@ -10,9 +10,13 @@ namespace UML_Database_Library.BlackBox
     {
          public static int CreaterId(LiveData obj)
         {
-            var tmplist = obj.ListObjectFigure;
-            var inttmp = obj.ListObjectFigure[tmplist.Count-1]._id;
-            return inttmp+1;
+            List<LiveDataElem> tmplist = obj.ListObjectFigure;
+            if(tmplist.Count == 0) return 1;
+            else
+            {
+                int inttmp = obj.ListObjectFigure[tmplist.Count - 1]._id;
+                return inttmp + 1;
+            } 
         }
     }
 }
