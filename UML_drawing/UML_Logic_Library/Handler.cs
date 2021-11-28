@@ -26,14 +26,12 @@ namespace UML_Logic_Library
             // Тут все-таки надо передавать тебе в метод параметр (объект для записи)
             // мб я чет совсем путаю, но в момент написания я очень уверена была и все вроде логично
             var componentCreated = _apiData.CreateElem(_liveData, component);
-            component.SetId(componentCreated._id);
+            component.ItemId = componentCreated._id;
             return component;
         }
 
         public IComponent GetItem(int id)
         {
-            if (id < 0)
-                throw new ArgumentException("Такого элемента не существует!");
             var liveDataElement = _liveData.ListObjectFigure.Find(x => x._id == id);
             var component = ComponentFactory.CreateSingleBlock(liveDataElement);
             if (component == null)
@@ -43,8 +41,6 @@ namespace UML_Logic_Library
 
         public bool DeleteItem(int id)
         {
-            if (id < 0)
-                throw new ArgumentException("Такого элемента не существует!");
             return _apiData.RemoveElem(_liveData, id);
         }
 
@@ -57,21 +53,16 @@ namespace UML_Logic_Library
         
         public bool Refresh(SingleBlockRequest singleBlockRequest, int id)
         {
-            if (id < 0)
-                throw new ArgumentException("Такого элемента не существует!");
             var singleBlock = ComponentFactory.CreateSingleBlock(singleBlockRequest);
             if (singleBlock == null) 
                 throw new Exception("Несуществующий компонент");
-
-            // Помнишь, мы обсуждали обновление всей коллекции после изменения обЪекта,
-            // я тут подумала, что тебе тогда нужно будет перезаписать существующую,
-            // пока что вызываю метод CreateProj, но он будет создавать новую
+            
             for (var i = 0; i < _liveData.ListObjectFigure.Count; i++)
             {
                 if (_liveData.ListObjectFigure[i]._id == id)
                 {
                     _liveData.ListObjectFigure[i] = singleBlock.ToLiveDataElem();
-                    _apiData.CreateProj(_liveData.nameproject);
+                    _apiData.SaveProject(_liveData.nameproject, _liveData);
                     return true;
                 }
             }

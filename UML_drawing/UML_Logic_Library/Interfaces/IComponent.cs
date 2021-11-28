@@ -6,6 +6,6 @@ namespace UML_Logic_Library.Interfaces
        int ItemId { get; set; }
 
 
-       public void SetId(int id);
+       //public void SetId(int id);
     }
 }

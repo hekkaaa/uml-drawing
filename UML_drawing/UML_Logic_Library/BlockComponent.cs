@@ -12,8 +12,7 @@ namespace UML_Logic_Library
     [Serializable]
     public abstract class BlockComponent : IComponent
     {
-        private int _itemId;
-        public int ItemId { get => _itemId; set => value = _itemId; }
+        public int ItemId { get; set; }
         public string text = "Title";
 
         public string Text
@@ -77,10 +76,10 @@ namespace UML_Logic_Library
 
         public abstract bool PointIsInside(PointF p);
         
-        public void SetId(int id)
-        {
-            ItemId = id;
-        }
+        // public void SetId(int id)
+        // {
+        //     ItemId = id;
+        // }
 
         public abstract IEnumerable<Marker> GetMarkers(Handler diagram);
 
