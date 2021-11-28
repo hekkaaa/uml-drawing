@@ -1,0 +1,73 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using UML_Database_Library.API;
+using UML_Database_Library.BlackBox;
+using UML_Logic_Library.Interfaces;
+using UML_Logic_Library.Requests;
+using UML_Logic_Library.Requests.Abstract;
+
+namespace UML_Logic_Library
+{
+    public class Handler : IHandler
+    {
+        private ApiData _apiData = new ApiData();
+        private LiveData _liveData;
+        
+        public void CreateProj(string nameProj)
+        {
+            _liveData = _apiData.CreateProj(nameProj);
+        }
+        
+        // Когда добавятся еще компоненты, то добавлю еще перегрузку 
+        public IComponent Create(SingleBlockRequest singleBlockRequest)
+        {
+            var component = ComponentFactory.CreateSingleBlock(singleBlockRequest);
+            // Тут все-таки надо передавать тебе в метод параметр (объект для записи)
+            // мб я чет совсем путаю, но в момент написания я очень уверена была и все вроде логично
+            var componentCreated = _apiData.CreateElem(_liveData, component);
+            component.ItemId = componentCreated._id;
+            return component;
+        }
+
+        public IComponent GetItem(int id)
+        {
+            var liveDataElement = _liveData.ListObjectFigure.Find(x => x._id == id);
+            var component = ComponentFactory.CreateSingleBlock(liveDataElement);
+            if (component == null)
+                throw new ArgumentNullException("Выберите подходящий объект!");
+            return component;
+        }
+
+        public bool DeleteItem(int id)
+        {
+            return _apiData.RemoveElem(_liveData, id);
+        }
+
+        // Надо подумать над методом, потому что мне или визуалу смысл от LiveData
+        // скорее всего может нужно вернуть ListObjectFigure и отрисовывать компоненты по очереди
+        public LiveData LoadProject()
+        {
+            return _apiData.LoadProject(_liveData.nameproject);
+        }
+        
+        public bool Refresh(SingleBlockRequest singleBlockRequest, int id)
+        {
+            var singleBlock = ComponentFactory.CreateSingleBlock(singleBlockRequest);
+            if (singleBlock == null) 
+                throw new Exception("Несуществующий компонент");
+            
+            for (var i = 0; i < _liveData.ListObjectFigure.Count; i++)
+            {
+                if (_liveData.ListObjectFigure[i]._id == id)
+                {
+                    _liveData.ListObjectFigure[i] = singleBlock.ToLiveDataElem();
+                    _apiData.SaveProject(_liveData.nameproject, _liveData);
+                    return true;
+                }
+            }
+            return false;
+        }
+        
+    }
+}
