@@ -37,5 +37,10 @@ namespace UML_Logic_Library.Markers
 
         public abstract void UpdateLocation();
         
+        public override void Draw(Graphics gr)
+        {
+            gr.DrawRectangle(Pen, Location.X - _defaultSize, Location.Y - _defaultSize, _defaultSize * 2, _defaultSize * 2);
+            gr.FillRectangle(Brush, Location.X - _defaultSize, Location.Y - _defaultSize, _defaultSize * 2, _defaultSize * 2);
+        }
     }
 }

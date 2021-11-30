@@ -7,16 +7,16 @@ namespace UML_Logic_Library
 {
     public static class ComponentFactory
     {
-        public static SimpleRectangle CreateSingleBlock(SingleBlockRequest singleBlock) =>
+        public static SimpleRectangle CreateSingleBlock(BlockRequest block) =>
             new SimpleRectangle
             {
-                ItemId = singleBlock.ItemId,
-                //Color = singleBlock.Color,
-                PenColor = singleBlock.PenColor,
-                PenWidth = singleBlock.PenWidth,
-                //Text = singleBlock.Text,
-                Location = singleBlock.Location,
-                Size = singleBlock.Size
+                ItemId = block.ItemId,
+                //Color = block.Color,
+                PenColor = block.PenColor,
+                PenWidth = block.PenWidth,
+                //Text = block.Text,
+                Location = block.Location,
+                Size = block.Size
             };
         
         //public static SimpleRectangle CreateSingleBlock(LiveDataElem liveDataElem) =>

@@ -37,9 +37,8 @@ namespace UML_Logic_Library
                 return _brush;
             }
         }
-
         
-        public SimpleRectangle(){ }
+        // public SimpleRectangle(){ }
         
         public override bool PointIsInside(PointF p)
         {
@@ -54,9 +53,8 @@ namespace UML_Logic_Library
             yield return m;
             
         }
-        //настройки вывода текста
         
-        //прямоугольник вокруг фигуры (в абсолютных координатах)
+        //прямоугольник вокруг фигуры 
         public virtual RectangleF Bounds
         {
             get
@@ -118,8 +116,9 @@ namespace UML_Logic_Library
             gr.TranslateTransform(Location.X, Location.Y);
             gr.FillPath(Brush, Path);
             gr.DrawPath(Pen, Path);
-            gr.DrawString(Text.TextFields, Text.Font, Brushes.Black, TextRect, Text.StringFormatTitle);
-            gr.DrawRectangle(Pen, Bounds.Left - 2, Bounds.Top - 2, Bounds.Width + 4, Bounds.Height + 4);
+            RectangleF rectF1 = new RectangleF(Bounds.Left - 2, Bounds.Top - 2, Bounds.Width + 4, Bounds.Height + 4);
+            gr.DrawString(Text.TextFields, Text.Font, Brushes.Black, rectF1, Text.StringFormatTitle);
+            gr.DrawRectangle(Pen,Rectangle.Round(rectF1) );
             gr.Restore(transState);
         }
         

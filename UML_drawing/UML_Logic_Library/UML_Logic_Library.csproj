@@ -41,12 +41,10 @@
         <Reference Include="System.Xml" />
     </ItemGroup>
     <ItemGroup>
-        <Compile Include="ArrowComponentRequest.cs" />
         <Compile Include="Component.cs" />
         <Compile Include="ComponentFactory.cs" />
         <Compile Include="ComponentRequest.cs" />
         <Compile Include="Components.cs" />
-        <Compile Include="DrawElements.cs" />
         <Compile Include="Handler.cs" />
         <Compile Include="Helpers\GraphicPathHelper.cs" />
         <Compile Include="Helpers\PointHelper.cs" />
@@ -59,10 +57,8 @@
         <Compile Include="Markers\Marker.cs" />
         <Compile Include="Markers\SizeMarker.cs" />
         <Compile Include="Properties\AssemblyInfo.cs" />
-        <Compile Include="RectangleComponent.cs" />
-        <Compile Include="Requests\Abstract\IBlockComponentRequest.cs" />
-        <Compile Include="Requests\SingleBlockRequest.cs" />
-        <Compile Include="SerializableGraphicsPath.cs" />
+        <Compile Include="Requests\Abstract\IComponentRequest.cs" />
+        <Compile Include="Requests\BlockRequest.cs" />
         <Compile Include="SimpleRectangle.cs" />
         <Compile Include="TextField.cs" />
     </ItemGroup>

@@ -7,7 +7,7 @@ namespace UML_Logic_Library
     {
         public List<string> TextList = new List<string>();
         private string _textField;
-        private Font _font = new Font(FontFamily.GenericSansSerif, 12, FontStyle.Regular);
+        public Font Font => new Font(FontFamily.GenericSansSerif, 12, FontStyle.Regular);
 
         public string TextFields
         {
@@ -18,16 +18,6 @@ namespace UML_Logic_Library
                     _textField = "Object";
                 else
                     _textField = string.Join(" ", TextList.ToArray());
-            }
-        }
-
-        public Font Font
-        {
-            get => _font;
-            set
-            {
-                _font = new Font(value.FontFamily, value.Size, value.Style);
-
             }
         }
         

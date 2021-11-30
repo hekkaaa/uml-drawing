@@ -45,7 +45,11 @@ namespace UML_Logic_Library
 
             public override void Draw(Graphics gr)
             {
-                throw new System.NotImplementedException();
+                if (From == null || To == null)
+                    return;
+
+                RecalcPath();
+                gr.DrawPath(Pen, Path);
             }
 
             public void RecalcPath()

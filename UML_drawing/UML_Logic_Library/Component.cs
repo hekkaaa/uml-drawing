@@ -14,7 +14,6 @@ namespace UML_Logic_Library
     public abstract class Component : IComponent
     {
         public int ItemId { get; set; }
-        //readonly GraphicsPath _graphicsPath = new GraphicsPath();
         public GraphicsPath Path => new GraphicsPath();
         private Color _penColor = Color.Black;
         protected Pen _pen;

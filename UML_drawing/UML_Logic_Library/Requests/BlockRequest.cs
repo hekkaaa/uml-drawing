@@ -3,7 +3,7 @@ using UML_Logic_Library.Requests.Abstract;
 
 namespace UML_Logic_Library.Requests
 {
-    public class SingleBlockRequest : IBlockComponentRequest
+    public class BlockRequest : IComponentRequest
     {
         public SizeF Size { get; set; }
         
@@ -13,6 +13,6 @@ namespace UML_Logic_Library.Requests
         public Brush Brush { get; set; }
         public Color PenColor { get; set; }
         public float PenWidth { get; set; }
-        public string Text { get; set; }
+        public TextField Text { get; set; }
     }
 }

@@ -7,15 +7,15 @@ namespace UML_Logic_Library.Interfaces
 {
     public interface IHandler
     {
-        public IComponent Create (SingleBlockRequest singleBlockRequest);
+        //public IComponent Create (BlockRequest blockRequest);
         
-        public IComponent GetItem(int id);
-        
-        public bool DeleteItem(int id);
+        // public IComponent GetItem(int id);
+        //
+        // public bool DeleteItem(int id);
         
         public LiveData LoadProject();
         
-        public bool Refresh(SingleBlockRequest singleBlockRequest, int id);
+        public bool Refresh(BlockRequest blockRequest, int id);
         
     }
 }
