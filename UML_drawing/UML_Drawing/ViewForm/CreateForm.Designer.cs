@@ -32,6 +32,8 @@
             this.PJname = new System.Windows.Forms.Label();
             this.buttonCreate = new System.Windows.Forms.Button();
             this.buttonCancel = new System.Windows.Forms.Button();
+            this.InfoLabel = new System.Windows.Forms.Label();
+            this.infoLabel1 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // textBoxCreate
@@ -39,7 +41,7 @@
             this.textBoxCreate.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBoxCreate.Location = new System.Drawing.Point(117, 78);
+            this.textBoxCreate.Location = new System.Drawing.Point(117, 69);
             this.textBoxCreate.Name = "textBoxCreate";
             this.textBoxCreate.Size = new System.Drawing.Size(246, 22);
             this.textBoxCreate.TabIndex = 0;
@@ -82,12 +84,31 @@
             this.buttonCancel.UseVisualStyleBackColor = true;
             this.buttonCancel.Click += new System.EventHandler(this.buttonCancel_Click);
             // 
+            // InfoLabel
+            // 
+            this.InfoLabel.AutoSize = true;
+            this.InfoLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.InfoLabel.Location = new System.Drawing.Point(104, 94);
+            this.InfoLabel.Name = "InfoLabel";
+            this.InfoLabel.Size = new System.Drawing.Size(0, 16);
+            this.InfoLabel.TabIndex = 4;
+            // 
+            // infoLabel1
+            // 
+            this.infoLabel1.AutoSize = true;
+            this.infoLabel1.Location = new System.Drawing.Point(164, 94);
+            this.infoLabel1.Name = "infoLabel1";
+            this.infoLabel1.Size = new System.Drawing.Size(0, 16);
+            this.infoLabel1.TabIndex = 5;
+            // 
             // CreateForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
             this.ClientSize = new System.Drawing.Size(483, 192);
+            this.Controls.Add(this.infoLabel1);
+            this.Controls.Add(this.InfoLabel);
             this.Controls.Add(this.buttonCancel);
             this.Controls.Add(this.buttonCreate);
             this.Controls.Add(this.PJname);
@@ -108,5 +129,7 @@
         private System.Windows.Forms.Label PJname;
         private System.Windows.Forms.Button buttonCreate;
         private System.Windows.Forms.Button buttonCancel;
+        private System.Windows.Forms.Label InfoLabel;
+        private System.Windows.Forms.Label infoLabel1;
     }
 }

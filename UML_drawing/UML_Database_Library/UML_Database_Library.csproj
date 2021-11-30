@@ -70,6 +70,7 @@
     <Compile Include="BlackBox\CreateId.cs" />
     <Compile Include="BlackBox\LiveData.cs" />
     <Compile Include="BlackBox\LiveDataElem.cs" />
+    <Compile Include="BlackBox\SystemFiles.cs" />
     <Compile Include="BlackBox\WorkJSON.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

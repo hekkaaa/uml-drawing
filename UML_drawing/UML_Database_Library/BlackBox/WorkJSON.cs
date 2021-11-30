@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Text.Json;
+using UML_Database_Library.BlackBox;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,12 +14,14 @@ namespace UML_Database_Library.BlackBox
         internal static LiveData LoadJson(string namefile)
         {
             try
-            {   
-                
+            {
+
                 // тут проблема с путями сохранения и чтения.
                 // нужно решить потом.
 
-                string json = File.ReadAllText($@"..\..\..\..\ConsoleApp1-test\files\{namefile}");
+                string userDirectory = Directory.GetCurrentDirectory();
+
+                string json = File.ReadAllText($@"{userDirectory}\project\{namefile}.json");
                 JsonDocument parse = JsonDocument.Parse(json);
                 LiveData liveDataProject = new LiveData();
 
@@ -29,7 +32,7 @@ namespace UML_Database_Library.BlackBox
                         LiveDataElem tmpelem = JsonSerializer.Deserialize<LiveDataElem>(parse.RootElement[i].ToString());
                         liveDataProject.ListObjectFigure.Add(tmpelem);
                     };
-
+                    liveDataProject.nameproject = namefile;
                     return liveDataProject;
                 }
                 catch (InvalidOperationException)
@@ -53,11 +56,14 @@ namespace UML_Database_Library.BlackBox
         }
 
         internal static bool SaveJson(string namefile,LiveData obj)
-        {
+        {   
+            // Проверяем есть ли папка project вообще.
+            SystemFiles.CreateDirectoryProject(SystemFiles.CheckDirectory());
             string json = JsonSerializer.Serialize(obj.ListObjectFigure);
+
             try
             {
-                using (StreamWriter sw = new StreamWriter($@"..\..\..\..\UML_Database_Library\DataFile\{namefile}"))
+                using (StreamWriter sw = new StreamWriter($@"{Directory.GetCurrentDirectory()}\project\{namefile}.json"))
                 {
                     sw.WriteLine(json);
                 }
