@@ -7,29 +7,29 @@ namespace UML_Logic_Library
 {
     public static class ComponentFactory
     {
-        public static SingleBlock CreateSingleBlock(SingleBlockRequest singleBlock) =>
-            new SingleBlock
+        public static SimpleRectangle CreateSingleBlock(BlockRequest block) =>
+            new SimpleRectangle
             {
-                ItemId = singleBlock.ItemId,
-                Color = singleBlock.Color,
-                PenColor = singleBlock.PenColor,
-                PenWidth = singleBlock.PenWidth,
-                Text = singleBlock.Text,
-                Location = singleBlock.Location,
-                Size = singleBlock.Size
+                ItemId = block.ItemId,
+                //Color = block.Color,
+                PenColor = block.PenColor,
+                PenWidth = block.PenWidth,
+                //Text = block.Text,
+                Location = block.Location,
+                Size = block.Size
             };
         
-        public static SingleBlock CreateSingleBlock(LiveDataElem liveDataElem) =>
-            new SingleBlock
-            {
-                ItemId = liveDataElem.ItemId,
-                Color = liveDataElem.Color,
-                PenColor = liveDataElem.PenColor,
-                PenWidth = liveDataElem.PenWidth,
-                Text = liveDataElem.Text,
-                Location = liveDataElem.Location,
-                Size = liveDataElem.Size
-            };
+        //public static SimpleRectangle CreateSingleBlock(LiveDataElem liveDataElem) =>
+        //    new SimpleRectangle
+        //    {
+        //        ItemId = liveDataElem.ItemId,
+        //        Color = liveDataElem.Color,
+        //        PenColor = liveDataElem.PenColor,
+        //        PenWidth = liveDataElem.PenWidth,
+        //        TextField = liveDataElem.TextField,
+        //        Location = liveDataElem.Location,
+        //        Size = liveDataElem.Size
+        //    };
         
     }
 }
