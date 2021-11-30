@@ -103,6 +103,7 @@ namespace UML_Database_Library.API
             }
         }
 
+        // обьединить
         public bool AddElement(LiveData obj, LiveDataElem obj2)
         {   
             if(obj2._id == default)
