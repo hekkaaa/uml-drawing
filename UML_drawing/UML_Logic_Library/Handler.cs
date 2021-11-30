@@ -9,10 +9,15 @@ using UML_Logic_Library.Requests.Abstract;
 
 namespace UML_Logic_Library
 {
+    /// <summary>
+    /// Это у же не актуальный класс, но пусть пока что будет тут
+    /// </summary>
     public class Handler : IHandler
     {
         private ApiData _apiData = new ApiData();
         private LiveData _liveData;
+        // После всех свистоплясок сделать маппинг объектов _liveData в норм компоненты, наверное хз
+        public List<IComponent> ComponentsInProj;
         
         public void CreateProj(string nameProj)
         {
@@ -25,7 +30,7 @@ namespace UML_Logic_Library
             var component = ComponentFactory.CreateSingleBlock(singleBlockRequest);
             // Тут все-таки надо передавать тебе в метод параметр (объект для записи)
             // мб я чет совсем путаю, но в момент написания я очень уверена была и все вроде логично
-            var componentCreated = _apiData.CreateElem(_liveData, component);
+            var componentCreated = _apiData.CreateElem(_liveData);
             component.ItemId = componentCreated._id;
             return component;
         }
@@ -33,10 +38,10 @@ namespace UML_Logic_Library
         public IComponent GetItem(int id)
         {
             var liveDataElement = _liveData.ListObjectFigure.Find(x => x._id == id);
-            var component = ComponentFactory.CreateSingleBlock(liveDataElement);
-            if (component == null)
-                throw new ArgumentNullException("Выберите подходящий объект!");
-            return component;
+            //var component = ComponentFactory.CreateSingleBlock(liveDataElement);
+            //if (component == null)
+            //    throw new ArgumentNullException("Выберите подходящий объект!");
+            return new SimpleRectangle();
         }
 
         public bool DeleteItem(int id)
@@ -61,7 +66,7 @@ namespace UML_Logic_Library
             {
                 if (_liveData.ListObjectFigure[i]._id == id)
                 {
-                    _liveData.ListObjectFigure[i] = singleBlock.ToLiveDataElem();
+                    //_liveData.ListObjectFigure[i] = singleBlock.ToLiveDataElem();
                     _apiData.SaveProject(_liveData.nameproject, _liveData);
                     return true;
                 }

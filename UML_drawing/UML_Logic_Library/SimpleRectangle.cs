@@ -3,23 +3,43 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.IO;
+using UML_Logic_Library.Helpers;
+using UML_Logic_Library.Markers;
 using UML_Logic_Library.Requests;
 using UML_Logic_Library.Requests.Abstract;
 
 namespace UML_Logic_Library
 {
-    public class SingleBlock : BlockComponent
+    public class SimpleRectangle : Component
     {
+        
         //размер новой фигуры, по умолчанию
-        public static int defaultSize = 40;
+        public int DefaultSize = 40;
         //местоположение центра фигуры
         public PointF Location;
+        public TextField Text { get; set; }
         //прямоугольник, в котором расположен текст
-        protected RectangleF textRect;
+        public RectangleF TextRect;
+        private Color _color = Color.White;
+        protected Brush _brush;
 
-        public SingleBlock()
+        public Color Color
         {
+            get { return _color; }
+            set { _color = value; _brush = null; }
         }
+
+        public virtual Brush Brush
+        {
+            get {
+                if (_brush == null)
+                    _brush = new SolidBrush(_color);
+                return _brush;
+            }
+        }
+
+        
+        public SimpleRectangle(){ }
         
         public override bool PointIsInside(PointF p)
         {
@@ -27,25 +47,14 @@ namespace UML_Logic_Library
         }
         
         
-        public override IEnumerable<Marker> GetMarkers(Handler diagram)
+        public override IEnumerable<Marker> GetMarkers()
         {
             Marker m = new SizeMarker();
-            m.targetComponent = this;
+            m.targetComponent = (SimpleRectangle)this;
             yield return m;
             
         }
-
         //настройки вывода текста
-        protected virtual StringFormat StringFormat
-        {
-            get {
-                StringFormat stringFormat = new StringFormat();
-                stringFormat.Alignment = StringAlignment.Center;
-                stringFormat.LineAlignment = StringAlignment.Center;
-                return stringFormat;
-            }
-        }
-        
         
         //прямоугольник вокруг фигуры (в абсолютных координатах)
         public virtual RectangleF Bounds
@@ -56,15 +65,15 @@ namespace UML_Logic_Library
                 return new RectangleF(bounds.Left + Location.X, bounds.Top + Location.Y, bounds.Width, bounds.Height);
             }
         }
-        
-        //прямоугольник текста (в абсолютных координатах)
-        public Rectangle TextBounds
-        {
-            get
-            {
-                return new Rectangle((int)(textRect.Left + Location.X), (int)(textRect.Top + Location.Y), (int)textRect.Width, (int)textRect.Height);
-            }
-        }
+        //
+        // //прямоугольник текста (в абсолютных координатах)
+        // public Rectangle TextBounds
+        // {
+        //     get
+        //     {
+        //         return new Rectangle((int)(TextRect.Left + Location.X), (int)(TextRect.Top + Location.Y), (int)TextRect.Width, (int)TextRect.Height);
+        //     }
+        // }
         
         //размер прямоугольника вокруг фигуры
         public SizeF Size
@@ -89,8 +98,8 @@ namespace UML_Logic_Library
             Matrix m = new Matrix();
             m.Scale(scaleX, scaleY);
             Path.Transform(m);
-            //масштабируем прямоугльник текста
-            textRect = new RectangleF(textRect.Left * scaleX, textRect.Top * scaleY, textRect.Width * scaleX, textRect.Height * scaleY);
+            //масштабируем прямоугольник текста
+            TextRect = new RectangleF(TextRect.Left * scaleX, TextRect.Top * scaleY, TextRect.Width * scaleX, TextRect.Height * scaleY);
         }
         
         //сдвиг местоположения фигуры
@@ -101,6 +110,17 @@ namespace UML_Logic_Library
                 Location.X = 0;
             if (Location.Y < 0)
                 Location.Y = 0;
+        }
+        
+        public override void Draw(Graphics gr)
+        {
+            GraphicsState transState = gr.Save();
+            gr.TranslateTransform(Location.X, Location.Y);
+            gr.FillPath(Brush, Path);
+            gr.DrawPath(Pen, Path);
+            gr.DrawString(Text.TextFields, Text.Font, Brushes.Black, TextRect, Text.StringFormatTitle);
+            gr.DrawRectangle(Pen, Bounds.Left - 2, Bounds.Top - 2, Bounds.Width + 4, Bounds.Height + 4);
+            gr.Restore(transState);
         }
         
     }

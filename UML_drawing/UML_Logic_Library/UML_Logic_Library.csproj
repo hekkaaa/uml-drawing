@@ -42,21 +42,29 @@
     </ItemGroup>
     <ItemGroup>
         <Compile Include="ArrowComponentRequest.cs" />
-        <Compile Include="BlockComponent.cs" />
-        <Compile Include="BlockFields.cs" />
+        <Compile Include="Component.cs" />
         <Compile Include="ComponentFactory.cs" />
         <Compile Include="ComponentRequest.cs" />
+        <Compile Include="Components.cs" />
+        <Compile Include="DrawElements.cs" />
         <Compile Include="Handler.cs" />
+        <Compile Include="Helpers\GraphicPathHelper.cs" />
+        <Compile Include="Helpers\PointHelper.cs" />
         <Compile Include="Interfaces\IComponent.cs" />
         <Compile Include="Interfaces\IHandler.cs" />
         <Compile Include="ComponentMapper.cs" />
-        <Compile Include="Marker.cs" />
+        <Compile Include="Line.cs" />
+        <Compile Include="Markers\EndLineMarker.cs" />
+        <Compile Include="Markers\LedgeMarker.cs" />
+        <Compile Include="Markers\Marker.cs" />
+        <Compile Include="Markers\SizeMarker.cs" />
         <Compile Include="Properties\AssemblyInfo.cs" />
+        <Compile Include="RectangleComponent.cs" />
         <Compile Include="Requests\Abstract\IBlockComponentRequest.cs" />
         <Compile Include="Requests\SingleBlockRequest.cs" />
         <Compile Include="SerializableGraphicsPath.cs" />
-        <Compile Include="SingleBlock.cs" />
-        <Compile Include="SizeMarker.cs" />
+        <Compile Include="SimpleRectangle.cs" />
+        <Compile Include="TextField.cs" />
     </ItemGroup>
     <ItemGroup>
       <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies" Version="1.0.2">
