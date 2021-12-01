@@ -88,38 +88,7 @@ namespace UML_drawing
         //***********************************************
 
 
-        // Взаимодействие с листом стрелок
-        private void ListLine_SelectedIndexChanged(object sender, EventArgs e)
-        {   
-             var createform = new LineForm();
-             createform.ShowDialog();
-             //string selectedState = ListLine.SelectedItem.ToString();
-             //label3.Text = selectedState;
-           
-        }
-
-        private void ListLine_MouseDoubleClick(object sender, MouseEventArgs e)
-        {
-            // тут сделать логику вызова окна.
-            ListLine_SelectedIndexChanged(sender, e);
         
-        }
-
-        private void ListLine_Leave(object sender, EventArgs e)
-        {
-            //ListLine.ClearSelected();
-        }
-
-        // ******************************************************************
-
-        // Взаимодействие с листом стрелок
-
-        private void ObjectList_MouseDoubleClick(object sender, MouseEventArgs e)
-        {
-            var createfrom = new ObjectForm();
-            createfrom.ShowDialog();
-        }
-
         Point startDragPoint = new Point(90,50);
 
         private void ObjectButton_Click(object sender, EventArgs e)
