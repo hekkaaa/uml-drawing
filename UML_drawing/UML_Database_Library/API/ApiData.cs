@@ -102,7 +102,6 @@ namespace UML_Database_Library.API
             }
             catch (DirectoryNotFoundException ex)
             {   
-                
                 throw new DirectoryNotFoundException(ex.Message);
             }
             catch (Exception ex)

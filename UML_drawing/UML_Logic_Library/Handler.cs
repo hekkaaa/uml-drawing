@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using UML_Database_Library.API;
 using UML_Database_Library.BlackBox;
@@ -57,6 +58,24 @@ namespace UML_Logic_Library
         {
             return _apiData.LoadProject(nameProj);
         }
+        
+        
+        public bool SaveProject(string nameProj)
+        {
+            try
+            {
+                return _apiData.SaveProject(nameProj, _liveData);
+            }
+            catch (DirectoryNotFoundException ex)
+            {
+                throw new DirectoryNotFoundException(ex.Message);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
 
         public bool Refresh(BlockRequest blockRequest, int id)
         {

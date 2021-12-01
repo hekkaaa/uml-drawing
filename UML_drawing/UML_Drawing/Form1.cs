@@ -60,36 +60,17 @@ namespace UML_drawing
             myBoxControl.Handler = myBoxControl.Handler;
         }
 
-      
-
-        // Логика при клике.
-        private void MyEventHandler1(object sender, MouseEventArgs e)
-        {
-            //var Form2 = new Form();
-            //Form2.ShowDialog();
-            //Form2.Show(this);
-            //var forms = new ViewForm.LineForm();
-            //forms.ShowDialog();
-            //Color test = new Color();
-        
-        }
-
-
-        // ******************************************************************
-        // при действие наведении.
-
         private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
         {
            InfoForms.About about = new InfoForms.About();
             about.ShowDialog();
-
         }
 
+        // КНОПКИ В FILE 
         private void createProjectToolStripMenuItem_Click(object sender, EventArgs e)
         {
             var createform = new CreateForm();
             createform.ShowDialog();
-
         }
 
         private void loadProjectToolStripMenuItem_Click(object sender, EventArgs e)
@@ -98,7 +79,15 @@ namespace UML_drawing
             createform.ShowDialog();
         }
 
-        
+        private void saveProjectToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var createform = new SavesInfoFrom();
+            createform.ShowDialog(this);
+        }
+
+        //***********************************************
+
+
         // Взаимодействие с листом стрелок
         private void ListLine_SelectedIndexChanged(object sender, EventArgs e)
         {   
@@ -129,11 +118,6 @@ namespace UML_drawing
         {
             var createfrom = new ObjectForm();
             createfrom.ShowDialog();
-        }
-
-        private void ObjectList_Leave(object sender, EventArgs e)
-        {
-            ObjectList.ClearSelected();
         }
 
         Point startDragPoint = new Point(90,50);
@@ -182,6 +166,8 @@ namespace UML_drawing
             }
 
         }
+
+      
 
 
 
