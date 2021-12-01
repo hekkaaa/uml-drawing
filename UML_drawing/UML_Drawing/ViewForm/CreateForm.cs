@@ -1,12 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
+using UML_drawing.SubLogical;
+using UML_Logic_Library;
 
 namespace UML_drawing.ViewForm
 {
@@ -19,8 +16,35 @@ namespace UML_drawing.ViewForm
 
         private void buttonCreate_Click(object sender, EventArgs e)
         {
-            UML_Database_Library.API.ApiData btmcreate = new UML_Database_Library.API.ApiData();
-            btmcreate.CreateProj(textBoxCreate.Text);
+            // ВРЕМЕННОЕ РЕШЕНИЕ В ОБХОД ЛОГИКЕ АЛИИ.
+            //UML_Database_Library.API.ApiData btncreate = new UML_Database_Library.API.ApiData();
+
+            Handler btncreate = new Handler();
+            string res = CheckValidName.Check(textBoxCreate.Text);
+            if (res != null)
+            {
+                infoLabel1.ForeColor = Color.Red;
+                infoLabel1.Text = res;
+            }
+            else
+            {
+                try
+                {
+                    btncreate.CreateProj(textBoxCreate.Text);
+                    //btncreate.SaveProject(textBoxCreate.Text, test);
+                    Close();
+                }
+                catch (DuplicateNameException)
+                {
+                    InfoLabel.ForeColor = Color.Red;
+                    InfoLabel.Text = "Проект с таким именем уже существует";
+                }
+            }
+
+
+
+
+            // InfoLabel label для ошибок.
             // Прикрутить логику по созданию в местной папке проекта.
         }
 
