@@ -136,6 +136,14 @@ namespace UML_drawing
 
         }
 
+        private void saveProjectToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+          
+            SavesInfoFrom saveForm = new SavesInfoFrom();
+            saveForm.ShowDialog();
+        }
+
         // ******************************************************************
     }
 }

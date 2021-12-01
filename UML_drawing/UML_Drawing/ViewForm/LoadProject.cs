@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using UML_Logic_Library;
 
 namespace UML_drawing.ViewForm
 {
@@ -21,8 +22,12 @@ namespace UML_drawing.ViewForm
         private void button1_Click(object sender, EventArgs e)
         {
             // Заменить потом на методы Алии.
-            UML_Database_Library.API.ApiData test = new UML_Database_Library.API.ApiData();
-            test.LoadProject(ListProject.SelectedItem.ToString());
+            //UML_Database_Library.API.ApiData test = new UML_Database_Library.API.ApiData();
+            //btnclick.LoadProject(ListProject.SelectedItem.ToString());
+            // ==== ТУТ НУЖНО ДОРАБОТАТЬ МЕТОД АЛИИ == 
+
+            Handler btnclick = new Handler();
+            btnclick.LoadProject();
             Close();
         }
 
