@@ -35,8 +35,8 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.4.1, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.4.5.3\lib\net461\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.6.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.4.7.1\lib\net461\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
     </Reference>
     <Reference Include="System.Threading.Tasks.Extensions, Version=4.2.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Threading.Tasks.Extensions.4.5.4\lib\net461\System.Threading.Tasks.Extensions.dll</HintPath>
@@ -91,6 +91,12 @@
     <Compile Include="ViewForm\ObjectForm.Designer.cs">
       <DependentUpon>ObjectForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="ViewForm\SavesInfoFrom.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ViewForm\SavesInfoFrom.Designer.cs">
+      <DependentUpon>SavesInfoFrom.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
@@ -118,6 +124,9 @@
     <EmbeddedResource Include="ViewForm\ObjectForm.resx">
       <DependentUpon>ObjectForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ViewForm\SavesInfoFrom.resx">
+      <DependentUpon>SavesInfoFrom.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -139,6 +148,10 @@
     <ProjectReference Include="..\UML_Database_Library\UML_Database_Library.csproj">
       <Project>{4a8997ca-3c1f-455f-9be0-99fa30db4b0d}</Project>
       <Name>UML_Database_Library</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\UML_Logic_Library\UML_Logic_Library.csproj">
+      <Project>{8d398e58-fd60-4083-aeba-1c1b3e323479}</Project>
+      <Name>UML_Logic_Library</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

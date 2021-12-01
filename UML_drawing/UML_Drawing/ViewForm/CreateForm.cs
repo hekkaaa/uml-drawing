@@ -3,6 +3,7 @@ using System.Data;
 using System.Drawing;
 using System.Windows.Forms;
 using UML_drawing.SubLogical;
+using UML_Logic_Library;
 
 namespace UML_drawing.ViewForm
 {
@@ -16,8 +17,9 @@ namespace UML_drawing.ViewForm
         private void buttonCreate_Click(object sender, EventArgs e)
         {
             // ВРЕМЕННОЕ РЕШЕНИЕ В ОБХОД ЛОГИКЕ АЛИИ.
-            UML_Database_Library.API.ApiData btncreate = new UML_Database_Library.API.ApiData();
+            //UML_Database_Library.API.ApiData btncreate = new UML_Database_Library.API.ApiData();
 
+            Handler btncreate = new Handler();
             string res = CheckValidName.Check(textBoxCreate.Text);
             if (res != null)
             {
@@ -28,8 +30,8 @@ namespace UML_drawing.ViewForm
             {
                 try
                 {
-                    var test = btncreate.CreateProj(textBoxCreate.Text);
-                    btncreate.SaveProject(textBoxCreate.Text, test);
+                    btncreate.CreateProj(textBoxCreate.Text);
+                    //btncreate.SaveProject(textBoxCreate.Text, test);
                     Close();
                 }
                 catch (DuplicateNameException)
