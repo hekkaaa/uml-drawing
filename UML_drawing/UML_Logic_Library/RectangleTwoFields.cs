@@ -126,5 +126,6 @@ namespace UML_Logic_Library
                 _textRectFieldMethods, Text.StringFormatField);
             gr.Restore(transState);
         }
+        
     }
 }

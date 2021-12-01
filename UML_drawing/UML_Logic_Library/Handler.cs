@@ -53,12 +53,11 @@ namespace UML_Logic_Library
 
         // Надо подумать над методом, потому что мне или визуалу смысл от LiveData
         // скорее всего может нужно вернуть ListObjectFigure и отрисовывать компоненты по очереди
-        public LiveData LoadProject()
+        public LiveData LoadProject(string nameProj)
         {
-            
-            return _apiData.LoadProject(_liveData.nameproject);
+            return _apiData.LoadProject(nameProj);
         }
-        
+
         public bool Refresh(BlockRequest blockRequest, int id)
         {
             var singleBlock = ComponentFactory.CreateSingleBlock(blockRequest);
