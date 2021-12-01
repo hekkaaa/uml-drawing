@@ -13,7 +13,7 @@ namespace UML_Logic_Library.Interfaces
         //
         // public bool DeleteItem(int id);
         
-        public LiveData LoadProject();
+        public LiveData LoadProject(string nameProject);
         
         public bool Refresh(BlockRequest blockRequest, int id);
         
