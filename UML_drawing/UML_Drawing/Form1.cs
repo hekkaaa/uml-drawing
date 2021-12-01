@@ -4,10 +4,13 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using UML_drawing.ViewForm;
+using UML_Logic_Library;
+using Component = System.ComponentModel.Component;
 
 namespace UML_drawing
 {
@@ -16,6 +19,7 @@ namespace UML_drawing
         public Form1()
         {
             InitializeComponent();
+            Form1_Load(null,null);
         }
 
         // ЗАКРЫТИЕ ЧЕРЕЗ FILE
@@ -52,7 +56,8 @@ namespace UML_drawing
         // тут при загрузке формы можно вешкать фоновые методы.
         private void Form1_Load(object sender, EventArgs e)
         {
-          
+            myBoxControl.Handler = new Handler();
+            myBoxControl.Handler = myBoxControl.Handler;
         }
 
       
@@ -97,8 +102,8 @@ namespace UML_drawing
         // Взаимодействие с листом стрелок
         private void ListLine_SelectedIndexChanged(object sender, EventArgs e)
         {   
-              var createform = new LineForm();
-            createform.ShowDialog();
+             var createform = new LineForm();
+             createform.ShowDialog();
              //string selectedState = ListLine.SelectedItem.ToString();
              //label3.Text = selectedState;
            
@@ -113,13 +118,13 @@ namespace UML_drawing
 
         private void ListLine_Leave(object sender, EventArgs e)
         {
-            ListLine.ClearSelected();
+            //ListLine.ClearSelected();
         }
 
         // ******************************************************************
 
         // Взаимодействие с листом стрелок
-            
+
         private void ObjectList_MouseDoubleClick(object sender, MouseEventArgs e)
         {
             var createfrom = new ObjectForm();
@@ -131,10 +136,63 @@ namespace UML_drawing
             ObjectList.ClearSelected();
         }
 
-        private void ObjectList_SelectedIndexChanged(object sender, EventArgs e)
+        Point startDragPoint = new Point(90,50);
+
+        private void ObjectButton_Click(object sender, EventArgs e)
         {
+            myBoxControl.AddFigure<RectangleComponent>(startDragPoint);
+        }
+
+        private void myBoxControl_DoubleClick(object sender, EventArgs e)
+        {
+            var objectField = (myBoxControl.SelectedFigure as SimpleRectangle).Text.TextFields;
+            var createfrom = new TextForm(objectField);
+            createfrom.ShowDialog();
+            myBoxControl.SelectedBeginEditText(createfrom.textToObj);
+            
+        }
+
+        private void associationLineButton_Click(object sender, EventArgs e)
+        {
+            myBoxControl.SelectedAddLedgeLine();
+            //myBoxControl.AddFigure<Line>(startDragPoint);
+        }
+
+        private void inheritanceLineButton_Click(object sender, EventArgs e)
+        {
+            myBoxControl.SelectedAddDashLedgeLine();
+        }
+
+        private void objectOneFieldButton_Click(object sender, EventArgs e)
+        {
+            myBoxControl.AddFigure<RectangleOneField>(startDragPoint);
+        }
+
+        private void objectTwoFieldsButton_Click(object sender, EventArgs e)
+        {
+            myBoxControl.AddFigure<RectangleTwoFields>(startDragPoint);
+        }
+
+        private void toolStripButton2_Click(object sender, EventArgs e)
+        {
+            var obj = myBoxControl.SelectedFigure;
+            if (obj is SimpleRectangle)
+            {
+                (obj as SimpleRectangle).Color = toolStripButton2.BackColor;
+            }
 
         }
+
+
+
+
+
+
+
+
+
+
+
 
         // ******************************************************************
     }

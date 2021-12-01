@@ -14,10 +14,13 @@ namespace UML_Logic_Library
     public abstract class Component : IComponent
     {
         public int ItemId { get; set; }
-        public GraphicsPath Path => new GraphicsPath();
+        private readonly MyGraphicPath _myGraphicPath = new MyGraphicPath();
+
+        public GraphicsPath Path { get => _myGraphicPath.path; }
+        //public GraphicsPath Path => new GraphicsPath();
         private Color _penColor = Color.Black;
         protected Pen _pen;
-        private float _penWidth = 5;
+        private float _penWidth = 1;
         
         public virtual Pen Pen
         {
@@ -42,7 +45,7 @@ namespace UML_Logic_Library
 
         public abstract bool PointIsInside(PointF p);
 
-        public abstract IEnumerable<Marker> GetMarkers();
+        public abstract IEnumerable<Marker> GetMarkers(Handler handler);
 
         public abstract void Draw(Graphics gr);
 

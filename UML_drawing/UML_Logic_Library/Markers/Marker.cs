@@ -6,7 +6,7 @@ namespace UML_Logic_Library.Markers
 {
     public abstract class Marker : SimpleRectangle
     {
-        private readonly int _defaultSize;
+        private readonly int _defaultSize = 3;
         public Component targetComponent;
         private List<Marker> _markers;
 
@@ -39,8 +39,8 @@ namespace UML_Logic_Library.Markers
         
         public override void Draw(Graphics gr)
         {
-            gr.DrawRectangle(Pen, Location.X - _defaultSize, Location.Y - _defaultSize, _defaultSize * 2, _defaultSize * 2);
-            gr.FillRectangle(Brush, Location.X - _defaultSize, Location.Y - _defaultSize, _defaultSize * 2, _defaultSize * 2);
+            gr.DrawRectangle(Pen, Location.X, Location.Y, _defaultSize, _defaultSize);
+            gr.FillRectangle(Brush, Location.X, Location.Y, _defaultSize, _defaultSize);
         }
     }
 }

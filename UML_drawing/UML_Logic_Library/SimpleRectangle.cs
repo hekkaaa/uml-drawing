@@ -14,14 +14,15 @@ namespace UML_Logic_Library
     {
         
         //размер новой фигуры, по умолчанию
-        public int DefaultSize = 40;
+        public static int DefaultSize = 80;
         //местоположение центра фигуры
         public PointF Location;
-        public TextField Text { get; set; }
+        public TextField Text = new TextField();
         //прямоугольник, в котором расположен текст
         public RectangleF TextRect;
         private Color _color = Color.White;
         protected Brush _brush;
+        protected RectangleF textRect;
 
         public Color Color
         {
@@ -46,7 +47,7 @@ namespace UML_Logic_Library
         }
         
         
-        public override IEnumerable<Marker> GetMarkers()
+        public override IEnumerable<Marker> GetMarkers(Handler handler)
         {
             Marker m = new SizeMarker();
             m.targetComponent = (SimpleRectangle)this;
@@ -65,14 +66,14 @@ namespace UML_Logic_Library
         }
         //
         // //прямоугольник текста (в абсолютных координатах)
-        // public Rectangle TextBounds
-        // {
-        //     get
-        //     {
-        //         return new Rectangle((int)(TextRect.Left + Location.X), (int)(TextRect.Top + Location.Y), (int)TextRect.Width, (int)TextRect.Height);
-        //     }
-        // }
-        
+        public Rectangle TextBounds
+        {
+            get
+            {
+                return new Rectangle((int)(TextRect.Left + Location.X), (int)(TextRect.Top + Location.Y), (int)TextRect.Width, (int)TextRect.Height);
+            }
+        }
+
         //размер прямоугольника вокруг фигуры
         public SizeF Size
         {
@@ -97,7 +98,7 @@ namespace UML_Logic_Library
             m.Scale(scaleX, scaleY);
             Path.Transform(m);
             //масштабируем прямоугольник текста
-            TextRect = new RectangleF(TextRect.Left * scaleX, TextRect.Top * scaleY, TextRect.Width * scaleX, TextRect.Height * scaleY);
+            textRect = new RectangleF(textRect.Left * scaleX, textRect.Top * scaleY, textRect.Width * scaleX, textRect.Height * scaleY);
         }
         
         //сдвиг местоположения фигуры
@@ -116,9 +117,7 @@ namespace UML_Logic_Library
             gr.TranslateTransform(Location.X, Location.Y);
             gr.FillPath(Brush, Path);
             gr.DrawPath(Pen, Path);
-            RectangleF rectF1 = new RectangleF(Bounds.Left - 2, Bounds.Top - 2, Bounds.Width + 4, Bounds.Height + 4);
-            gr.DrawString(Text.TextFields, Text.Font, Brushes.Black, rectF1, Text.StringFormatTitle);
-            gr.DrawRectangle(Pen,Rectangle.Round(rectF1) );
+            gr.DrawString(Text.TextFields, SystemFonts.DefaultFont, Brushes.Black, textRect, Text.StringFormatTitle);
             gr.Restore(transState);
         }
         

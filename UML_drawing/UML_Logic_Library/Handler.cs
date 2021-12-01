@@ -17,11 +17,10 @@ namespace UML_Logic_Library
         private ApiData _apiData = new ApiData();
         private LiveData _liveData;
         // После всех свистоплясок сделать маппинг объектов _liveData в норм компоненты, наверное хз
-        public List<IComponent> ComponentsInProj;
+        public List<Component> ComponentsInProj = new List<Component>();
         
         public void CreateProj(string nameProj)
         {
-            ComponentsInProj = new List<IComponent>();
             _liveData = _apiData.CreateProj(nameProj);
         }
         

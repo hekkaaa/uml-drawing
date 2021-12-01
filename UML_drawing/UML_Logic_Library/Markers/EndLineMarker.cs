@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using UML_Logic_Library.Arrows;
 using UML_Logic_Library.Interfaces;
 
 namespace UML_Logic_Library.Markers
@@ -6,7 +7,7 @@ namespace UML_Logic_Library.Markers
     public class EndLineMarker : Marker
     {
         int pointIndex;
-        List<IComponent> components;
+        List<Component> components;
 
         public EndLineMarker(Handler componentsList, int pointIndex)
         {

@@ -2,17 +2,27 @@
 using System.Drawing;
 using UML_Logic_Library.Markers;
 
-namespace UML_Logic_Library
+namespace UML_Logic_Library.Arrows
 {
+    public enum Arrows
+    {
+        Simple,
+        SolidArrow,
+        LineArrow,
+        SolidDiamond,
+        LoneDiamond
+    }
     public class Line : Component
     {
         
             public SimpleRectangle From;
             public SimpleRectangle To;
-            static Pen clickPen = new Pen(Color.Transparent, 3);
-            internal float ledgePositionX = -1;
 
-            public IEnumerable<Marker> GetMarkers(Handler components)
+            public PointF[] Points;
+            //static Pen clickPen = new Pen(Color.Transparent, 3);
+            internal float ledgePositionX = -1;
+            
+            public override IEnumerable<Marker> GetMarkers(Handler components)
             {
                 RecalcPath();
                 EndLineMarker m1 = new EndLineMarker(components, 0);
@@ -35,34 +45,30 @@ namespace UML_Logic_Library
                     return false;
 
                 RecalcPath();
-                return Path.IsOutlineVisible(p, clickPen);            
+                return Path.IsOutlineVisible(p, Pen);            
             }
-
-            public override IEnumerable<Marker> GetMarkers()
-            {
-                throw new System.NotImplementedException();
-            }
-
+            
+            
             public override void Draw(Graphics gr)
             {
                 if (From == null || To == null)
                     return;
 
                 RecalcPath();
-                gr.DrawPath(Pen, Path);
+                gr.DrawLines(Pen, Points);
             }
 
             public void RecalcPath()
             {
-                PointF[] points = null;
+                Points = null;
 
                 if (ledgePositionX < 0)
                     ledgePositionX = (From.Location.X + To.Location.X) / 2;
 
                 if (Path.PointCount > 0)
-                    points = Path.PathPoints;
-                if (Path.PointCount != 4 || points[0] != From.Location || points[3] != To.Location ||
-                    points[1].X!=ledgePositionX)
+                    Points = Path.PathPoints;
+                if (Path.PointCount != 4 || Points[0] != From.Location || Points[3] != To.Location ||
+                    Points[1].X!=ledgePositionX)
                 {
                     Path.Reset();
                     Path.AddLines(new PointF[]{
