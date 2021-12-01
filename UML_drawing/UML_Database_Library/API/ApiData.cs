@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -10,24 +11,26 @@ namespace UML_Database_Library.API
 {
     public class ApiData
     {
-        public LiveData CreateProj()
-        {
-            LiveData project = new LiveData();
-            return project;
-        }
-
-        public LiveData CreateProj(string nameprodject)
-        {
-            LiveData project = new LiveData();
-            return project;
-        }
-
-        //// Веротяно он и не нужен. Излишний метод.
-        //public LiveData CreateProj(string nameprodject, object obj)
+        //public LiveData CreateProj()
         //{
-        //    LiveData project = new LiveData(nameprodject, obj); // доработать возможность передачи LIST<obj>, а не по одному.
+        //    LiveData project = new LiveData();
         //    return project;
         //}
+
+        public LiveData CreateProj(string nameprodject)
+        {   
+            SystemFiles.CreateDirectoryProject(SystemFiles.CheckDirectory()); // Проверка наличия папки project
+            bool res = SystemFiles.CheckDublicateName(nameprodject);
+            if (res)
+            {   // ошибка летит на фронт как дубликат имени.
+                throw new DuplicateNameException();
+            }
+            else
+            {
+                LiveData project = new LiveData(nameprodject);
+                return project;
+            } 
+        }
 
         public LiveDataElem CreateElem(LiveData obj)
         {
@@ -55,13 +58,17 @@ namespace UML_Database_Library.API
                 if (res) { return true; }
                 else { throw new Exception("Обьект с указанным ID не найден"); }
             }
+            catch (ArgumentException ex)
+            {
+                throw new ArgumentException("Такого элемента не существует! " + ex.Message);
+            }
             catch (Exception ex)
             {
                 throw new Exception(ex.Message);
             }
         }
 
-        // нужно указать "<filename>.json" вернет обьект с екзепляром Livedata и всеми елементами что сохранились.
+        // нужно указать "<filename>.json" вернет обьект с экзепляром Livedata и всеми елементами что сохранились.
         public LiveData LoadProject(string nameproject)
         {
             try
@@ -94,7 +101,8 @@ namespace UML_Database_Library.API
                 return WorkJson.SaveJson(nameproject, obj);
             }
             catch (DirectoryNotFoundException ex)
-            {
+            {   
+                
                 throw new DirectoryNotFoundException(ex.Message);
             }
             catch (Exception ex)
@@ -103,7 +111,7 @@ namespace UML_Database_Library.API
             }
         }
 
-        // обьединить
+        // Добавляем элемент в проект. ПОКА ОСТАВЛЕН.
         public bool AddElement(LiveData obj, LiveDataElem obj2)
         {   
             if(obj2._id == default)

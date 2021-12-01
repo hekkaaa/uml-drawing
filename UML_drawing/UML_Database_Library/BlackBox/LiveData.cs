@@ -39,6 +39,10 @@ namespace UML_Database_Library.BlackBox
                         _listObjectFigure.RemoveAt(i);
                         return true;
                     }
+                    catch(ArgumentException ex)
+                    {
+                        throw new ArgumentException("Такого элемента не существует! " + ex.Message);
+                    }
                     catch (Exception ex)
                     {
                         throw new Exception(ex.Message);
