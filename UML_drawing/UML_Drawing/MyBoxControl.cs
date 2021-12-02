@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using UML_drawing.ViewForm;
 using UML_Logic_Library.Arrows;
 using UML_Logic_Library.Helpers;
 using UML_Logic_Library.Markers;
@@ -276,21 +277,32 @@ namespace UML_Logic_Library
         {
             if (selectedFigure != null && (selectedFigure is SimpleRectangle))
             {
-                SimpleRectangle figure = (selectedFigure as RectangleComponent);
-                TextBox textBox = new TextBox();
-                textBox.Parent = this;
-                textBox.SetBounds(figure.TextBounds.Left, figure.TextBounds.Top, figure.TextBounds.Width, figure.TextBounds.Height);
-                textBox.Text = text;
-                //textBox.Text = figure.Text.TextFields;
-                textBox.Multiline = true;
-                textBox.TextAlign = HorizontalAlignment.Center;
-                (selectedFigure as SimpleRectangle).Text.TextFields = textBox.Text;
-                textBox.Focus();
-                //textBox.LostFocus += new EventHandler(textBox_LostFocus);
+                RectangleComponent figure = (selectedFigure as RectangleComponent);
+                (selectedFigure as SimpleRectangle).Text.TextFields = text;
             }
         }
 
+        public void SelectedBeginEditText(string text, string text1)
+        {
+            if (selectedFigure != null && (selectedFigure is SimpleRectangle))
+            {
+                RectangleOneField figure = (selectedFigure as RectangleOneField);
+                figure.TextFieldTitle.TextFields = text;
+                figure.TextFieldProperty.TextFieldsProp = text1;
+            }
+        }
 
+        public void SelectedBeginEditText(string text, string text1, string text2)
+        {
+            if (selectedFigure != null && (selectedFigure is SimpleRectangle))
+            {
+                RectangleTwoFields figure = (selectedFigure as RectangleTwoFields);
+                figure.TextFieldTitle.TextFields = text;
+                figure.TextFieldProperty.TextFieldsProp = text1;
+                figure.TextFieldMethods.TextFieldsMethod = text2;
+            }
+        }
+       
         public void SelectedAddLedgeLine()
         {
             if (selectedFigure != null && (selectedFigure is SimpleRectangle))

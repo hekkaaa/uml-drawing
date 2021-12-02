@@ -19,10 +19,9 @@ namespace UML_Logic_Library
         public PointF Location;
         public TextField Text = new TextField();
         //прямоугольник, в котором расположен текст
-        public RectangleF TextRect;
         private Color _color = Color.White;
         protected Brush _brush;
-        protected RectangleF textRect;
+        public RectangleF textRect;
 
         public Color Color
         {
@@ -62,15 +61,6 @@ namespace UML_Logic_Library
             {
                 RectangleF bounds = Path.GetBounds();
                 return new RectangleF(bounds.Left + Location.X, bounds.Top + Location.Y, bounds.Width, bounds.Height);
-            }
-        }
-        //
-        // //прямоугольник текста (в абсолютных координатах)
-        public Rectangle TextBounds
-        {
-            get
-            {
-                return new Rectangle((int)(TextRect.Left + Location.X), (int)(TextRect.Top + Location.Y), (int)TextRect.Width, (int)TextRect.Height);
             }
         }
 
