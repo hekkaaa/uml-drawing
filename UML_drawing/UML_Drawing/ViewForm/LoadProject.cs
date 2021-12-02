@@ -21,14 +21,10 @@ namespace UML_drawing.ViewForm
 
         private void button1_Click(object sender, EventArgs e)
         {
-            // Заменить потом на методы Алии.
-            //UML_Database_Library.API.ApiData test = new UML_Database_Library.API.ApiData();
-            //btnclick.LoadProject(ListProject.SelectedItem.ToString());
-            // ==== ТУТ НУЖНО ДОРАБОТАТЬ МЕТОД АЛИИ == 
-
             Handler btnclick = new Handler();
-            btnclick.LoadProject();
+            btnclick.LoadProject(ListProject.SelectedItem.ToString());
             Close();
+            // Осталось понять как делать рисовку обратно.
         }
 
         private void button2_Click(object sender, EventArgs e)

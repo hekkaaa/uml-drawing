@@ -16,9 +16,6 @@ namespace UML_drawing.ViewForm
 
         private void buttonCreate_Click(object sender, EventArgs e)
         {
-            // ВРЕМЕННОЕ РЕШЕНИЕ В ОБХОД ЛОГИКЕ АЛИИ.
-            //UML_Database_Library.API.ApiData btncreate = new UML_Database_Library.API.ApiData();
-
             Handler btncreate = new Handler();
             string res = CheckValidName.Check(textBoxCreate.Text);
             if (res != null)
@@ -31,7 +28,7 @@ namespace UML_drawing.ViewForm
                 try
                 {
                     btncreate.CreateProj(textBoxCreate.Text);
-                    //btncreate.SaveProject(textBoxCreate.Text, test);
+                    btncreate.SaveProject(textBoxCreate.Text);
                     Close();
                 }
                 catch (DuplicateNameException)
@@ -39,13 +36,12 @@ namespace UML_drawing.ViewForm
                     InfoLabel.ForeColor = Color.Red;
                     InfoLabel.Text = "Проект с таким именем уже существует";
                 }
+                catch (Exception ex)
+                {
+                    InfoLabel.ForeColor = Color.Red;
+                    InfoLabel.Text = "Неизвестная ошибка при создании проекта";
+                }
             }
-
-
-
-
-            // InfoLabel label для ошибок.
-            // Прикрутить логику по созданию в местной папке проекта.
         }
 
         private void buttonCancel_Click(object sender, EventArgs e)

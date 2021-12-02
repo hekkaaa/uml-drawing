@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
@@ -60,36 +61,17 @@ namespace UML_drawing
             myBoxControl.Handler = myBoxControl.Handler;
         }
 
-      
-
-        // Логика при клике.
-        private void MyEventHandler1(object sender, MouseEventArgs e)
-        {
-            //var Form2 = new Form();
-            //Form2.ShowDialog();
-            //Form2.Show(this);
-            //var forms = new ViewForm.LineForm();
-            //forms.ShowDialog();
-            //Color test = new Color();
-        
-        }
-
-
-        // ******************************************************************
-        // при действие наведении.
-
         private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
         {
            InfoForms.About about = new InfoForms.About();
             about.ShowDialog();
-
         }
 
+        // КНОПКИ В FILE 
         private void createProjectToolStripMenuItem_Click(object sender, EventArgs e)
         {
             var createform = new CreateForm();
             createform.ShowDialog();
-
         }
 
         private void loadProjectToolStripMenuItem_Click(object sender, EventArgs e)
@@ -98,44 +80,16 @@ namespace UML_drawing
             createform.ShowDialog();
         }
 
+        private void saveProjectToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var createform = new SavesInfoFrom();
+            createform.ShowDialog(this);
+        }
+
+        //***********************************************
+
+
         
-        // Взаимодействие с листом стрелок
-        private void ListLine_SelectedIndexChanged(object sender, EventArgs e)
-        {   
-             var createform = new LineForm();
-             createform.ShowDialog();
-             //string selectedState = ListLine.SelectedItem.ToString();
-             //label3.Text = selectedState;
-           
-        }
-
-        private void ListLine_MouseDoubleClick(object sender, MouseEventArgs e)
-        {
-            // тут сделать логику вызова окна.
-            ListLine_SelectedIndexChanged(sender, e);
-        
-        }
-
-        private void ListLine_Leave(object sender, EventArgs e)
-        {
-            //ListLine.ClearSelected();
-        }
-
-        // ******************************************************************
-
-        // Взаимодействие с листом стрелок
-
-        private void ObjectList_MouseDoubleClick(object sender, MouseEventArgs e)
-        {
-            var createfrom = new ObjectForm();
-            createfrom.ShowDialog();
-        }
-
-        private void ObjectList_Leave(object sender, EventArgs e)
-        {
-            ObjectList.ClearSelected();
-        }
-
         Point startDragPoint = new Point(90,50);
 
         private void ObjectButton_Click(object sender, EventArgs e)
@@ -173,26 +127,97 @@ namespace UML_drawing
             myBoxControl.AddFigure<RectangleTwoFields>(startDragPoint);
         }
 
-        private void toolStripButton2_Click(object sender, EventArgs e)
+        private void toolStripButton1_Click(object sender, EventArgs e)
         {
+            colorDialog1.ShowDialog();
             var obj = myBoxControl.SelectedFigure;
             if (obj is SimpleRectangle)
             {
-                (obj as SimpleRectangle).Color = toolStripButton2.BackColor;
+                (obj as SimpleRectangle).Color = colorDialog1.Color;
             }
+        }
+        // ******************************************************************
+
+
+        // Анимации PictureBoxHover при наведении
+        private void ObjectButton_MouseHover(object sender, EventArgs e)
+        {
+            // Кнопка 1
+            pictureBoxHover.Size = new Size(220, 122);
+            pictureBoxHover.BorderStyle = BorderStyle.FixedSingle;
+            pictureBoxHover.BackgroundImage = Image.FromFile(@"D:\GitWork\uml-drawing\UML_drawing\UML_Drawing\BaseImages\object0.png");
+            pictureBoxHover.Location = new Point(13, 71);
+            pictureBoxHover.Visible = true;
 
         }
+        private void ObjectButton_MouseLeave(object sender, EventArgs e)
+        {      // Кнопка 1
+             pictureBoxHover.Visible = false;
+        }
 
+        private void objectOneFieldButton_MouseHover(object sender, EventArgs e)
+        {
+            // Кнопка 2
+            pictureBoxHover.Size = new Size(215, 217);
+            pictureBoxHover.BorderStyle = BorderStyle.FixedSingle;
+            pictureBoxHover.BackgroundImage = Image.FromFile(@"..\..\BaseImages\object1.png");
+            pictureBoxHover.Location = new Point(43, 71);
+            pictureBoxHover.Visible = true;
+        }
 
+        private void objectOneFieldButton_MouseLeave(object sender, EventArgs e)
+        {   
+            // Кнопка 2
+            pictureBoxHover.Visible = false;
+        }
 
+        private void objectTwoFieldsButton_MouseHover(object sender, EventArgs e)
+        {
+            // Кнопка 3
+            pictureBoxHover.Size = new Size(210, 310);
+            pictureBoxHover.BorderStyle = BorderStyle.FixedSingle;
+            pictureBoxHover.BackgroundImage = Image.FromFile(@"..\..\BaseImages\object2.png");
+            pictureBoxHover.Location = new Point(68, 71);
+            pictureBoxHover.Visible = true;
+        }
 
+        private void objectTwoFieldsButton_MouseLeave(object sender, EventArgs e)
+        {
+            // Кнопка 3
+            pictureBoxHover.Visible = false;
+        }
 
+        private void associationLineButton_MouseHover(object sender, EventArgs e)
+        {
+            // Кнопка 4
+            pictureBoxHover.Size = new Size(295, 47);
+            pictureBoxHover.BorderStyle = BorderStyle.FixedSingle;
+            pictureBoxHover.BackgroundImage = Image.FromFile(@"..\..\BaseImages\line0.png");
+            pictureBoxHover.Location = new Point(88, 71);
+            pictureBoxHover.Visible = true;
+        }
 
+        private void associationLineButton_MouseLeave(object sender, EventArgs e)
+        {
+            // Кнопка 4
+            pictureBoxHover.Visible = false;
+        }
 
+        private void inheritanceLineButton_MouseHover(object sender, EventArgs e)
+        {
+            // Кнопка 4
+            pictureBoxHover.Size = new Size(295, 47);
+            pictureBoxHover.BorderStyle = BorderStyle.FixedSingle;
+            pictureBoxHover.BackgroundImage = Image.FromFile(@"..\..\BaseImages\line1.png");
+            pictureBoxHover.Location = new Point(108, 71);
+            pictureBoxHover.Visible = true;
+        }
 
-
-
-
+        private void inheritanceLineButton_MouseLeave(object sender, EventArgs e)
+        {
+            // Кнопка 4
+            pictureBoxHover.Visible = false;
+        }
 
         // ******************************************************************
     }
