@@ -1,4 +1,4 @@
-﻿using System.Windows.Forms;
+using System.Windows.Forms;
 using UML_Logic_Library;
 
 namespace UML_drawing
