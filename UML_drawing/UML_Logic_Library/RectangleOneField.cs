@@ -5,51 +5,23 @@ using System.Runtime.Remoting.Messaging;
 
 namespace UML_Logic_Library
 {
-    public class RectangleOneField : RectangleComponent
+    public class RectangleOneField : SimpleRectangle
     {
         private PropField Head = new PropField(0);
         private PropField FieldProp = new PropField(DefaultSize);
-        public RectangleF TextRect1;
-        public RectangleF TextRect2;
+        public TextField TextFieldTitle;
+        public TextField TextFieldProperty;
 
         private RectangleF[] rect = new RectangleF[2];
         private RectangleF[] textRect = new RectangleF[2];
-        private RectangleF _textRectHead;
-        private RectangleF _textRectFieldProp;
-
-        public Rectangle TextBounds1
-        {
-            get
-            {
-                return new Rectangle(
-                    (int)(TextRect1.Left + Location.X), 
-                    (int)(TextRect1.Top + Location.Y), 
-                    (int)TextRect1.Width, 
-                    (int)TextRect1.Height
-                    );
-            }
-        }
-
-        public Rectangle TextBounds2
-        {
-            get
-            {
-                return new Rectangle(
-                    (int)(TextRect2.Left + Location.X ), 
-                    (int)(TextRect2.Top + Location.Y + FieldProp.RectHeight), 
-                    (int)TextRect2.Width, 
-                    (int)TextRect2.Height + FieldProp.RectHeight
-                    );
-            }
-        }
 
         public RectangleOneField()
         {
             rect[0] = Head.rect;
             rect[1] = FieldProp.rect;
-            _textRectHead = Head.textRect;
-            _textRectFieldProp = FieldProp.textRect;
-
+            TextFieldTitle = Head.Text;
+            TextFieldProperty = FieldProp.Text;
+           
             Path.AddRectangles(rect);
         }
 
@@ -76,17 +48,17 @@ namespace UML_Logic_Library
             m.Scale(scaleX, scaleY);
             Path.Transform(m);
             //масштабируем прямоугольник текста
-            _textRectHead = new RectangleF(
-                _textRectHead.Left * scaleX, 
-                _textRectHead.Top * scaleY,
-                _textRectHead.Width * scaleX, 
-                _textRectHead.Height * scaleY
+            Head.textRect = new RectangleF(
+                Head.textRect.Left * scaleX, 
+                Head.textRect.Top * scaleY,
+                Head.textRect.Width * scaleX, 
+                Head.textRect.Height * scaleY
                 );
-            _textRectFieldProp = new RectangleF(
-                _textRectFieldProp.Left * scaleX, 
-                _textRectFieldProp.Top * scaleY, 
-                _textRectFieldProp.Width * scaleX, 
-                _textRectFieldProp.Height * scaleY
+            FieldProp.textRect = new RectangleF(
+                FieldProp.textRect.Left * scaleX, 
+                FieldProp.textRect.Top * scaleY, 
+                FieldProp.textRect.Width * scaleX, 
+                FieldProp.textRect.Height * scaleY
                 );
 
         }
@@ -97,10 +69,10 @@ namespace UML_Logic_Library
             gr.TranslateTransform(Location.X, Location.Y);
             gr.FillPath(Brush, Path);
             gr.DrawPath(Pen, Path);
-            gr.DrawString(Text.TextFields, SystemFonts.DefaultFont, Brushes.Black, 
-                _textRectHead, Text.StringFormatTitle);
-            gr.DrawString(Text.TextFieldsProp, SystemFonts.DefaultFont, Brushes.Black, 
-                _textRectFieldProp, Text.StringFormatField);
+            gr.DrawString(TextFieldTitle.TextFields, SystemFonts.DefaultFont, Brushes.Black, 
+                Head.textRect, Head.Text.StringFormatTitle);
+            gr.DrawString(TextFieldProperty.TextFieldsProp, SystemFonts.DefaultFont, Brushes.Black, 
+                FieldProp.textRect, FieldProp.Text.StringFormatField);
             gr.Restore(transState);
         }
     }

@@ -101,6 +101,25 @@ namespace UML_drawing
         private void myBoxControl_DoubleClick(object sender, EventArgs e)
         {
             if (myBoxControl.SelectedFigure is Line) return;
+            if (myBoxControl.SelectedFigure is RectangleOneField)
+            {
+                var objectField1 = (myBoxControl.SelectedFigure as RectangleOneField).TextFieldTitle.TextFields;
+                var objectField2 = (myBoxControl.SelectedFigure as RectangleOneField).TextFieldProperty.TextFieldsProp;
+                var createfromtwofields = new TextBoxOneField(objectField1, objectField2);
+                createfromtwofields.ShowDialog();
+                myBoxControl.SelectedBeginEditText(createfromtwofields.textToObjTitle, createfromtwofields.textToObjProp);
+                return;
+            }
+            if (myBoxControl.SelectedFigure is RectangleTwoFields)
+            {
+                var objectField1 = (myBoxControl.SelectedFigure as RectangleTwoFields).TextFieldTitle.TextFields;
+                var objectField2 = (myBoxControl.SelectedFigure as RectangleTwoFields).TextFieldProperty.TextFieldsProp;
+                var objectField3 = (myBoxControl.SelectedFigure as RectangleTwoFields).TextFieldMethods.TextFieldsMethod;
+                var createfromtwofields = new TextBoxTwoFields(objectField1, objectField2, objectField3);
+                createfromtwofields.ShowDialog();
+                myBoxControl.SelectedBeginEditText(createfromtwofields.textToObjTitle, createfromtwofields.textToObjProp, createfromtwofields.textToObjMethods);
+                return;
+            }
             var objectField = (myBoxControl.SelectedFigure as SimpleRectangle).Text.TextFields;
             var createfrom = new TextForm(objectField);
             createfrom.ShowDialog();
