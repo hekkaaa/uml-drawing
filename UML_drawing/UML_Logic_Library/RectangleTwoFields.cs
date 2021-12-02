@@ -40,7 +40,8 @@ namespace UML_Logic_Library
                         TextRect.Left + Location.X),
                     (int) (TextRect.Top + Location.Y + FieldProp.RectHeight), 
                     (int) TextRect.Width,
-                    (int) TextRect.Height);
+                    (int) TextRect.Height
+                    );
             }
         }
 
