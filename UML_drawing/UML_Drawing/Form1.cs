@@ -126,16 +126,6 @@ namespace UML_drawing
             myBoxControl.AddFigure<RectangleTwoFields>(startDragPoint);
         }
 
-        private void toolStripButton2_Click(object sender, EventArgs e)
-        {
-            var obj = myBoxControl.SelectedFigure;
-            if (obj is SimpleRectangle)
-            {
-                (obj as SimpleRectangle).Color = toolStripButton2.BackColor;
-            }
-
-        }
-
         private void toolStripButton1_Click(object sender, EventArgs e)
         {
             colorDialog1.ShowDialog();
@@ -145,6 +135,89 @@ namespace UML_drawing
                 (obj as SimpleRectangle).Color = colorDialog1.Color;
             }
         }
+        // ******************************************************************
+
+
+        // Анимации PictureBoxHover при наведении
+        private void ObjectButton_MouseHover(object sender, EventArgs e)
+        {
+            // Кнопка 1
+            pictureBoxHover.Size = new Size(220, 122);
+            pictureBoxHover.BorderStyle = BorderStyle.FixedSingle;
+            pictureBoxHover.BackgroundImage = Image.FromFile(@"D:\GitWork\uml-drawing\UML_drawing\UML_Drawing\BaseImages\object0.png");
+            pictureBoxHover.Location = new Point(13, 71);
+            pictureBoxHover.Visible = true;
+
+        }
+        private void ObjectButton_MouseLeave(object sender, EventArgs e)
+        {      // Кнопка 1
+             pictureBoxHover.Visible = false;
+        }
+
+        private void objectOneFieldButton_MouseHover(object sender, EventArgs e)
+        {
+            // Кнопка 2
+            pictureBoxHover.Size = new Size(215, 217);
+            pictureBoxHover.BorderStyle = BorderStyle.FixedSingle;
+            pictureBoxHover.BackgroundImage = Image.FromFile(@"D:\GitWork\uml-drawing\UML_drawing\UML_Drawing\BaseImages\object1.png");
+            pictureBoxHover.Location = new Point(43, 71);
+            pictureBoxHover.Visible = true;
+        }
+
+        private void objectOneFieldButton_MouseLeave(object sender, EventArgs e)
+        {   
+            // Кнопка 2
+            pictureBoxHover.Visible = false;
+        }
+
+        private void objectTwoFieldsButton_MouseHover(object sender, EventArgs e)
+        {
+            // Кнопка 3
+            pictureBoxHover.Size = new Size(210, 310);
+            pictureBoxHover.BorderStyle = BorderStyle.FixedSingle;
+            pictureBoxHover.BackgroundImage = Image.FromFile(@"D:\GitWork\uml-drawing\UML_drawing\UML_Drawing\BaseImages\object2.png");
+            pictureBoxHover.Location = new Point(68, 71);
+            pictureBoxHover.Visible = true;
+        }
+
+        private void objectTwoFieldsButton_MouseLeave(object sender, EventArgs e)
+        {
+            // Кнопка 3
+            pictureBoxHover.Visible = false;
+        }
+
+        private void associationLineButton_MouseHover(object sender, EventArgs e)
+        {
+            // Кнопка 4
+            pictureBoxHover.Size = new Size(295, 47);
+            pictureBoxHover.BorderStyle = BorderStyle.FixedSingle;
+            pictureBoxHover.BackgroundImage = Image.FromFile(@"D:\GitWork\uml-drawing\UML_drawing\UML_Drawing\BaseImages\line0.png");
+            pictureBoxHover.Location = new Point(88, 71);
+            pictureBoxHover.Visible = true;
+        }
+
+        private void associationLineButton_MouseLeave(object sender, EventArgs e)
+        {
+            // Кнопка 4
+            pictureBoxHover.Visible = false;
+        }
+
+        private void inheritanceLineButton_MouseHover(object sender, EventArgs e)
+        {
+            // Кнопка 4
+            pictureBoxHover.Size = new Size(295, 47);
+            pictureBoxHover.BorderStyle = BorderStyle.FixedSingle;
+            pictureBoxHover.BackgroundImage = Image.FromFile(@"D:\GitWork\uml-drawing\UML_drawing\UML_Drawing\BaseImages\line1.png");
+            pictureBoxHover.Location = new Point(108, 71);
+            pictureBoxHover.Visible = true;
+        }
+
+        private void inheritanceLineButton_MouseLeave(object sender, EventArgs e)
+        {
+            // Кнопка 4
+            pictureBoxHover.Visible = false;
+        }
+
         // ******************************************************************
     }
 }

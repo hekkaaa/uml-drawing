@@ -49,13 +49,14 @@ namespace UML_drawing
             this.objectTwoFieldsButton = new System.Windows.Forms.ToolStripButton();
             this.associationLineButton = new System.Windows.Forms.ToolStripButton();
             this.inheritanceLineButton = new System.Windows.Forms.ToolStripButton();
-            this.toolStripButton2 = new System.Windows.Forms.ToolStripButton();
-            this.myBoxControl = new UML_Logic_Library.MyBoxControl();
             this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
             this.colorDialog1 = new System.Windows.Forms.ColorDialog();
+            this.pictureBoxHover = new System.Windows.Forms.PictureBox();
+            this.myBoxControl = new UML_Logic_Library.MyBoxControl();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).BeginInit();
             this.toolStrip1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxHover)).BeginInit();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -84,6 +85,7 @@ namespace UML_drawing
             // 
             // createProjectToolStripMenuItem
             // 
+            this.createProjectToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("createProjectToolStripMenuItem.Image")));
             this.createProjectToolStripMenuItem.Name = "createProjectToolStripMenuItem";
             this.createProjectToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.createProjectToolStripMenuItem.Text = "Create Project";
@@ -91,6 +93,7 @@ namespace UML_drawing
             // 
             // loadProjectToolStripMenuItem
             // 
+            this.loadProjectToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("loadProjectToolStripMenuItem.Image")));
             this.loadProjectToolStripMenuItem.Name = "loadProjectToolStripMenuItem";
             this.loadProjectToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.loadProjectToolStripMenuItem.Text = "Load Project";
@@ -98,6 +101,7 @@ namespace UML_drawing
             // 
             // saveProjectToolStripMenuItem
             // 
+            this.saveProjectToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("saveProjectToolStripMenuItem.Image")));
             this.saveProjectToolStripMenuItem.Name = "saveProjectToolStripMenuItem";
             this.saveProjectToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.saveProjectToolStripMenuItem.Text = "Save Project";
@@ -105,6 +109,7 @@ namespace UML_drawing
             // 
             // exitToolStripMenuItem
             // 
+            this.exitToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("exitToolStripMenuItem.Image")));
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
             this.exitToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.exitToolStripMenuItem.Text = "Exit";
@@ -135,8 +140,7 @@ namespace UML_drawing
             this.objectTwoFieldsButton,
             this.associationLineButton,
             this.inheritanceLineButton,
-            this.toolStripButton1,
-            this.toolStripButton2});
+            this.toolStripButton1});
             this.toolStrip1.Location = new System.Drawing.Point(0, 28);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Size = new System.Drawing.Size(875, 31);
@@ -152,6 +156,8 @@ namespace UML_drawing
             this.ObjectButton.Size = new System.Drawing.Size(29, 28);
             this.ObjectButton.Text = "Object";
             this.ObjectButton.Click += new System.EventHandler(this.ObjectButton_Click);
+            this.ObjectButton.MouseLeave += new System.EventHandler(this.ObjectButton_MouseLeave);
+            this.ObjectButton.MouseHover += new System.EventHandler(this.ObjectButton_MouseHover);
             // 
             // objectOneFieldButton
             // 
@@ -162,6 +168,8 @@ namespace UML_drawing
             this.objectOneFieldButton.Size = new System.Drawing.Size(29, 28);
             this.objectOneFieldButton.Text = "toolStripButton2";
             this.objectOneFieldButton.Click += new System.EventHandler(this.objectOneFieldButton_Click);
+            this.objectOneFieldButton.MouseLeave += new System.EventHandler(this.objectOneFieldButton_MouseLeave);
+            this.objectOneFieldButton.MouseHover += new System.EventHandler(this.objectOneFieldButton_MouseHover);
             // 
             // objectTwoFieldsButton
             // 
@@ -172,6 +180,8 @@ namespace UML_drawing
             this.objectTwoFieldsButton.Size = new System.Drawing.Size(29, 28);
             this.objectTwoFieldsButton.Text = "toolStripButton2";
             this.objectTwoFieldsButton.Click += new System.EventHandler(this.objectTwoFieldsButton_Click);
+            this.objectTwoFieldsButton.MouseLeave += new System.EventHandler(this.objectTwoFieldsButton_MouseLeave);
+            this.objectTwoFieldsButton.MouseHover += new System.EventHandler(this.objectTwoFieldsButton_MouseHover);
             // 
             // associationLineButton
             // 
@@ -182,6 +192,8 @@ namespace UML_drawing
             this.associationLineButton.Size = new System.Drawing.Size(29, 28);
             this.associationLineButton.Text = "toolStripButton1";
             this.associationLineButton.Click += new System.EventHandler(this.associationLineButton_Click);
+            this.associationLineButton.MouseLeave += new System.EventHandler(this.associationLineButton_MouseLeave);
+            this.associationLineButton.MouseHover += new System.EventHandler(this.associationLineButton_MouseHover);
             // 
             // inheritanceLineButton
             // 
@@ -192,16 +204,32 @@ namespace UML_drawing
             this.inheritanceLineButton.Size = new System.Drawing.Size(29, 28);
             this.inheritanceLineButton.Text = "toolStripButton1";
             this.inheritanceLineButton.Click += new System.EventHandler(this.inheritanceLineButton_Click);
+            this.inheritanceLineButton.MouseLeave += new System.EventHandler(this.inheritanceLineButton_MouseLeave);
+            this.inheritanceLineButton.MouseHover += new System.EventHandler(this.inheritanceLineButton_MouseHover);
             // 
-            // toolStripButton2
+            // toolStripButton1
             // 
-            this.toolStripButton2.BackColor = System.Drawing.Color.Red;
-            this.toolStripButton2.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton2.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton2.Name = "toolStripButton2";
-            this.toolStripButton2.Size = new System.Drawing.Size(29, 28);
-            this.toolStripButton2.Text = "toolStripButton2";
-            this.toolStripButton2.Click += new System.EventHandler(this.toolStripButton2_Click);
+            this.toolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButton1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton1.Image")));
+            this.toolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton1.Name = "toolStripButton1";
+            this.toolStripButton1.Size = new System.Drawing.Size(29, 28);
+            this.toolStripButton1.Text = "toolStripButton1";
+            this.toolStripButton1.Click += new System.EventHandler(this.toolStripButton1_Click);
+            // 
+            // colorDialog1
+            // 
+            this.colorDialog1.Color = System.Drawing.Color.Gold;
+            // 
+            // pictureBoxHover
+            // 
+            this.pictureBoxHover.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.pictureBoxHover.Location = new System.Drawing.Point(13, 71);
+            this.pictureBoxHover.Name = "pictureBoxHover";
+            this.pictureBoxHover.Size = new System.Drawing.Size(37, 28);
+            this.pictureBoxHover.TabIndex = 9;
+            this.pictureBoxHover.TabStop = false;
+            this.pictureBoxHover.Visible = false;
             // 
             // myBoxControl
             // 
@@ -220,25 +248,12 @@ namespace UML_drawing
             this.myBoxControl.TabIndex = 7;
             this.myBoxControl.DoubleClick += new System.EventHandler(this.myBoxControl_DoubleClick);
             // 
-            // toolStripButton1
-            // 
-            this.toolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton1.Image")));
-            this.toolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton1.Name = "toolStripButton1";
-            this.toolStripButton1.Size = new System.Drawing.Size(29, 28);
-            this.toolStripButton1.Text = "toolStripButton1";
-            this.toolStripButton1.Click += new System.EventHandler(this.toolStripButton1_Click);
-            // 
-            // colorDialog1
-            // 
-            this.colorDialog1.Color = System.Drawing.Color.Gold;
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(875, 554);
+            this.Controls.Add(this.pictureBoxHover);
             this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.myBoxControl);
             this.Controls.Add(this.label3);
@@ -256,6 +271,7 @@ namespace UML_drawing
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).EndInit();
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxHover)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -278,9 +294,9 @@ namespace UML_drawing
         private ToolStripButton inheritanceLineButton;
         private ToolStripButton objectOneFieldButton;
         private ToolStripButton objectTwoFieldsButton;
-        private ToolStripButton toolStripButton2;
         private ToolStripMenuItem saveProjectToolStripMenuItem;
         private ToolStripButton toolStripButton1;
         private ColorDialog colorDialog1;
+        private PictureBox pictureBoxHover;
     }
 }
