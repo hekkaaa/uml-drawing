@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using UML_drawing.ViewForm;
 using UML_Logic_Library;
+using UML_Logic_Library.Arrows;
 using Component = System.ComponentModel.Component;
 
 namespace UML_drawing
@@ -99,6 +100,7 @@ namespace UML_drawing
 
         private void myBoxControl_DoubleClick(object sender, EventArgs e)
         {
+            if (myBoxControl.SelectedFigure is Line) return;
             var objectField = (myBoxControl.SelectedFigure as SimpleRectangle).Text.TextFields;
             var createfrom = new TextForm(objectField);
             createfrom.ShowDialog();
