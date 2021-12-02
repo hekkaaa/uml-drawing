@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
@@ -159,7 +160,7 @@ namespace UML_drawing
             // Кнопка 2
             pictureBoxHover.Size = new Size(215, 217);
             pictureBoxHover.BorderStyle = BorderStyle.FixedSingle;
-            pictureBoxHover.BackgroundImage = Image.FromFile(@"D:\GitWork\uml-drawing\UML_drawing\UML_Drawing\BaseImages\object1.png");
+            pictureBoxHover.BackgroundImage = Image.FromFile(@"..\..\BaseImages\object1.png");
             pictureBoxHover.Location = new Point(43, 71);
             pictureBoxHover.Visible = true;
         }
@@ -175,7 +176,7 @@ namespace UML_drawing
             // Кнопка 3
             pictureBoxHover.Size = new Size(210, 310);
             pictureBoxHover.BorderStyle = BorderStyle.FixedSingle;
-            pictureBoxHover.BackgroundImage = Image.FromFile(@"D:\GitWork\uml-drawing\UML_drawing\UML_Drawing\BaseImages\object2.png");
+            pictureBoxHover.BackgroundImage = Image.FromFile(@"..\..\BaseImages\object2.png");
             pictureBoxHover.Location = new Point(68, 71);
             pictureBoxHover.Visible = true;
         }
@@ -191,7 +192,7 @@ namespace UML_drawing
             // Кнопка 4
             pictureBoxHover.Size = new Size(295, 47);
             pictureBoxHover.BorderStyle = BorderStyle.FixedSingle;
-            pictureBoxHover.BackgroundImage = Image.FromFile(@"D:\GitWork\uml-drawing\UML_drawing\UML_Drawing\BaseImages\line0.png");
+            pictureBoxHover.BackgroundImage = Image.FromFile(@"..\..\BaseImages\line0.png");
             pictureBoxHover.Location = new Point(88, 71);
             pictureBoxHover.Visible = true;
         }
@@ -207,7 +208,7 @@ namespace UML_drawing
             // Кнопка 4
             pictureBoxHover.Size = new Size(295, 47);
             pictureBoxHover.BorderStyle = BorderStyle.FixedSingle;
-            pictureBoxHover.BackgroundImage = Image.FromFile(@"D:\GitWork\uml-drawing\UML_drawing\UML_Drawing\BaseImages\line1.png");
+            pictureBoxHover.BackgroundImage = Image.FromFile(@"..\..\BaseImages\line1.png");
             pictureBoxHover.Location = new Point(108, 71);
             pictureBoxHover.Visible = true;
         }
