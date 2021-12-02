@@ -7,7 +7,7 @@ namespace UML_Logic_Library.Markers
         public override void UpdateLocation()
         {
             RectangleF bounds = ((SimpleRectangle) targetComponent).Bounds;
-            Location = new PointF(bounds.Right + DefaultSize / 2, bounds.Bottom + DefaultSize / 2);
+            Location = new PointF(bounds.Right, bounds.Bottom);
         }
 
         public override void Offset(float dx, float dy)

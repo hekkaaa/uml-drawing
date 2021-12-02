@@ -145,7 +145,7 @@ namespace UML_drawing
             // Кнопка 1
             pictureBoxHover.Size = new Size(220, 122);
             pictureBoxHover.BorderStyle = BorderStyle.FixedSingle;
-            pictureBoxHover.BackgroundImage = Image.FromFile(@"D:\GitWork\uml-drawing\UML_drawing\UML_Drawing\BaseImages\object0.png");
+            pictureBoxHover.BackgroundImage = Image.FromFile(@"..\..\BaseImages\object0.png");
             pictureBoxHover.Location = new Point(13, 71);
             pictureBoxHover.Visible = true;
 

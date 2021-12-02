@@ -77,8 +77,8 @@ namespace UML_Logic_Library
 
         private void Draw(Graphics gr)
         {
-            gr.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighQuality;
-            gr.TranslateTransform(AutoScrollPosition.X, AutoScrollPosition.Y);
+            gr.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighQuality; 
+            // gr.TranslateTransform(AutoScrollPosition.X, AutoScrollPosition.Y);
 
             if (handler != null)
             {
@@ -95,7 +95,12 @@ namespace UML_Logic_Library
             {
                 SimpleRectangle figure = selectedFigure as SimpleRectangle;
                 RectangleF bounds = figure.Bounds;
-                gr.DrawRectangle(selectRectPen, bounds.Left - 2, bounds.Top - 2, bounds.Width + 4, bounds.Height + 4);
+                gr.DrawRectangle(
+                    selectRectPen, bounds.Left - 2, 
+                    bounds.Top - 2, 
+                    bounds.Width + 4, 
+                    bounds.Height + 4
+                    );
             }
             //рисуем маркеры
             foreach (Marker m in markers)
@@ -163,7 +168,8 @@ namespace UML_Logic_Library
             {
                 if (draggedFigure != null && (draggedFigure is SimpleRectangle))
                 {
-                    (draggedFigure as SimpleRectangle).Offset(location.X - startDragPoint.X, location.Y - startDragPoint.Y);
+                    (draggedFigure as SimpleRectangle).Offset(location.X - startDragPoint.X, 
+                        location.Y - startDragPoint.Y);
                     UpdateMarkers();
                     Invalidate();
                     CalcAutoScrollPosition();
@@ -196,12 +202,14 @@ namespace UML_Logic_Library
         private void CalcAutoScrollPosition()
         {
             RectangleF r = new RectangleF(0, 0, 0, 0);
+            
             // Перебираем все фигуры, ищем максимальные координаты
+            
             foreach (Component f in handler.ComponentsInProj)
                 if (f != null && f is SimpleRectangle)
                     r = RectangleF.Union(r, (f as SimpleRectangle).Bounds);
 
-            Size size = new Size((int)r.Width, (int)r.Height);
+            Size size = new Size((int)r.Width + 100, (int)r.Height + 100);
             if (size != AutoScrollMinSize)
                 AutoScrollMinSize = size;
         }
