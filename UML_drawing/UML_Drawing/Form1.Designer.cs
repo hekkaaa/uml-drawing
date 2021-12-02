@@ -38,6 +38,7 @@ namespace UML_drawing
             this.createToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.createProjectToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.loadProjectToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.saveProjectToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
@@ -50,7 +51,8 @@ namespace UML_drawing
             this.inheritanceLineButton = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton2 = new System.Windows.Forms.ToolStripButton();
             this.myBoxControl = new UML_Logic_Library.MyBoxControl();
-            this.saveProjectToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
+            this.colorDialog1 = new System.Windows.Forms.ColorDialog();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).BeginInit();
             this.toolStrip1.SuspendLayout();
@@ -65,7 +67,6 @@ namespace UML_drawing
             this.aboutToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Padding = new System.Windows.Forms.Padding(6, 2, 0, 2);
             this.menuStrip1.Size = new System.Drawing.Size(875, 28);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
@@ -94,6 +95,13 @@ namespace UML_drawing
             this.loadProjectToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.loadProjectToolStripMenuItem.Text = "Load Project";
             this.loadProjectToolStripMenuItem.Click += new System.EventHandler(this.loadProjectToolStripMenuItem_Click);
+            // 
+            // saveProjectToolStripMenuItem
+            // 
+            this.saveProjectToolStripMenuItem.Name = "saveProjectToolStripMenuItem";
+            this.saveProjectToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.saveProjectToolStripMenuItem.Text = "Save Project";
+            this.saveProjectToolStripMenuItem.Click += new System.EventHandler(this.saveProjectToolStripMenuItem_Click);
             // 
             // exitToolStripMenuItem
             // 
@@ -127,6 +135,7 @@ namespace UML_drawing
             this.objectTwoFieldsButton,
             this.associationLineButton,
             this.inheritanceLineButton,
+            this.toolStripButton1,
             this.toolStripButton2});
             this.toolStrip1.Location = new System.Drawing.Point(0, 28);
             this.toolStrip1.Name = "toolStrip1";
@@ -211,12 +220,19 @@ namespace UML_drawing
             this.myBoxControl.TabIndex = 7;
             this.myBoxControl.DoubleClick += new System.EventHandler(this.myBoxControl_DoubleClick);
             // 
-            // saveProjectToolStripMenuItem
+            // toolStripButton1
             // 
-            this.saveProjectToolStripMenuItem.Name = "saveProjectToolStripMenuItem";
-            this.saveProjectToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
-            this.saveProjectToolStripMenuItem.Text = "Save Project";
-            this.saveProjectToolStripMenuItem.Click += new System.EventHandler(this.saveProjectToolStripMenuItem_Click);
+            this.toolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.toolStripButton1.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton1.Image")));
+            this.toolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.toolStripButton1.Name = "toolStripButton1";
+            this.toolStripButton1.Size = new System.Drawing.Size(29, 28);
+            this.toolStripButton1.Text = "toolStripButton1";
+            this.toolStripButton1.Click += new System.EventHandler(this.toolStripButton1_Click);
+            // 
+            // colorDialog1
+            // 
+            this.colorDialog1.Color = System.Drawing.Color.Gold;
             // 
             // Form1
             // 
@@ -264,5 +280,7 @@ namespace UML_drawing
         private ToolStripButton objectTwoFieldsButton;
         private ToolStripButton toolStripButton2;
         private ToolStripMenuItem saveProjectToolStripMenuItem;
+        private ToolStripButton toolStripButton1;
+        private ColorDialog colorDialog1;
     }
 }

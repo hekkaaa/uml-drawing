@@ -135,6 +135,16 @@ namespace UML_drawing
             }
 
         }
+
+        private void toolStripButton1_Click(object sender, EventArgs e)
+        {
+            colorDialog1.ShowDialog();
+            var obj = myBoxControl.SelectedFigure;
+            if (obj is SimpleRectangle)
+            {
+                (obj as SimpleRectangle).Color = colorDialog1.Color;
+            }
+        }
         // ******************************************************************
     }
 }
