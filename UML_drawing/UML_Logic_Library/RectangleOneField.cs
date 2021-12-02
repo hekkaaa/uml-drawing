@@ -9,36 +9,36 @@ namespace UML_Logic_Library
     {
         private PropField Head = new PropField(0);
         private PropField FieldProp = new PropField(DefaultSize);
-        public RectangleF TextRect;
         public RectangleF TextRect1;
+        public RectangleF TextRect2;
 
         private RectangleF[] rect = new RectangleF[2];
         private RectangleF[] textRect = new RectangleF[2];
         private RectangleF _textRectHead;
         private RectangleF _textRectFieldProp;
 
-        public Rectangle TextBounds
-        {
-            get
-            {
-                return new Rectangle(
-                    (int)(TextRect.Left + Location.X), 
-                    (int)(TextRect.Top + Location.Y), 
-                    (int)TextRect.Width, 
-                    (int)TextRect.Height
-                    );
-            }
-        }
-
         public Rectangle TextBounds1
         {
             get
             {
                 return new Rectangle(
-                    (int)(TextRect.Left + Location.X ), 
-                    (int)(TextRect.Top + Location.Y + FieldProp.RectHeight), 
-                    (int)TextRect.Width, 
-                    (int)TextRect.Height
+                    (int)(TextRect1.Left + Location.X), 
+                    (int)(TextRect1.Top + Location.Y), 
+                    (int)TextRect1.Width, 
+                    (int)TextRect1.Height
+                    );
+            }
+        }
+
+        public Rectangle TextBounds2
+        {
+            get
+            {
+                return new Rectangle(
+                    (int)(TextRect2.Left + Location.X ), 
+                    (int)(TextRect2.Top + Location.Y + FieldProp.RectHeight), 
+                    (int)TextRect2.Width, 
+                    (int)TextRect2.Height + FieldProp.RectHeight
                     );
             }
         }
