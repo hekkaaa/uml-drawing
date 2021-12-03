@@ -73,6 +73,8 @@ namespace UML_drawing
         {
             var createform = new CreateForm();
             createform.ShowDialog();
+            myBoxControl.Handler = createform.Handler;
+            myBoxControl.Handler = myBoxControl.Handler;
         }
 
         private void loadProjectToolStripMenuItem_Click(object sender, EventArgs e)
@@ -83,7 +85,7 @@ namespace UML_drawing
 
         private void saveProjectToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var createform = new SavesInfoFrom();
+            var createform = new SavesInfoFrom(myBoxControl.Handler.NameProj, myBoxControl.Handler.ComponentsInProj);
             createform.ShowDialog(this);
         }
 

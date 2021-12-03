@@ -16,9 +16,32 @@ namespace UML_Logic_Library
     public class Handler : IHandler
     {
         private ApiData _apiData = new ApiData();
-        private LiveData _liveData;
+        private LiveData _liveData = new LiveData();
         // После всех свистоплясок сделать маппинг объектов _liveData в норм компоненты, наверное хз
         public List<Component> ComponentsInProj = new List<Component>();
+        private string _nameProj = "Project1";
+
+        public string NameProj
+        {
+            get => _nameProj;
+            set
+            {
+                if (string.IsNullOrEmpty(value) || string.IsNullOrWhiteSpace(value))
+                {
+                    throw new ArgumentNullException("Назовите проект!");
+                }
+
+                _nameProj = value;
+            }
+        }
+        
+        public Handler(){}
+
+        public Handler(string nameProj, List<Component> components)
+        {
+            NameProj = nameProj;
+            ComponentsInProj = new List<Component>(components);
+        }
         
         public void CreateProj(string nameProj)
         {
@@ -60,7 +83,7 @@ namespace UML_Logic_Library
         }
         
         
-        public bool SaveProject(string nameProj)
+        public bool SaveProject(string nameProj, List<Component> components)
         {
             try
             {

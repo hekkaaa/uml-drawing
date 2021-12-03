@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Drawing;
 using System.Windows.Forms;
@@ -9,14 +10,17 @@ namespace UML_drawing.ViewForm
 {
     public partial class CreateForm : Form
     {
+        public Handler Handler;
         public CreateForm()
         {
             InitializeComponent();
+            textBoxCreate.TextChanged += textBoxCreate_TextChanged;
         }
 
         private void buttonCreate_Click(object sender, EventArgs e)
         {
-            Handler btncreate = new Handler();
+            Handler = new Handler();
+            Handler.NameProj = textBoxCreate.Text;
             string res = CheckValidName.Check(textBoxCreate.Text);
             if (res != null)
             {
@@ -27,8 +31,8 @@ namespace UML_drawing.ViewForm
             {
                 try
                 {
-                    btncreate.CreateProj(textBoxCreate.Text);
-                    btncreate.SaveProject(textBoxCreate.Text);
+                    Handler.CreateProj(textBoxCreate.Text);
+                    Handler.SaveProject(textBoxCreate.Text, Handler.ComponentsInProj);
                     Close();
                 }
                 catch (DuplicateNameException)
@@ -47,6 +51,11 @@ namespace UML_drawing.ViewForm
         private void buttonCancel_Click(object sender, EventArgs e)
         {
             Close();
+        }
+
+        private void textBoxCreate_TextChanged(object sender, EventArgs e)
+        {
+            textBoxCreate.Text = textBoxCreate.Text;
         }
     }
 }
