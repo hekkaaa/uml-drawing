@@ -102,6 +102,8 @@ namespace UML_drawing
 
         private void myBoxControl_DoubleClick(object sender, EventArgs e)
         {
+            if (myBoxControl.SelectedFigure == null || myBoxControl.SelectedFigure is Line)
+                return;
             if (myBoxControl.SelectedFigure is Line) return;
             if (myBoxControl.SelectedFigure is RectangleOneField)
             {
@@ -131,13 +133,13 @@ namespace UML_drawing
 
         private void associationLineButton_Click(object sender, EventArgs e)
         {
-            myBoxControl.SelectedAddLedgeLine();
+            myBoxControl.SelectedAddLedgeLine(Arrows.AssociationArrow);
             //myBoxControl.AddFigure<Line>(startDragPoint);
         }
 
         private void inheritanceLineButton_Click(object sender, EventArgs e)
         {
-            myBoxControl.SelectedAddDashLedgeLine();
+            myBoxControl.SelectedAddLedgeLine(Arrows.AddictionArrow);
         }
 
         private void objectOneFieldButton_Click(object sender, EventArgs e)
