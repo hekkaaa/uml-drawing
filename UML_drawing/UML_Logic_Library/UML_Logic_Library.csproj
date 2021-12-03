@@ -41,13 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Arrows\AddictionArrow.cs" />
-    <Compile Include="Arrows\AgragationArrow.cs" />
-    <Compile Include="Arrows\AssociationArrow.cs" />
-    <Compile Include="Arrows\CompozitionArrow.cs" />
-    <Compile Include="Arrows\InheritanceArrow.cs" />
     <Compile Include="Arrows\Line.cs" />
-    <Compile Include="Arrows\RealizationArrow.cs" />
     <Compile Include="PropField.cs" />
     <Compile Include="MyGraphicPath.cs" />
     <Compile Include="RectangleComponent.cs" />

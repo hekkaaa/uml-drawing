@@ -294,42 +294,21 @@ namespace UML_Logic_Library
 
         public void SelectedBeginEditText(string text, string text1, string text2)
         {
-            if (selectedFigure != null && (selectedFigure is SimpleRectangle))
-            {
-                RectangleTwoFields figure = (selectedFigure as RectangleTwoFields);
+            RectangleTwoFields figure = (selectedFigure as RectangleTwoFields);
                 figure.TextFieldTitle.TextFields = text;
                 figure.TextFieldProperty.TextFieldsProp = text1;
                 figure.TextFieldMethods.TextFieldsMethod = text2;
-            }
         }
        
-        public void SelectedAddLedgeLine()
+        public void SelectedAddLedgeLine(Arrows.Arrows type)
         {
             if (selectedFigure != null && (selectedFigure is SimpleRectangle))
             {
-                Line line = new Line();
+                Line line = new Line(type);
                 line.From = (selectedFigure as SimpleRectangle);
                 EndLineMarker marker = new EndLineMarker(handler, 1);
                 marker.Location = line.From.Location;
-                marker.Location = marker.Location.Offset(0, line.From.Size.Height / 2 + 10);
-                line.To = marker;
-                handler.ComponentsInProj.Add(line);
-                selectedFigure = line;
-                CreateMarkers();
-
-                Invalidate();
-            }
-        }
-
-        public void SelectedAddDashLedgeLine()
-        {
-            if (selectedFigure != null && (selectedFigure is SimpleRectangle))
-            {
-                AssociationArrow line = new AssociationArrow();
-                line.From = (selectedFigure as SimpleRectangle);
-                EndLineMarker marker = new EndLineMarker(handler, 1);
-                marker.Location = line.From.Location;
-                marker.Location = marker.Location.Offset(0, line.From.Size.Height / 2 + 10);
+                marker.Location = marker.Location.Offset(0, line.From.Size.Height);
                 line.To = marker;
                 handler.ComponentsInProj.Add(line);
                 selectedFigure = line;
@@ -341,7 +320,7 @@ namespace UML_Logic_Library
 
         public void SelectedDelete()
         {
-            if (selectedFigure != null)
+            if (selectedFigure != null || selectedFigure is Line)
             {
                 handler.ComponentsInProj.Remove(selectedFigure);
                 selectedFigure = null;
@@ -374,6 +353,9 @@ namespace UML_Logic_Library
         {
             base.OnKeyUp(e);
 
+            if (e.KeyData == (Keys.Delete))
+                SelectedDelete();
+            
             if (SelectedFigure == null || !(SelectedFigure is SimpleRectangle))
                 return;
             int dx = 0;
@@ -386,9 +368,7 @@ namespace UML_Logic_Library
                 dy = -1;
             if (e.KeyData == Keys.Down)
                 dy = +1;
-
-            if (e.KeyData == (Keys.Delete))
-                SelectedDelete();
+            
             
             if (e.KeyData == (Keys.Right | Keys.Shift))
                 dx = +15;

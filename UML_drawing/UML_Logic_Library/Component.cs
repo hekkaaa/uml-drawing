@@ -29,6 +29,10 @@ namespace UML_Logic_Library
                     _pen = new Pen(_penColor, _penWidth);
                 return _pen;
             }
+            set
+            {
+                _pen = value;
+            }
         }
 
         public Color PenColor
