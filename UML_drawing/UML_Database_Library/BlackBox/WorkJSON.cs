@@ -6,6 +6,7 @@ using UML_Database_Library.BlackBox;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.ComponentModel;
 
 namespace UML_Database_Library.BlackBox
 {
@@ -55,11 +56,11 @@ namespace UML_Database_Library.BlackBox
             }
         }
 
-        internal static bool SaveJson(string namefile,LiveData obj)
+        internal static bool SaveJson(string namefile,/*LiveData*/ List<LiveDataElem> obj)
         {   
             // Проверяем есть ли папка project вообще.
             SystemFiles.CreateDirectoryProject(SystemFiles.CheckDirectory());
-            string json = JsonSerializer.Serialize(obj.ListObjectFigure);
+            string json = JsonSerializer.Serialize(obj);
 
             try
             {

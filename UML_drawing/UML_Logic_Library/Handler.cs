@@ -10,32 +10,15 @@ using UML_Logic_Library.Requests.Abstract;
 
 namespace UML_Logic_Library
 {
-    /// <summary>
-    /// Это у же не актуальный класс, но пусть пока что будет тут
-    /// </summary>
     public class Handler : IHandler
     {
         private ApiData _apiData = new ApiData();
         private LiveData _liveData = new LiveData();
         // После всех свистоплясок сделать маппинг объектов _liveData в норм компоненты, наверное хз
         public List<Component> ComponentsInProj = new List<Component>();
-        private string _nameProj = "Project1";
-
-        public string NameProj
-        {
-            get => _nameProj;
-            set
-            {
-                if (string.IsNullOrEmpty(value) || string.IsNullOrWhiteSpace(value))
-                {
-                    throw new ArgumentNullException("Назовите проект!");
-                }
-
-                _nameProj = value;
-            }
-        }
-        
-        public Handler(){}
+        //private string _nameProj = "DefaultProject";
+        public string NameProj { get { return _liveData.nameproject; } set { _liveData.nameproject = value; } }
+        public Handler(){ _liveData.nameproject = "DefaultProject"; } // назначаем имя по умолчанию при создании нового проекта.
 
         public Handler(string nameProj, List<Component> components)
         {
@@ -45,40 +28,30 @@ namespace UML_Logic_Library
         
         public void CreateProj(string nameProj)
         {
+            NameProj = nameProj;
             _liveData = _apiData.CreateProj(nameProj);
         }
-        
-        // Наверн это уже не нужно
-        
-        
-        // public IComponent Create(BlockRequest blockRequest)
-        // {
-        //     var component = ComponentFactory.CreateSingleBlock(blockRequest);
-        //     // Тут все-таки надо передавать тебе в метод параметр (объект для записи)
-        //     // мб я чет совсем путаю, но в момент написания я очень уверена была и все вроде логично
-        //     var componentCreated = _apiData.CreateElem(_liveData);
-        //     component.ItemId = componentCreated._id;
-        //     return component;
-        // }
-
-        // public IComponent GetItem(int id)
-        // {
-        //     var liveDataElement = _liveData.ListObjectFigure.Find(x => x._id == id);
-        //     //var component = ComponentFactory.CreateSingleBlock(liveDataElement);
-        //     //if (component == null)
-        //     //    throw new ArgumentNullException("Выберите подходящий объект!");
-        //     return new SimpleRectangle();
-        // }
-        //
-        // public bool DeleteItem(int id)
-        // {
-        //     return _apiData.RemoveElem(_liveData, id);
-        // }
-
-        // Надо подумать над методом, потому что мне или визуалу смысл от LiveData
-        // скорее всего может нужно вернуть ListObjectFigure и отрисовывать компоненты по очереди
+      
         public LiveData LoadProject(string nameProj)
-        {
+        {   
+            var load = _apiData.LoadProject(nameProj);
+            foreach (var component in load.ListObjectFigure)
+            {
+                //ComponentsInProj.Add(new Component(component));
+
+                //ComponentsInProj.Add(new Component
+                //{
+                //    ItemId = component._id,
+                //});
+                //_liveData.ListObjectFigure.Add(new LiveDataElem
+                //{
+                //    _id = component.ItemId,
+                //    //_pen = component.Pen.,
+                //    _penColor = component.PenColor,
+                //    _penWidth = component.PenWidth,
+                //    Path = component.Path
+                //}); ;
+            }
             return _apiData.LoadProject(nameProj);
         }
         
@@ -87,7 +60,19 @@ namespace UML_Logic_Library
         {
             try
             {
-                return _apiData.SaveProject(nameProj, _liveData);
+                //переделываю под LivedataElem потому как другого вариента нет ConvertAll не взлетел.
+                foreach (var component in components)
+                {
+                    _liveData.ListObjectFigure.Add(new LiveDataElem
+                    {
+                        _id = component.ItemId,
+                        //_pen = component.Pen.,
+                        _penColor = component.PenColor,
+                        _penWidth = component.PenWidth,
+                        Path = component.Path
+                    }); ;
+                }
+                return _apiData.SaveProject(nameProj, _liveData.ListObjectFigure);
             }
             catch (DirectoryNotFoundException ex)
             {
@@ -103,20 +88,20 @@ namespace UML_Logic_Library
         public bool Refresh(BlockRequest blockRequest, int id)
         {
             var singleBlock = ComponentFactory.CreateSingleBlock(blockRequest);
-            if (singleBlock == null) 
+            if (singleBlock == null)
                 throw new Exception("Несуществующий компонент");
-            
+
             for (var i = 0; i < _liveData.ListObjectFigure.Count; i++)
             {
                 if (_liveData.ListObjectFigure[i]._id == id)
                 {
                     //_liveData.ListObjectFigure[i] = block.ToLiveDataElem();
-                    _apiData.SaveProject(_liveData.nameproject, _liveData);
+                    //_apiData.SaveProject(_liveData.nameproject, _liveData);
                     return true;
                 }
             }
             return false;
         }
-        
+
     }
 }

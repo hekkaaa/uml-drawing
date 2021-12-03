@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Data;
 using System.IO;
 using System.Linq;
@@ -94,7 +95,7 @@ namespace UML_Database_Library.API
         }
 
         // сохраненение текущей Livedate в файловой системе.
-        public bool SaveProject(string nameproject, LiveData obj)
+        public bool SaveProject(string nameproject, List<LiveDataElem> obj/*LiveData obj*/)
         {
             try
             {
