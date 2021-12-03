@@ -28,9 +28,14 @@ namespace UML_Logic_Library.Markers
         public override void Offset(float dx, float dy)
         {
             base.Offset(dx, dy);
-
-            //ищем фигуру под маркером
-            SimpleRectangle figure = this;
+            
+            SimpleRectangle figure = null;
+            for (int i = components.Count - 1; i >= 0; i--)
+                if (components[i] is SimpleRectangle && components[i].PointIsInside(Location))
+                {
+                    figure = (SimpleRectangle)components[i];
+                    break;
+                }
 
             Line line = (targetComponent as Line);
             if (figure == null)

@@ -9,7 +9,8 @@ namespace UML_Logic_Library.Markers
         {
             Line line = (targetComponent as Line);
             if (line.From == null || line.To == null)
-                return;//не обновляем маркеры оторванных концов
+                return;
+            //не обновляем маркеры оторванных концов
             //фигура, с которой связана линия
             Location = new PointF(line.ledgePositionX, (line.From.Location.Y + line.To.Location.Y) / 2);
         }
