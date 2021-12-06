@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
+using UML_Logic_Library.AdditionalClasses;
 using UML_Logic_Library.Arrows;
 using UML_Logic_Library.Interfaces;
+using UML_Logic_Library.StructuralEntities;
 
 namespace UML_Logic_Library.Markers
 {

@@ -9,9 +9,12 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using UML_drawing.ViewForm;
+using UML_Logic_Library.AdditionalClasses;
 using UML_Logic_Library.Arrows;
 using UML_Logic_Library.Helpers;
 using UML_Logic_Library.Markers;
+using UML_Logic_Library.StructuralEntities;
+using Component = UML_Logic_Library.StructuralEntities.Component;
 
 namespace UML_Logic_Library
 {
@@ -22,7 +25,6 @@ namespace UML_Logic_Library
         Component selectedFigure = null;
         //фигура или маркер, который тащится мышью
         Component draggedFigure = null;
-        private Control _control;
 
         List<Marker> markers = new List<Marker>();
         Pen selectRectPen;
@@ -117,7 +119,7 @@ namespace UML_Logic_Library
         {
             base.OnMouseDown(e);
             Point location = e.Location;
-            // location.Offset(-AutoScrollPosition.X, -AutoScrollPosition.Y);
+            location.Offset(-AutoScrollPosition.X, -AutoScrollPosition.Y);
 
             Focus();
             if (e.Button == System.Windows.Forms.MouseButtons.Left)
@@ -164,7 +166,7 @@ namespace UML_Logic_Library
         {
             base.OnMouseMove(e);
             Point location = e.Location;
-            // location.Offset(-AutoScrollPosition.X, -AutoScrollPosition.Y);
+            location.Offset(-AutoScrollPosition.X, -AutoScrollPosition.Y);
             if (e.Button == System.Windows.Forms.MouseButtons.Left)
             {
                 if (draggedFigure != null && (draggedFigure is SimpleRectangle))
@@ -273,33 +275,6 @@ namespace UML_Logic_Library
             }
         }
 
-        public void SelectedBeginEditText(string text)
-        {
-            if (selectedFigure != null && (selectedFigure is SimpleRectangle))
-            {
-                RectangleComponent figure = (selectedFigure as RectangleComponent);
-                (selectedFigure as SimpleRectangle).Text.TextFields = text;
-            }
-        }
-
-        public void SelectedBeginEditText(string text, string text1)
-        {
-            if (selectedFigure != null && (selectedFigure is SimpleRectangle))
-            {
-                RectangleOneField figure = (selectedFigure as RectangleOneField);
-                figure.TextFieldTitle.TextFields = text;
-                figure.TextFieldProperty.TextFieldsProp = text1;
-            }
-        }
-
-        public void SelectedBeginEditText(string text, string text1, string text2)
-        {
-            RectangleTwoFields figure = (selectedFigure as RectangleTwoFields);
-                figure.TextFieldTitle.TextFields = text;
-                figure.TextFieldProperty.TextFieldsProp = text1;
-                figure.TextFieldMethods.TextFieldsMethod = text2;
-        }
-       
         public void SelectedAddLedgeLine(Arrows.Arrows type)
         {
             if (selectedFigure != null && (selectedFigure is SimpleRectangle))
@@ -331,17 +306,17 @@ namespace UML_Logic_Library
             }
         }
 
-        //public Bitmap GetImage()
-        //{
-        //    selectedFigure = null;
-        //    draggedFigure = null;
-        //    CreateMarkers();
+        public Bitmap GetImage()
+        {
+            selectedFigure = null;
+            draggedFigure = null;
+            CreateMarkers();
 
-        //    Bitmap bmp = new Bitmap(Bounds.Width, Bounds.Height);
-        //    DrawToBitmap(bmp, new Rectangle(0, 0, bmp.Width, bmp.Height));
+            Bitmap bmp = new Bitmap(Bounds.Width, Bounds.Height);
+            DrawToBitmap(bmp, new Rectangle(0, 0, bmp.Width, bmp.Height));
 
-        //    return bmp;
-        //}
+            return bmp;
+        }
 
 
         protected override void OnKeyPress(KeyPressEventArgs e)

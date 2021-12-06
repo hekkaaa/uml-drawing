@@ -9,7 +9,8 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using UML_Logic_Library;
-using Component = UML_Logic_Library.Component;
+using UML_Logic_Library.AdditionalClasses;
+using Component = UML_Logic_Library.StructuralEntities.Component;
 
 namespace UML_drawing.ViewForm
 {
@@ -28,7 +29,7 @@ namespace UML_drawing.ViewForm
             for (int i = 0; i <= 100; i += 10)
             {
                 progressBar1.Value = i;
-                Thread.Sleep(400);
+                Thread.Sleep(150);
                 ResetText();
                 Update();
                 // тут нужно прикрутить метод save от Алии.

@@ -2,7 +2,7 @@
 using System.Drawing.Drawing2D;
 using System.Runtime.Serialization;
 
-namespace UML_Logic_Library
+namespace UML_Logic_Library.AdditionalClasses
 {
     public class MyGraphicPath
     {

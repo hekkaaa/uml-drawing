@@ -1,15 +1,23 @@
-﻿using System.Collections.Generic;
-using System.Drawing;
+﻿using System.Drawing;
 
-namespace UML_Logic_Library
+namespace UML_Logic_Library.AdditionalClasses
 {
-    public class TextField
+    public sealed class TextField
     {
-        public Font Font => new Font(FontFamily.GenericMonospace, 12, FontStyle.Regular);
+        private Font _font = SystemFonts.DefaultFont;
         private string _textField = "Object";
         private string _textFieldProp = "+ Property(Type) : Type";
         private string _textFieldMethods = "+ Method(Type) : Type";
 
+        public Font Font
+        {
+            get => _font;
+            set
+            {
+                _font = value;
+            }
+        }
+        
         public string TextFields
         {
             get => _textField;
@@ -46,7 +54,7 @@ namespace UML_Logic_Library
             }
         }
         
-        public virtual StringFormat StringFormatTitle
+        public StringFormat StringFormatTitle
         {
             get
             {
@@ -57,7 +65,7 @@ namespace UML_Logic_Library
             }
         }
         
-        public virtual StringFormat StringFormatField
+        public StringFormat StringFormatField
         {
             get
             {
