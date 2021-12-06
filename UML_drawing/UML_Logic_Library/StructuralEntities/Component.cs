@@ -2,13 +2,11 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Drawing2D;
-using System.Net.Mime;
-using Microsoft.SqlServer.Server;
+using UML_Logic_Library.AdditionalClasses;
 using UML_Logic_Library.Interfaces;
 using UML_Logic_Library.Markers;
-using UML_Logic_Library.Requests.Abstract;
 
-namespace UML_Logic_Library
+namespace UML_Logic_Library.StructuralEntities
 {
     [Serializable]
     public abstract class Component : IComponent

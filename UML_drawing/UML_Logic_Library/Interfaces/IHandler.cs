@@ -1,7 +1,5 @@
 ﻿using System.Collections.Generic;
 using UML_Database_Library.BlackBox;
-using UML_Logic_Library.Requests;
-using UML_Logic_Library.Requests.Abstract;
 
 namespace UML_Logic_Library.Interfaces
 {
@@ -15,7 +13,7 @@ namespace UML_Logic_Library.Interfaces
         
         public LiveData LoadProject(string nameProject);
         
-        public bool Refresh(BlockRequest blockRequest, int id);
+        //public bool Refresh(BlockRequest blockRequest, int id);
         
     }
 }

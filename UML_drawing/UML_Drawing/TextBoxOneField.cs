@@ -7,40 +7,58 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using UML_Logic_Library;
+using UML_Logic_Library.StructuralEntities;
+using Component = UML_Logic_Library.StructuralEntities.Component;
 
 namespace UML_drawing
 {
     public partial class TextBoxOneField : Form
     {
-        public TextBoxOneField()
-        {
-            InitializeComponent();
-        }
+        private RectangleOneField _objectInForm;
 
-        public TextBoxOneField(string title, string prop)
+        public TextBoxOneField(Component objectFromForm)
         {
             InitializeComponent();
-            textBox.Text = title;
-            textBox.TextChanged += textBox_TextChanged;
-            textBox1.Text = prop;
-            textBox1.TextChanged += textBox1_TextChanged;
+            _objectInForm = objectFromForm as RectangleOneField;
+            textBox2.Text = _objectInForm.Head.Text.TextFields;
+            textBox2.Font = _objectInForm.Head.Text.Font;
+            textBox3.Text = _objectInForm.FieldRectangle.Text.TextFieldsProp;
+            textBox3.Font = _objectInForm.FieldRectangle.Text.Font;
+            textBox2.TextChanged += textBox2_TextChanged;
+            textBox3.TextChanged += textBox3_TextChanged;
         }
 
         public string textToObjTitle;
-        private void textBox_TextChanged(object sender, EventArgs e)
+        private void textBox2_TextChanged(object sender, EventArgs e)
         {
-            textToObjTitle = textBox.Text;
+            _objectInForm.Head.Text.TextFields = textBox2.Text;
         }
 
-        public string textToObjProp;
-        private void textBox1_TextChanged(object sender, EventArgs e)
+        private void textBox3_TextChanged(object sender, EventArgs e)
         {
-            textToObjProp = textBox1.Text;
+            _objectInForm.FieldRectangle.Text.TextFieldsProp = textBox3.Text;
         }
 
         private void OkTextButton_Click(object sender, EventArgs e)
         {
+            _objectInForm.Head.Text.Font = textBox2.Font;
+            _objectInForm.FieldRectangle.Text.Font = textBox3.Font;
             this.Close();
         }
+
+        private void fontEditor_Click(object sender, EventArgs e)
+        {
+            fontDialog3.ShowDialog();
+            textBox2.Font = fontDialog3.Font;
+        }
+
+        private void textEditor2_Click(object sender, EventArgs e)
+        {
+            fontDialog4.ShowDialog();
+            textBox3.Font = fontDialog4.Font;
+        }
+
+        
     }
 }

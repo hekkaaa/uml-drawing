@@ -12,13 +12,13 @@ namespace UML_Logic_Library.Markers
                 return;
             //не обновляем маркеры оторванных концов
             //фигура, с которой связана линия
-            Location = new PointF(line.ledgePositionX, (line.From.Location.Y + line.To.Location.Y) / 2);
+            Location = new PointF(line.LedgePositionX, (line.From.Location.Y + line.To.Location.Y) / 2);
         }
 
         public override void Offset(float dx, float dy)
         {
             base.Offset(dx, 0);
-            (targetComponent as Line).ledgePositionX += dx;
+            (targetComponent as Line).LedgePositionX += dx;
         }
     }
 }

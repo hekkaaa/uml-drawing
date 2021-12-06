@@ -1,7 +1,6 @@
 ﻿namespace UML_Logic_Library
 {
-    public class ComponentRequest
+    public class Class1
     {
-        
     }
 }

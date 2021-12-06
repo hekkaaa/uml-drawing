@@ -1,14 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using UML_Database_Library.API;
 using UML_Database_Library.BlackBox;
 using UML_Logic_Library.Interfaces;
-using UML_Logic_Library.Requests;
-using UML_Logic_Library.Requests.Abstract;
+using UML_Logic_Library.StructuralEntities;
 
-namespace UML_Logic_Library
+namespace UML_Logic_Library.AdditionalClasses
 {
     /// <summary>
     /// Это у же не актуальный класс, но пусть пока что будет тут
@@ -100,23 +98,23 @@ namespace UML_Logic_Library
         }
 
 
-        public bool Refresh(BlockRequest blockRequest, int id)
-        {
-            var singleBlock = ComponentFactory.CreateSingleBlock(blockRequest);
-            if (singleBlock == null) 
-                throw new Exception("Несуществующий компонент");
-            
-            for (var i = 0; i < _liveData.ListObjectFigure.Count; i++)
-            {
-                if (_liveData.ListObjectFigure[i]._id == id)
-                {
-                    //_liveData.ListObjectFigure[i] = block.ToLiveDataElem();
-                    _apiData.SaveProject(_liveData.nameproject, _liveData);
-                    return true;
-                }
-            }
-            return false;
-        }
+        // public bool Refresh(BlockRequest blockRequest, int id)
+        // {
+        //     var singleBlock = ComponentFactory.CreateSingleBlock(blockRequest);
+        //     if (singleBlock == null) 
+        //         throw new Exception("Несуществующий компонент");
+        //     
+        //     for (var i = 0; i < _liveData.ListObjectFigure.Count; i++)
+        //     {
+        //         if (_liveData.ListObjectFigure[i]._id == id)
+        //         {
+        //             //_liveData.ListObjectFigure[i] = block.ToLiveDataElem();
+        //             _apiData.SaveProject(_liveData.nameproject, _liveData);
+        //             return true;
+        //         }
+        //     }
+        //     return false;
+        // }
         
     }
 }

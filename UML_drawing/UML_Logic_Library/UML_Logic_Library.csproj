@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
@@ -41,31 +41,24 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AdditionalClasses\Handler.cs" />
+    <Compile Include="AdditionalClasses\MyGraphicPath.cs" />
+    <Compile Include="AdditionalClasses\TextField.cs" />
     <Compile Include="Arrows\Line.cs" />
-    <Compile Include="PropField.cs" />
-    <Compile Include="MyGraphicPath.cs" />
-    <Compile Include="RectangleComponent.cs" />
-    <Compile Include="Component.cs" />
-    <Compile Include="ComponentFactory.cs" />
-    <Compile Include="ComponentRequest.cs" />
-    <Compile Include="Components.cs" />
-    <Compile Include="Handler.cs" />
-    <Compile Include="Helpers\GraphicPathHelper.cs" />
     <Compile Include="Helpers\PointHelper.cs" />
     <Compile Include="Interfaces\IComponent.cs" />
     <Compile Include="Interfaces\IHandler.cs" />
-    <Compile Include="ComponentMapper.cs" />
     <Compile Include="Markers\EndLineMarker.cs" />
     <Compile Include="Markers\LedgeMarker.cs" />
     <Compile Include="Markers\Marker.cs" />
     <Compile Include="Markers\SizeMarker.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RectangleOneField.cs" />
-    <Compile Include="RectangleTwoFields.cs" />
-    <Compile Include="Requests\Abstract\IComponentRequest.cs" />
-    <Compile Include="Requests\BlockRequest.cs" />
-    <Compile Include="SimpleRectangle.cs" />
-    <Compile Include="TextField.cs" />
+    <Compile Include="StructuralEntities\Component.cs" />
+    <Compile Include="StructuralEntities\RectangleComponent.cs" />
+    <Compile Include="StructuralEntities\RectangleField.cs" />
+    <Compile Include="StructuralEntities\RectangleOneField.cs" />
+    <Compile Include="StructuralEntities\RectangleTwoFields.cs" />
+    <Compile Include="StructuralEntities\SimpleRectangle.cs" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.NETFramework.ReferenceAssemblies" Version="1.0.2">
