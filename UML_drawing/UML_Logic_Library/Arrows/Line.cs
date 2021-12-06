@@ -1,50 +1,50 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Drawing2D;
+using UML_Logic_Library.AdditionalClasses;
 using UML_Logic_Library.Markers;
+using UML_Logic_Library.StructuralEntities;
 
 namespace UML_Logic_Library.Arrows
 {
     public enum Arrows
     {
         AssociationArrow,
-        AgregationArrow,
+        AggregationArrow,
         AddictionArrow,
-        CompozitionArrow,
+        CompositionArrow,
         InheritanceArrow,
         RealizationArrow
     }
     public class Line : Component
     {
-        
+            private const string ClassTypeName = "Line";
             public SimpleRectangle From;
             public SimpleRectangle To;
+            private readonly Arrows _type;
 
-            public PointF[] Points;
+            private PointF[] _points;
             //static Pen clickPen = new Pen(Color.Transparent, 3);
-            internal float ledgePositionX = -1;
+            internal float LedgePositionX = -1;
+            
+            private Color _color = Color.Black;
+            private Brush _brush;
+            public RectangleF TextRect;
+
+            public Color Color
+            {
+                get => _color;
+                set { _color = value; _brush = null; }
+            }
+
+            public Brush Brush => _brush ??= new SolidBrush(_color);
 
             public Line(Arrows arrowType)
             {
-                switch (arrowType)
-                {
-                    case Arrows.AddictionArrow :
-                        Pen p = new Pen(PenColor, PenWidth);
-                        p.CustomEndCap = new AdjustableArrowCap(15, 15, false);
-                        p.DashStyle = DashStyle.Dash;
-                        p.DashPattern = new float[] {2, 3};
-                        Pen = p;
-                        break;
-                    case Arrows.AssociationArrow :
-                        Pen p1 = new Pen(PenColor, PenWidth);
-                        p1.CustomEndCap = new AdjustableArrowCap(15, 15, false);
-                        Pen = p1;
-                        break;
-                }
+                _type = arrowType;
             }
-            
-        
-            
+
             public override IEnumerable<Marker> GetMarkers(Handler components)
             {
                 RecalcPath();
@@ -70,36 +70,129 @@ namespace UML_Logic_Library.Arrows
                 RecalcPath();
                 return Path.IsOutlineVisible(p, Pen);            
             }
-            
-            
+
+            private void SetPen(Arrows arrowType)
+            {
+                switch (arrowType)
+                {
+                    case Arrows.AddictionArrow :
+                        Pen p = new Pen(PenColor, PenWidth);
+                        p.CustomEndCap = new AdjustableArrowCap(10, 10, false);
+                        p.DashStyle = DashStyle.Dash;
+                        p.DashPattern = new float[] {2, 3};
+                        Pen = p;
+                        break;
+                    case Arrows.AssociationArrow :
+                        Pen p1 = new Pen(PenColor, PenWidth);
+                        p1.CustomEndCap = new AdjustableArrowCap(10, 10, false);
+                        Pen = p1;
+                        break;
+                    case Arrows.AggregationArrow :
+                        Pen p2 = new Pen(PenColor, PenWidth);
+                        GraphicsPath hPath = new GraphicsPath();
+                        hPath.AddLine(new Point(0,0), new Point(7, 5));
+                        hPath.AddLine(new Point(7,5), new Point(14, 0));
+                        hPath.AddLine(new Point(14,0), new Point(7, -5));
+                        hPath.AddLine(new Point(7,-5), new Point(0, 0));
+                        CustomLineCap diamondCap = new CustomLineCap(null, hPath);
+                        p2.CustomEndCap = diamondCap;
+                        Pen = p2;
+                        break;
+                    case Arrows.CompositionArrow :
+                        Pen p3 = new Pen(PenColor, PenWidth);
+                        GraphicsPath dFCap = new GraphicsPath();
+                        dFCap.AddLines( new PointF[]
+                            {
+                                new Point(0, 0),
+                                new Point(-4, -6),
+                                new Point(-4, -6),
+                                new Point(0, -12),
+                                new Point(0, -12),
+                                new Point(4, -6),
+                                new Point(4, -6),
+                                new Point(0, 0)
+                            }
+                        );
+                        CustomLineCap diamondFillCap = new CustomLineCap(dFCap, null);
+                        p3.CustomEndCap = diamondFillCap;
+                        Pen = p3;
+                        break;
+                    case Arrows.InheritanceArrow :
+                        Pen p4 = new Pen(PenColor, PenWidth);
+                        GraphicsPath tCap = new GraphicsPath();
+                        // Она оч странно строиться да, как останется время покручу координаты еще
+                        tCap.AddLines( new PointF[]
+                            {
+                                new Point(0, 0),
+                                new Point(0, 8),
+                                new Point(0, 8),
+                                new Point(13, 0),
+                                new Point(13, 0),
+                                new Point(0, -8),
+                                new Point(0, -8),
+                                new Point(0, 0)
+                            }
+                        );
+                        CustomLineCap triangleCap = new CustomLineCap(null, tCap);
+                        p4.CustomEndCap = triangleCap;
+                        Pen = p4;
+                        break;
+                    case Arrows.RealizationArrow :
+                        Pen p5 = new Pen(PenColor, PenWidth);
+                        GraphicsPath tFCap = new GraphicsPath();
+                        // Она оч странно строиться да, как останется время покручу координаты еще
+                        tFCap.AddLines( new PointF[]
+                            {
+                                new Point(0, 0),
+                                new Point(0, 8),
+                                new Point(0, 8),
+                                new Point(13, 0),
+                                new Point(13, 0),
+                                new Point(0, -8),
+                                new Point(0, -8),
+                                new Point(0, 0)
+                            }
+                        );
+                        CustomLineCap triangleFillCap = new CustomLineCap(null, tFCap);
+                        p5.CustomEndCap = triangleFillCap;
+                        p5.DashStyle = DashStyle.Dash;
+                        p5.DashPattern = new float[] {2, 3};
+                        Pen = p5;
+                        break;
+                }
+            }
+
+
+
             public override void Draw(Graphics gr)
             {
                 if (From == null || To == null)
                     return;
 
                 RecalcPath();
-                gr.DrawLines(Pen, Points);
+                SetPen(_type);
+                gr.DrawLines(Pen, _points);
             }
 
-            public void RecalcPath()
+            private void RecalcPath()
             {
-                Points = null;
+                _points = null;
 
-                if (ledgePositionX < 0)
-                    ledgePositionX = (From.Location.X + From.Location.Y) / 2;
+                if (LedgePositionX < 0)
+                    LedgePositionX = (From.Location.X + From.Location.Y) / 2;
 
                 if (Path.PointCount > 0)
-                    Points = Path.PathPoints;
-                if (Path.PointCount != 4 || Points[0] != From.Location || Points[3] != To.Location ||
-                    Points[1].X != ledgePositionX)
+                    _points = Path.PathPoints;
+                if (Path.PointCount != 4 || _points[0] != From.Location || _points[3] != To.Location ||
+                    _points[1].X != LedgePositionX)
                 {
                     Path.Reset();
                     
                         Path.AddLines(new PointF[]
                         {
                             From.Location,
-                            new PointF(ledgePositionX, From.Location.Y),
-                            new PointF(ledgePositionX, To.Location.Y),
+                            new PointF(LedgePositionX, From.Location.Y),
+                            new PointF(LedgePositionX, To.Location.Y),
                             To.Location
                         });
                     
