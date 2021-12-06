@@ -94,7 +94,7 @@ namespace UML_Database_Library.API
         }
 
         // сохраненение текущей Livedate в файловой системе.
-        public bool SaveProject(string nameproject, LiveData obj)
+        public bool SaveProject(string nameproject, List<LiveDataElem> obj)
         {
             try
             {
