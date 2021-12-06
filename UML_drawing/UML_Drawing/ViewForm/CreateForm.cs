@@ -20,6 +20,10 @@ namespace UML_drawing.ViewForm
 
         private void buttonCreate_Click(object sender, EventArgs e)
         {
+            // Сбрасываю на значения по умолчанию при повторном клике.
+            InfoLabel.Text = default;
+            infoLabel1.Text = default;
+
             Handler = new Handler();
             Handler.NameProj = textBoxCreate.Text;
             string res = CheckValidName.Check(textBoxCreate.Text);
@@ -57,6 +61,11 @@ namespace UML_drawing.ViewForm
         private void textBoxCreate_TextChanged(object sender, EventArgs e)
         {
             textBoxCreate.Text = textBoxCreate.Text;
+        }
+
+        private void CreateForm_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }
