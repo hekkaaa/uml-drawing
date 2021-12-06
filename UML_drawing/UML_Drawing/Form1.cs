@@ -46,6 +46,14 @@ namespace UML_drawing
                  MessageBoxButtons.YesNo,
                  MessageBoxIcon.Warning
                 );
+            if (dialog == DialogResult.Yes)
+            {
+                this.Close();
+            }
+            else
+            {
+                // null;
+            }
         }
 
         // ЗАКРЫТИЕ ЧЕРЕЗ КРЕСТИК
