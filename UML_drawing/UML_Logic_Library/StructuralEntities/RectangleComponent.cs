@@ -1,15 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Drawing;
 
-namespace UML_Logic_Library
+namespace UML_Logic_Library.StructuralEntities
 {
     public class RectangleComponent : SimpleRectangle
     {
+        private const string ClassTypeName = "RectangleComponent";
         public RectangleComponent() 
         {
             Path.AddRectangle(new RectangleF(-DefaultSize, -DefaultSize / 2, 2 * DefaultSize, DefaultSize));

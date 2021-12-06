@@ -1,4 +1,5 @@
 ﻿using System.Drawing;
+using UML_Logic_Library.StructuralEntities;
 
 namespace UML_Logic_Library.Markers
 {

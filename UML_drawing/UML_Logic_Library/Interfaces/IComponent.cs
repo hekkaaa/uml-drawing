@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Drawing2D;
+using UML_Logic_Library.AdditionalClasses;
 using UML_Logic_Library.Markers;
 
 namespace UML_Logic_Library.Interfaces

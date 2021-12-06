@@ -11,17 +11,30 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using UML_drawing.ViewForm;
 using UML_Logic_Library;
+using UML_Logic_Library.AdditionalClasses;
 using UML_Logic_Library.Arrows;
+using UML_Logic_Library.StructuralEntities;
 using Component = System.ComponentModel.Component;
 
 namespace UML_drawing
 {
     public partial class Form1 : Form
     {
+        private ToolStripButton[] _arrowButtons;
+
         public Form1()
         {
             InitializeComponent();
             Form1_Load(null,null);
+            myBoxControl.SelectedChanged += delegate
+                {
+                    foreach (var button in _arrowButtons)
+                    {
+                        button.Enabled = myBoxControl.SelectedFigure is SimpleRectangle;
+                    }
+                    textEditor.Enabled = myBoxControl.SelectedFigure is SimpleRectangle;
+                    colorEdit.Enabled = !(myBoxControl.SelectedFigure is null);
+                };
         }
 
         // ЗАКРЫТИЕ ЧЕРЕЗ FILE
@@ -55,11 +68,21 @@ namespace UML_drawing
         }
 
 
+
         // тут при загрузке формы можно вешкать фоновые методы.
         private void Form1_Load(object sender, EventArgs e)
         {
             myBoxControl.Handler = new Handler();
             myBoxControl.Handler = myBoxControl.Handler;
+            _arrowButtons = new ToolStripButton[]
+            {
+                associationLineButton, 
+                inheritanceLineButton, 
+                addictionLineButton, 
+                realizationLineButton,
+                compositionLineButton,
+                aggregationLineButton
+            };
         }
 
         private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
@@ -89,10 +112,27 @@ namespace UML_drawing
             createform.ShowDialog(this);
         }
 
+        // Пхехп, короче, он сохраняет картиночку все ок, но рофл в том, что сохраняет с рамочкой
+        // если джипег сохрянять то вообще со скроллом)))))))))) воть
+        private void saveAsImageToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                saveImage.ShowDialog();
+                myBoxControl.GetImage().Save(saveImage.FileName, System.Drawing.Imaging.ImageFormat.Png);
+            }
+            catch (Exception)
+            {
+                return;
+            }
+            
+            
+        }
+
         //***********************************************
 
 
-        
+
         Point startDragPoint = new Point(90,50);
 
         private void ObjectButton_Click(object sender, EventArgs e)
@@ -100,34 +140,24 @@ namespace UML_drawing
             myBoxControl.AddFigure<RectangleComponent>(startDragPoint);
         }
 
-        private void myBoxControl_DoubleClick(object sender, EventArgs e)
+        private void textEditor_Click(object sender, EventArgs e)
         {
             if (myBoxControl.SelectedFigure == null || myBoxControl.SelectedFigure is Line)
                 return;
-            if (myBoxControl.SelectedFigure is Line) return;
             if (myBoxControl.SelectedFigure is RectangleOneField)
             {
-                var objectField1 = (myBoxControl.SelectedFigure as RectangleOneField).TextFieldTitle.TextFields;
-                var objectField2 = (myBoxControl.SelectedFigure as RectangleOneField).TextFieldProperty.TextFieldsProp;
-                var createfromtwofields = new TextBoxOneField(objectField1, objectField2);
-                createfromtwofields.ShowDialog();
-                myBoxControl.SelectedBeginEditText(createfromtwofields.textToObjTitle, createfromtwofields.textToObjProp);
+                var createEditorBoxOneFieldfields = new TextBoxOneField(myBoxControl.SelectedFigure);
+                createEditorBoxOneFieldfields.ShowDialog();
                 return;
             }
             if (myBoxControl.SelectedFigure is RectangleTwoFields)
             {
-                var objectField1 = (myBoxControl.SelectedFigure as RectangleTwoFields).TextFieldTitle.TextFields;
-                var objectField2 = (myBoxControl.SelectedFigure as RectangleTwoFields).TextFieldProperty.TextFieldsProp;
-                var objectField3 = (myBoxControl.SelectedFigure as RectangleTwoFields).TextFieldMethods.TextFieldsMethod;
-                var createfromtwofields = new TextBoxTwoFields(objectField1, objectField2, objectField3);
+                var createfromtwofields = new TextBoxTwoFields(myBoxControl.SelectedFigure);
                 createfromtwofields.ShowDialog();
-                myBoxControl.SelectedBeginEditText(createfromtwofields.textToObjTitle, createfromtwofields.textToObjProp, createfromtwofields.textToObjMethods);
                 return;
             }
-            var objectField = (myBoxControl.SelectedFigure as SimpleRectangle).Text.TextFields;
-            var createfrom = new TextForm(objectField);
-            createfrom.ShowDialog();
-            myBoxControl.SelectedBeginEditText(createfrom.textToObj);
+            var createEditorBox = new TextForm(myBoxControl.SelectedFigure);
+            createEditorBox.ShowDialog(); 
             
         }
 
@@ -137,9 +167,29 @@ namespace UML_drawing
             //myBoxControl.AddFigure<Line>(startDragPoint);
         }
 
-        private void inheritanceLineButton_Click(object sender, EventArgs e)
+        private void addictionLineButton_Click(object sender, EventArgs e)
         {
             myBoxControl.SelectedAddLedgeLine(Arrows.AddictionArrow);
+        }
+
+        private void inheritanceLineButton_Click(object sender, EventArgs e)
+        {
+            myBoxControl.SelectedAddLedgeLine(Arrows.InheritanceArrow);
+        }
+
+        private void realizationLineButton_Click(object sender, EventArgs e)
+        {
+            myBoxControl.SelectedAddLedgeLine(Arrows.RealizationArrow);
+        }
+
+        private void compositionLineButton_Click(object sender, EventArgs e)
+        {
+            myBoxControl.SelectedAddLedgeLine(Arrows.CompositionArrow);
+        }
+
+        private void aggregationLineButton_Click(object sender, EventArgs e)
+        {
+            myBoxControl.SelectedAddLedgeLine(Arrows.AggregationArrow);
         }
 
         private void objectOneFieldButton_Click(object sender, EventArgs e)
@@ -152,13 +202,29 @@ namespace UML_drawing
             myBoxControl.AddFigure<RectangleTwoFields>(startDragPoint);
         }
 
+        // Тут есть забавный баг, что когда мы закрываем окошко ничего не выбрав,
+        // то оно colorDialog1.Reset() отсюда берет дефолтный цвет (или белый как у форм) и получается, 
+        // что фигура все равно закрашивается)))))))
         private void toolStripButton1_Click(object sender, EventArgs e)
         {
-            colorDialog1.ShowDialog();
+            if (myBoxControl.SelectedFigure == null)
+            {
+                return;
+            }
             var obj = myBoxControl.SelectedFigure;
             if (obj is SimpleRectangle)
             {
+                colorDialog1.Color = Color.White;
+                colorDialog1.ShowDialog();
                 (obj as SimpleRectangle).Color = colorDialog1.Color;
+                colorDialog1.Reset();
+            }
+
+            if (obj is Line)
+            {
+                colorDialog1.ShowDialog();
+                (obj as Line).PenColor = colorDialog1.Color;
+                colorDialog1.Reset();
             }
         }
         // ******************************************************************
@@ -228,7 +294,7 @@ namespace UML_drawing
             pictureBoxHover.Visible = false;
         }
 
-        private void inheritanceLineButton_MouseHover(object sender, EventArgs e)
+        private void addictionLineButton_MouseHover(object sender, EventArgs e)
         {
             // Кнопка 4
             pictureBoxHover.Size = new Size(295, 47);
@@ -238,11 +304,78 @@ namespace UML_drawing
             pictureBoxHover.Visible = true;
         }
 
+        private void addictionLineButton_MouseLeave(object sender, EventArgs e)
+        {
+            // Кнопка 4
+            pictureBoxHover.Visible = false;
+        }
+
+        private void realizationLineButton_MouseHover(object sender, EventArgs e)
+        {
+            // Кнопка 4
+            pictureBoxHover.Size = new Size(295, 47);
+            pictureBoxHover.BorderStyle = BorderStyle.FixedSingle;
+            pictureBoxHover.BackgroundImage = Image.FromFile(@"..\..\BaseImages\line2.png");
+            pictureBoxHover.Location = new Point(108, 71);
+            pictureBoxHover.Visible = true;
+        }
+
+        private void realizationLineButton_MouseLeave(object sender, EventArgs e)
+        {
+            // Кнопка 4
+            pictureBoxHover.Visible = false;
+        }
+
+        private void inheritanceLineButton_MouseHover(object sender, EventArgs e)
+        {
+            // Кнопка 4
+            pictureBoxHover.Size = new Size(295, 47);
+            pictureBoxHover.BorderStyle = BorderStyle.FixedSingle;
+            pictureBoxHover.BackgroundImage = Image.FromFile(@"..\..\BaseImages\line3.png");
+            pictureBoxHover.Location = new Point(108, 71);
+            pictureBoxHover.Visible = true;
+        }
+
         private void inheritanceLineButton_MouseLeave(object sender, EventArgs e)
         {
             // Кнопка 4
             pictureBoxHover.Visible = false;
         }
+
+        private void aggregationLineButton_MouseHover(object sender, EventArgs e)
+        {
+            // Кнопка 4
+            pictureBoxHover.Size = new Size(295, 47);
+            pictureBoxHover.BorderStyle = BorderStyle.FixedSingle;
+            pictureBoxHover.BackgroundImage = Image.FromFile(@"..\..\BaseImages\line4.png");
+            pictureBoxHover.Location = new Point(108, 71);
+            pictureBoxHover.Visible = true;
+        }
+
+        private void aggregationLineButton_MouseLeave(object sender, EventArgs e)
+        {
+            // Кнопка 4
+            pictureBoxHover.Visible = false;
+        }
+
+        private void compositionLineButton_MouseHover(object sender, EventArgs e)
+        {
+            // Кнопка 4
+            pictureBoxHover.Size = new Size(295, 47);
+            pictureBoxHover.BorderStyle = BorderStyle.FixedSingle;
+            pictureBoxHover.BackgroundImage = Image.FromFile(@"..\..\BaseImages\line5.png");
+            pictureBoxHover.Location = new Point(108, 71);
+            pictureBoxHover.Visible = true;
+        }
+
+        private void compositionLineButton_MouseLeave(object sender, EventArgs e)
+        {
+            // Кнопка 4
+            pictureBoxHover.Visible = false;
+        }
+
+        
+
 
         // ******************************************************************
     }

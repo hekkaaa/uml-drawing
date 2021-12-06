@@ -9,7 +9,8 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using UML_Logic_Library;
-using Component = UML_Logic_Library.Component;
+using UML_Logic_Library.AdditionalClasses;
+using Component = UML_Logic_Library.StructuralEntities.Component;
 
 namespace UML_drawing.ViewForm
 {

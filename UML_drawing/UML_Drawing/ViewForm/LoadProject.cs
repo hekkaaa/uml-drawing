@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using UML_Logic_Library;
+using UML_Logic_Library.AdditionalClasses;
 
 namespace UML_drawing.ViewForm
 {

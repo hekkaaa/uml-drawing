@@ -2,17 +2,15 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Drawing2D;
-using System.IO;
+using UML_Logic_Library.AdditionalClasses;
 using UML_Logic_Library.Helpers;
 using UML_Logic_Library.Markers;
-using UML_Logic_Library.Requests;
-using UML_Logic_Library.Requests.Abstract;
 
-namespace UML_Logic_Library
+namespace UML_Logic_Library.StructuralEntities
 {
     public class SimpleRectangle : Component
     {
-        
+        private const string ClassTypeName = "SimpleRectangle";
         //размер новой фигуры, по умолчанию
         public static int DefaultSize = 80;
         //местоположение центра фигуры
@@ -65,7 +63,7 @@ namespace UML_Logic_Library
         }
 
         //размер прямоугольника вокруг фигуры
-        public SizeF Size
+        public virtual SizeF Size
         {
             get { return Path.GetBounds().Size; }
             set
@@ -107,7 +105,7 @@ namespace UML_Logic_Library
             gr.TranslateTransform(Location.X, Location.Y);
             gr.FillPath(Brush, Path);
             gr.DrawPath(Pen, Path);
-            gr.DrawString(Text.TextFields, SystemFonts.DefaultFont, Brushes.Black, textRect, Text.StringFormatTitle);
+            gr.DrawString(Text.TextFields, Text.Font, Brushes.Black, textRect, Text.StringFormatTitle);
             gr.Restore(transState);
         }
         
