@@ -91,7 +91,15 @@ namespace UML_drawing
 
         //***********************************************
 
-
+        public void AddTestELEM()
+            // тут вот с рисованием как бы все. Форма шлет меня в далекое эротическое.
+        {   // Test Method
+            this.Close();
+            myBoxControl.ResetText();
+            Point startDragPoint1 = new Point(140, 50);
+            myBoxControl.AddFigure<RectangleComponent>(startDragPoint1);
+          
+        }
         
         Point startDragPoint = new Point(90,50);
 

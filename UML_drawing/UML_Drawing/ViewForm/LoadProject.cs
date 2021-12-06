@@ -22,7 +22,24 @@ namespace UML_drawing.ViewForm
         private void button1_Click(object sender, EventArgs e)
         {
             Handler btnclick = new Handler();
-            btnclick.LoadProject(ListProject.SelectedItem.ToString());
+            var load = btnclick.LoadProject(ListProject.SelectedItem.ToString());
+            //load.ListObjectFigure[0]._id = 0;
+            //myBoxControl.AddFigure<RectangleComponent>(startDragPoint);
+            //this.Close();
+            //MyBoxControl myBoxControl = new MyBoxControl();
+            //Point startDragPoint = new Point(140, 50);
+            //myBoxControl.BackColor = load.ListObjectFigure[0]._penColor;
+            //myBoxControl.AddFigure<RectangleComponent>(startDragPoint);
+            //myBoxControl.ResetText();
+
+            Form1 frm = new Form1();
+
+
+            frm.ShowDialog();
+            frm.AddTestELEM();
+
+
+            //frm.AddTestELEM();
             Close();
             // Осталось понять как делать рисовку обратно.
         }
