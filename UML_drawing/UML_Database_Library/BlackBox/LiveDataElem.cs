@@ -16,6 +16,8 @@ namespace UML_Database_Library.BlackBox
         //public Pen _pen { get; set; }
         public float _penWidth { get; set; }
         public GraphicsPath Path { get; set; }
+        public int _x { get; set; }
+        public int _y { get; set; }
       
     }
 }

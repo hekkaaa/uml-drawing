@@ -15,17 +15,26 @@ namespace UML_drawing.ViewForm
 {
     public partial class LoadProject : Form
     {
-        public LoadProject()
+        Form1 _main;
+        public LoadProject(Form1 main)
         {
             InitializeComponent();
+            _main = main;
         }
 
+
         private void button1_Click(object sender, EventArgs e)
-        {
+        {   
+            
             Handler btnclick = new Handler();
-            btnclick.LoadProject(ListProject.SelectedItem.ToString());
-            Close();
-            // Осталось понять как делать рисовку обратно.
+            var test = btnclick.LoadProject(ListProject.SelectedItem.ToString());
+            _main.Test_load_OBJ(test);
+            this.Close();
+
+            //// Осталось понять как делать рисовку обратно.
+            ///
+
+
         }
 
         private void button2_Click(object sender, EventArgs e)

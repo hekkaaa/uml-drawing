@@ -15,7 +15,6 @@ namespace UML_Logic_Library.AdditionalClasses
     {
         private ApiData _apiData = new ApiData();
         private LiveData _liveData = new LiveData();
-        // После всех свистоплясок сделать маппинг объектов _liveData в норм компоненты, наверное хз
         public List<Component> ComponentsInProj = new List<Component>();
         private string _nameProj = "Project1";
 
@@ -36,23 +35,11 @@ namespace UML_Logic_Library.AdditionalClasses
         public LiveData LoadProject(string nameProj)
         {
             var load = _apiData.LoadProject(nameProj);
-            foreach (var component in load.ListObjectFigure)
-            {
-                //ComponentsInProj.Add(new Component(component));
-
-                //ComponentsInProj.Add(new Component
-                //{
-                //    ItemId = component._id,
-                //});
-                //_liveData.ListObjectFigure.Add(new LiveDataElem
-                //{
-                //    _id = component.ItemId,
-                //    //_pen = component.Pen.,
-                //    _penColor = component.PenColor,
-                //    _penWidth = component.PenWidth,
-                //    Path = component.Path
-                //}); ;
-            }
+            load.nameproject = NameProj;
+            //foreach (var component in load.ListObjectFigure)
+            //{
+                    
+            //}
             return _apiData.LoadProject(nameProj);
         }
         
@@ -66,7 +53,9 @@ namespace UML_Logic_Library.AdditionalClasses
                     _liveData.ListObjectFigure.Add(new LiveDataElem
                     {
                         _id = component.ItemId,
-                        //_pen = component.Pen.,
+                        // Алия мне нужно Bounds свойсво как то достать. Оно есть в элементе но достать не могу.
+                        //_x = component.Bounds
+                        //_pen = component.Pen
                         _penColor = component.PenColor,
                         _penWidth = component.PenWidth,
                         Path = component.Path
@@ -82,26 +71,6 @@ namespace UML_Logic_Library.AdditionalClasses
             {
                 throw new Exception(ex.Message);
             }
-        }
-
-
-        // public bool Refresh(BlockRequest blockRequest, int id)
-        // {
-        //     var singleBlock = ComponentFactory.CreateSingleBlock(blockRequest);
-        //     if (singleBlock == null) 
-        //         throw new Exception("Несуществующий компонент");
-        //     
-        //     for (var i = 0; i < _liveData.ListObjectFigure.Count; i++)
-        //     {
-        //         if (_liveData.ListObjectFigure[i]._id == id)
-        //         {
-        //             //_liveData.ListObjectFigure[i] = block.ToLiveDataElem();
-        //             _apiData.SaveProject(_liveData.nameproject, _liveData);
-        //             return true;
-        //         }
-        //     }
-        //     return false;
-        // }
-        
+        }        
     }
 }
