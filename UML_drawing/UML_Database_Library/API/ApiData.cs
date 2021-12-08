@@ -23,22 +23,6 @@ namespace UML_Database_Library.API
             }
         }
 
-        //public LiveDataElem CreateElem(LiveData obj)
-        //{
-        //    LiveDataElem elem = new LiveDataElem();
-        //    int newid = CreateId.CreaterId(obj);
-        //    elem._id = newid;  // Узнаем свободный ID у присваиваем
-
-        //    obj.ListObjectFigure.Add(elem);
-        //    return elem;
-        //}
-
-        public LiveDataElem CreateElem()
-        {
-            LiveDataElem elem = new LiveDataElem();
-            return elem;
-        }
-
         public LiveData LoadProject(string nameproject)
         {
             try
