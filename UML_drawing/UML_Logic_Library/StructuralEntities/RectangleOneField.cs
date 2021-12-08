@@ -5,11 +5,12 @@ using UML_Logic_Library.AdditionalClasses;
 
 namespace UML_Logic_Library.StructuralEntities
 {
+    [Serializable]
     public class RectangleOneField : SimpleRectangle
     {
-        private const string ClassTypeName = "RectangleOneField";
-        public readonly RectangleField Head = new RectangleField(0);
-        public readonly RectangleField FieldRectangle = new RectangleField(DefaultSize);
+        public string CompName => "RectangleOneField";
+        public RectangleField Head = new RectangleField(0);
+        public RectangleField FieldRectangle = new RectangleField(DefaultSize);
         private readonly TextField _textFieldTitle;
         private readonly TextField _textFieldProperty;
 

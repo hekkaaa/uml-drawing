@@ -8,6 +8,7 @@ using UML_Logic_Library.StructuralEntities;
 
 namespace UML_Logic_Library.Arrows
 {
+    [Serializable]
     public enum Arrows
     {
         AssociationArrow,
@@ -19,10 +20,10 @@ namespace UML_Logic_Library.Arrows
     }
     public class Line : Component
     {
-            private const string ClassTypeName = "Line";
-            public SimpleRectangle From;
-            public SimpleRectangle To;
-            private readonly Arrows _type;
+            public string CompName => "Line";
+            public Component From;
+            public Component To;
+            public Arrows Type;
 
             private PointF[] _points;
             //static Pen clickPen = new Pen(Color.Transparent, 3);
@@ -42,22 +43,22 @@ namespace UML_Logic_Library.Arrows
 
             public Line(Arrows arrowType)
             {
-                _type = arrowType;
+                Type = arrowType;
             }
 
             public override IEnumerable<Marker> GetMarkers(Handler components)
             {
                 RecalcPath();
                 EndLineMarker m1 = new EndLineMarker(components, 0);
-                m1.targetComponent = this;
+                m1.TargetComponent = this;
                 yield return m1;
 
                 EndLineMarker m2 = new EndLineMarker(components, 1);
-                m2.targetComponent = this;
+                m2.TargetComponent = this;
                 yield return m2;
 
                 LedgeMarker m3 = new LedgeMarker();
-                m3.targetComponent = this;
+                m3.TargetComponent = this;
                 m3.UpdateLocation();
                 yield return m3;
             }
@@ -162,15 +163,14 @@ namespace UML_Logic_Library.Arrows
                 }
             }
 
-
-
+            
             public override void Draw(Graphics gr)
             {
                 if (From == null || To == null)
                     return;
 
                 RecalcPath();
-                SetPen(_type);
+                SetPen(Type);
                 gr.DrawLines(Pen, _points);
             }
 
@@ -178,22 +178,24 @@ namespace UML_Logic_Library.Arrows
             {
                 _points = null;
 
+                var from = From as SimpleRectangle;
+                var to = To as SimpleRectangle;
                 if (LedgePositionX < 0)
-                    LedgePositionX = (From.Location.X + From.Location.Y) / 2;
+                    LedgePositionX = (from.Location.X + to.Location.Y) / 2;
 
                 if (Path.PointCount > 0)
                     _points = Path.PathPoints;
-                if (Path.PointCount != 4 || _points[0] != From.Location || _points[3] != To.Location ||
+                if (Path.PointCount != 4 || _points[0] != from.Location || _points[3] != to.Location ||
                     _points[1].X != LedgePositionX)
                 {
                     Path.Reset();
                     
                         Path.AddLines(new PointF[]
                         {
-                            From.Location,
-                            new PointF(LedgePositionX, From.Location.Y),
-                            new PointF(LedgePositionX, To.Location.Y),
-                            To.Location
+                            from.Location,
+                            new PointF(LedgePositionX, from.Location.Y),
+                            new PointF(LedgePositionX, to.Location.Y),
+                            to.Location
                         });
                     
                 }

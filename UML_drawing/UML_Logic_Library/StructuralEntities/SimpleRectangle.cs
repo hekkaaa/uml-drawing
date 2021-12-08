@@ -8,9 +8,10 @@ using UML_Logic_Library.Markers;
 
 namespace UML_Logic_Library.StructuralEntities
 {
+    [Serializable]
     public class SimpleRectangle : Component
     {
-        private const string ClassTypeName = "SimpleRectangle";
+        public string CompName => "SimpleRectangle";
         //размер новой фигуры, по умолчанию
         public static int DefaultSize = 80;
         //местоположение центра фигуры
@@ -18,8 +19,9 @@ namespace UML_Logic_Library.StructuralEntities
         public TextField Text = new TextField();
         //прямоугольник, в котором расположен текст
         private Color _color = Color.White;
-        protected Brush _brush;
         public RectangleF textRect;
+        [NonSerialized]
+        protected Brush _brush;
 
         public Color Color
         {
@@ -36,7 +38,7 @@ namespace UML_Logic_Library.StructuralEntities
             }
         }
         
-        // public SimpleRectangle(){ }
+        public SimpleRectangle(){ }
         
         public override bool PointIsInside(PointF p)
         {
@@ -47,7 +49,7 @@ namespace UML_Logic_Library.StructuralEntities
         public override IEnumerable<Marker> GetMarkers(Handler handler)
         {
             Marker m = new SizeMarker();
-            m.targetComponent = (SimpleRectangle)this;
+            m.TargetComponent = (SimpleRectangle)this;
             yield return m;
             
         }

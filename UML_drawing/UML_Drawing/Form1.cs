@@ -102,20 +102,40 @@ namespace UML_drawing
         // КНОПКИ В FILE 
         private void createProjectToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var createform = new CreateForm();
-            createform.ShowDialog();
-            myBoxControl.Handler = createform.Handler;
-            myBoxControl.Handler = myBoxControl.Handler;
+            try
+            {
+                var createform = new CreateForm();
+                createform.ShowDialog();
+                myBoxControl.Handler = new Handler();
+                myBoxControl.Handler = myBoxControl.Handler;
+            }
+            catch (Exception exception)
+            {
+                return;
+            }
         }
 
         private void loadProjectToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var createform = new LoadProject();
-            createform.ShowDialog();
+            try
+            {
+                var createform = new LoadProject(myBoxControl);
+                createform.ShowDialog();
+                // openFileDialog1.ShowDialog();
+                // myBoxControl.Handler = Handler.Load(openFileDialog1.FileName);
+            }
+            catch (Exception exception)
+            {
+                return;
+            }
         }
 
         private void saveProjectToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            // if (saveFileDialog1.ShowDialog() == DialogResult.OK)
+            // {
+            //     myBoxControl.Handler.Save(saveFileDialog1.FileName);
+            // }
             var createform = new SavesInfoFrom(myBoxControl.Handler.NameProj, myBoxControl.Handler.ComponentsInProj);
             createform.ShowDialog(this);
         }

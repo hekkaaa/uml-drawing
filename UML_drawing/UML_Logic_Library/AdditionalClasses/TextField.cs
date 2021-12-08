@@ -1,12 +1,14 @@
-﻿using System.Drawing;
+﻿using System;
+using System.Drawing;
 
 namespace UML_Logic_Library.AdditionalClasses
 {
+    [Serializable]
     public sealed class TextField
     {
         private Font _font = SystemFonts.DefaultFont;
         private string _textField = "Object";
-        private string _textFieldProp = "+ Property(Type) : Type";
+        private string _textFieldProp = "+ Property : Type";
         private string _textFieldMethods = "+ Method(Type) : Type";
 
         public Font Font

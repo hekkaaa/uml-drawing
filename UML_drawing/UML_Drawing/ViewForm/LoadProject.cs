@@ -10,20 +10,42 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using UML_Logic_Library;
 using UML_Logic_Library.AdditionalClasses;
+using UML_Logic_Library.StructuralEntities;
+using Component = UML_Logic_Library.StructuralEntities.Component;
 
 namespace UML_drawing.ViewForm
 {
     public partial class LoadProject : Form
     {
-        public LoadProject()
+        private MyBoxControl _boxControl;
+        public LoadProject(MyBoxControl boxControl)
         {
             InitializeComponent();
+            _boxControl = boxControl;
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            Handler btnclick = new Handler();
-            btnclick.LoadProject(ListProject.SelectedItem.ToString());
+            // Handler btnclick = new Handler();
+            // var elem = btnclick.LoadProject(ListProject.SelectedItem.ToString());
+            var hand = _boxControl.Handler.LoadProject(ListProject.SelectedItem.ToString());
+            _boxControl.Handler = hand;
+            // foreach (var comp in elem.ListObjectFigure)
+            // {
+            //     switch (comp.CompName)
+            //     {
+            //         case "RectangleComponent" :
+            //             var component = ComponentMapper.FromLiveData(comp) as RectangleComponent;
+            //             _boxControl.AddFigure<RectangleComponent>(component.Location);
+            //             break;
+            //         case "RectangleOneField" :
+            //             var component1 = ComponentMapper.FromLiveData(comp) as RectangleOneField;
+            //             _boxControl.AddFigure<RectangleOneField>(component1.Location);
+            //             break;
+            //     }
+            // }
+            
+            
             Close();
             // Осталось понять как делать рисовку обратно.
         }

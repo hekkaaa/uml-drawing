@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UML_Logic_Library.AdditionalClasses;
 using UML_Logic_Library.Arrows;
 using UML_Logic_Library.Interfaces;
@@ -6,8 +7,10 @@ using UML_Logic_Library.StructuralEntities;
 
 namespace UML_Logic_Library.Markers
 {
+    [Serializable]
     public class EndLineMarker : Marker
     {
+        public string CompName => "EndLineMarker";
         int pointIndex;
         List<Component> components;
 
@@ -19,11 +22,13 @@ namespace UML_Logic_Library.Markers
 
         public override void UpdateLocation()
         {
-            Line line = (targetComponent as Line);
+            Line line = (TargetComponent as Line);
             if (line.From == null || line.To == null)
                 return;//не обновляем маркеры оторванных концов
             //фигура, с которой связана линия
-            SimpleRectangle figure = pointIndex == 0 ? line.From : line.To;
+            var from = line.From as SimpleRectangle;
+            var to = line.To as SimpleRectangle;
+            SimpleRectangle figure = pointIndex == 0 ? from : to;
             Location = figure.Location;
         }
 
@@ -39,7 +44,7 @@ namespace UML_Logic_Library.Markers
                     break;
                 }
 
-            Line line = (targetComponent as Line);
+            Line line = (TargetComponent as Line);
             if (figure == null)
                 figure = this;
             //если под маркером нет фигуры, то просто коннектим линию к самому маркеру

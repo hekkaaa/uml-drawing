@@ -1,10 +1,12 @@
-﻿using System.Drawing;
+﻿using System;
+using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Runtime.Serialization;
 
 namespace UML_Logic_Library.AdditionalClasses
 {
-    public class MyGraphicPath
+    [Serializable]
+    public class MyGraphicPath : ISerializable
     {
         public GraphicsPath path = new GraphicsPath();
 

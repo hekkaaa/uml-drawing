@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using UML_Database_Library.BlackBox;
 
 namespace UML_Logic_Library.Interfaces
 {
@@ -11,7 +10,7 @@ namespace UML_Logic_Library.Interfaces
         //
         // public bool DeleteItem(int id);
         
-        public LiveData LoadProject(string nameProject);
+        //public LiveData LoadProject(string nameProject);
         
         //public bool Refresh(BlockRequest blockRequest, int id);
         
