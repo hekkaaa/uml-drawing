@@ -70,7 +70,7 @@ namespace UML_Logic_Library
                    compEndMarker.PenWidth = elem._penWidth;
                    compEndMarker.PenColor = elem._penColor;
                    compEndMarker.Location = elem.Location;
-                   return (EndLineMarker) compEndMarker;
+                   return /*(EndLineMarker)*/ compEndMarker;
                case "Line":
                    var compLine = new Line((Arrows.Arrows)elem.ArrowType);
                    compLine.Path = elem.SerializablePath.Value;

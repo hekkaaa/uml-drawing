@@ -118,17 +118,17 @@ namespace UML_drawing
 
         private void loadProjectToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            try
-            {
+            //try
+            //{
                 var createform = new LoadProject(myBoxControl);
                 createform.ShowDialog();
                 // openFileDialog1.ShowDialog();
                 // myBoxControl.Handler = Handler.Load(openFileDialog1.FileName);
-            }
-            catch (Exception exception)
-            {
-                return;
-            }
+            //}
+            //catch (Exception exception)
+            //{
+            //    return;
+            //}
         }
 
         private void saveProjectToolStripMenuItem_Click(object sender, EventArgs e)

@@ -73,7 +73,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="API\ApiData.cs" />
-    <Compile Include="BlackBox\CreateId.cs" />
     <Compile Include="BlackBox\LiveData.cs" />
     <Compile Include="BlackBox\LiveDataElem.cs" />
     <Compile Include="BlackBox\SystemFiles.cs" />
@@ -82,8 +81,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
-    <None Include="DataFile\DefaultElem.json" />
-    <None Include="DataFile\DefaultProject.json" />
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

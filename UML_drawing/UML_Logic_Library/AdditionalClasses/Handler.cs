@@ -35,11 +35,19 @@ namespace UML_Logic_Library.AdditionalClasses
         public Handler LoadProject(string nameProj)
         {
             var load = _apiData.LoadProject(nameProj);
-            var listComp = load
+            try
+            {
+                var listComp = load
                 .ListObjectFigure
                 .Select(component => ComponentMapper.FromLiveData(component))
                 .ToList();
-            return new Handler(nameProj, listComp);
+                return new Handler(nameProj, listComp);
+            }
+            catch (NullReferenceException ex)
+            {
+                throw new NullReferenceException(ex.Message);
+            }
+            
         }
         
         
