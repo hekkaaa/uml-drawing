@@ -25,7 +25,7 @@ namespace UML_drawing
         public Form1()
         {
             InitializeComponent();
-            Form1_Load(null,null);
+            Form1_Load(null, null);
             myBoxControl.SelectedChanged += delegate
                 {
                     foreach (var button in _arrowButtons)
@@ -54,6 +54,7 @@ namespace UML_drawing
             {
                 // null;
             }
+
         }
 
         // ЗАКРЫТИЕ ЧЕРЕЗ КРЕСТИК
@@ -84,9 +85,9 @@ namespace UML_drawing
             myBoxControl.Handler = myBoxControl.Handler;
             _arrowButtons = new ToolStripButton[]
             {
-                associationLineButton, 
-                inheritanceLineButton, 
-                addictionLineButton, 
+                associationLineButton,
+                inheritanceLineButton,
+                addictionLineButton,
                 realizationLineButton,
                 compositionLineButton,
                 aggregationLineButton
@@ -95,7 +96,7 @@ namespace UML_drawing
 
         private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
         {
-           InfoForms.About about = new InfoForms.About();
+            InfoForms.About about = new InfoForms.About();
             about.ShowDialog();
         }
 
@@ -153,16 +154,29 @@ namespace UML_drawing
             {
                 return;
             }
-            
-            
+
+
         }
 
         //***********************************************
 
 
 
-        Point startDragPoint = new Point(90,50);
+        Point startDragPoint = new Point(90, 50);
 
+        // TEST OBJECT FOR LOAD
+        public void Test_load_OBJ(UML_Database_Library.BlackBox.LiveData obj)
+        {
+            //obj.ListObjectFigure[0];
+            // Пример
+            Point startDragPoint1 = new Point(220, 800);
+            Point startDragPoint2 = new Point(120, 150);
+            myBoxControl.AddFigure<RectangleComponent>(startDragPoint1);
+            myBoxControl.AddFigure<RectangleComponent>(startDragPoint2);
+
+        }
+
+        // ******************
         private void ObjectButton_Click(object sender, EventArgs e)
         {
             myBoxControl.AddFigure<RectangleComponent>(startDragPoint);

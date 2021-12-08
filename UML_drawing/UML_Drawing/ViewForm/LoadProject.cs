@@ -24,6 +24,7 @@ namespace UML_drawing.ViewForm
             _boxControl = boxControl;
         }
 
+
         private void button1_Click(object sender, EventArgs e)
         {
             // Handler btnclick = new Handler();
@@ -44,8 +45,6 @@ namespace UML_drawing.ViewForm
             //             break;
             //     }
             // }
-            
-            
             Close();
             // Осталось понять как делать рисовку обратно.
         }

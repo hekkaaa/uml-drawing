@@ -27,6 +27,7 @@ namespace UML_Database_Library.BlackBox
         //public Pen _pen { get; set; }
         public string CompName { get; set; }
         public float _penWidth { get; set; }
+      
         //public GraphicsPath SerializablePath { get; set; }
         public PointF Location { get; set; }
         public string[] Text = new string[3];

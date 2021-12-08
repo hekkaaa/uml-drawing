@@ -15,7 +15,6 @@ namespace UML_Logic_Library.AdditionalClasses
     {
         private ApiData _apiData = new ApiData();
         private LiveData _liveData = new LiveData();
-        // После всех свистоплясок сделать маппинг объектов _liveData в норм компоненты, наверное хз
         public List<Component> ComponentsInProj = new List<Component>();
         private string _nameProj = "Project1";
 
@@ -62,27 +61,7 @@ namespace UML_Logic_Library.AdditionalClasses
             {
                 throw new Exception(ex.Message);
             }
-        }
-
-
-        // public bool Refresh(BlockRequest blockRequest, int id)
-        // {
-        //     var singleBlock = ComponentFactory.CreateSingleBlock(blockRequest);
-        //     if (singleBlock == null) 
-        //         throw new Exception("Несуществующий компонент");
-        //     
-        //     for (var i = 0; i < _liveData.ListObjectFigure.Count; i++)
-        //     {
-        //         if (_liveData.ListObjectFigure[i]._id == id)
-        //         {
-        //             //_liveData.ListObjectFigure[i] = block.ToLiveDataElem();
-        //             _apiData.SaveProject(_liveData.nameproject, _liveData);
-        //             return true;
-        //         }
-        //     }
-        //     return false;
-        // }
-        
+        }        
     }
     
 }
