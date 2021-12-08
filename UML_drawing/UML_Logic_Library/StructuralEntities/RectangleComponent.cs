@@ -1,10 +1,12 @@
-﻿using System.Drawing;
+﻿using System;
+using System.Drawing;
 
 namespace UML_Logic_Library.StructuralEntities
 {
+    [Serializable]
     public class RectangleComponent : SimpleRectangle
     {
-        private const string ClassTypeName = "RectangleComponent";
+        public string CompName => "RectangleComponent";
         public RectangleComponent() 
         {
             Path.AddRectangle(new RectangleF(-DefaultSize, -DefaultSize / 2, 2 * DefaultSize, DefaultSize));

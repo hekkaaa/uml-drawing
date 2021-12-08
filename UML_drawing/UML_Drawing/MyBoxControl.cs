@@ -1,14 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Drawing.Imaging;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using UML_drawing.ViewForm;
 using UML_Logic_Library.AdditionalClasses;
 using UML_Logic_Library.Arrows;
 using UML_Logic_Library.Helpers;
@@ -16,7 +9,7 @@ using UML_Logic_Library.Markers;
 using UML_Logic_Library.StructuralEntities;
 using Component = UML_Logic_Library.StructuralEntities.Component;
 
-namespace UML_Logic_Library
+namespace UML_drawing
 {
     public partial class MyBoxControl : UserControl
     {
@@ -243,12 +236,15 @@ namespace UML_Logic_Library
                     return handler.ComponentsInProj[i];
             return null;
         }
-
+        
+        private int _idCount = 0;
         public void AddFigure<FigureType>(PointF location) where FigureType : SimpleRectangle, new()
         {
             
             FigureType figure = new FigureType();
             figure.Location = location;
+            figure.ItemId = _idCount;
+            _idCount++;
             if (handler != null)
                 handler.ComponentsInProj.Add(figure);
             Invalidate();
@@ -275,15 +271,15 @@ namespace UML_Logic_Library
             }
         }
 
-        public void SelectedAddLedgeLine(Arrows.Arrows type)
+        public void SelectedAddLedgeLine(UML_Logic_Library.Arrows.Arrows type)
         {
             if (selectedFigure != null && (selectedFigure is SimpleRectangle))
             {
                 Line line = new Line(type);
                 line.From = (selectedFigure as SimpleRectangle);
                 EndLineMarker marker = new EndLineMarker(handler, 1);
-                marker.Location = line.From.Location;
-                marker.Location = marker.Location.Offset(0, line.From.Size.Height);
+                marker.Location = (line.From as SimpleRectangle).Location;
+                marker.Location = marker.Location.Offset(0, ((SimpleRectangle) line.From).Size.Height);
                 line.To = marker;
                 handler.ComponentsInProj.Add(line);
                 selectedFigure = line;
@@ -324,6 +320,7 @@ namespace UML_Logic_Library
             base.OnKeyPress(e);
         }
 
+        private bool frontFlag = false;
         protected override void OnKeyUp(KeyEventArgs e)
         {
             base.OnKeyUp(e);
@@ -333,6 +330,23 @@ namespace UML_Logic_Library
             
             if (SelectedFigure == null || !(SelectedFigure is SimpleRectangle))
                 return;
+            
+            if (e.KeyData == (Keys.Enter))
+            {
+                if (!frontFlag)
+                {
+                    SelectedBringToFront();
+                }
+                else
+                {
+                    SelectedSendToBack();
+                }
+
+                frontFlag = !frontFlag;
+            }
+            
+            
+
             int dx = 0;
             int dy = 0;
             if (e.KeyData == Keys.Right)

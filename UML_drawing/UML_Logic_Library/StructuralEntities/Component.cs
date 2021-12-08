@@ -12,13 +12,15 @@ namespace UML_Logic_Library.StructuralEntities
     public abstract class Component : IComponent
     {
         public int ItemId { get; set; }
-        private readonly MyGraphicPath _myGraphicPath = new MyGraphicPath();
-
-        public GraphicsPath Path { get => _myGraphicPath.path; }
-        //public GraphicsPath Path => new GraphicsPath();
+        private MyGraphicPath _myGraphicPath = new MyGraphicPath();
+        public GraphicsPath Path { get => _myGraphicPath.path;
+            set => _myGraphicPath.path = value;
+        }
+        //public GraphicsPath SerializablePath => new GraphicsPath();
         private Color _penColor = Color.Black;
-        protected Pen _pen;
         private float _penWidth = 1;
+        [NonSerialized]
+        protected Pen _pen;
         
         public virtual Pen Pen
         {

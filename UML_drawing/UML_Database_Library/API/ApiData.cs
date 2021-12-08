@@ -73,7 +73,7 @@ namespace UML_Database_Library.API
         {
             try
             {
-                return WorkJson.LoadJson(nameproject);
+                return WorkData.Load(nameproject);
             }
             catch (FileNotFoundException ex)
             {
@@ -94,11 +94,11 @@ namespace UML_Database_Library.API
         }
 
         // сохраненение текущей Livedate в файловой системе.
-        public bool SaveProject(string nameproject, List<LiveDataElem> obj)
+        public bool SaveProject(string nameproject, List<LiveDataElem> components)
         {
             try
             {
-                return WorkJson.SaveJson(nameproject, obj);
+                return WorkData.Save(nameproject, components);
             }
             catch (DirectoryNotFoundException ex)
             {   

@@ -23,7 +23,7 @@ namespace UML_drawing.ViewForm
             // Сбрасываю на значения по умолчанию при повторном клике.
             InfoLabel.Text = default;
             infoLabel1.Text = default;
-
+            
             Handler = new Handler();
             Handler.NameProj = textBoxCreate.Text;
             string res = CheckValidName.Check(textBoxCreate.Text);

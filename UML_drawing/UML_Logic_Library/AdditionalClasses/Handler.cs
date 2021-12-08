@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
+using System.Runtime.Serialization.Formatters.Binary;
 using UML_Database_Library.API;
 using UML_Database_Library.BlackBox;
 using UML_Logic_Library.Interfaces;
@@ -8,9 +10,7 @@ using UML_Logic_Library.StructuralEntities;
 
 namespace UML_Logic_Library.AdditionalClasses
 {
-    /// <summary>
-    /// Это у же не актуальный класс, но пусть пока что будет тут
-    /// </summary>
+    [Serializable]
     public class Handler : IHandler
     {
         private ApiData _apiData = new ApiData();
@@ -32,15 +32,14 @@ namespace UML_Logic_Library.AdditionalClasses
             _liveData = _apiData.CreateProj(nameProj);
         }
         
-        public LiveData LoadProject(string nameProj)
+        public Handler LoadProject(string nameProj)
         {
             var load = _apiData.LoadProject(nameProj);
-            load.nameproject = NameProj;
-            //foreach (var component in load.ListObjectFigure)
-            //{
-                    
-            //}
-            return _apiData.LoadProject(nameProj);
+            var listComp = load
+                .ListObjectFigure
+                .Select(component => ComponentMapper.FromLiveData(component))
+                .ToList();
+            return new Handler(nameProj, listComp);
         }
         
         
@@ -50,16 +49,7 @@ namespace UML_Logic_Library.AdditionalClasses
             {
                 foreach (var component in components)
                 {
-                    _liveData.ListObjectFigure.Add(new LiveDataElem
-                    {
-                        _id = component.ItemId,
-                        // Алия мне нужно Bounds свойсво как то достать. Оно есть в элементе но достать не могу.
-                        //_x = component.Bounds
-                        //_pen = component.Pen
-                        _penColor = component.PenColor,
-                        _penWidth = component.PenWidth,
-                        Path = component.Path
-                    }); ;
+                    _liveData.ListObjectFigure.Add(ComponentMapper.ToLiveData(component));
                 }
                 return _apiData.SaveProject(nameProj, _liveData.ListObjectFigure);
             }
@@ -73,4 +63,5 @@ namespace UML_Logic_Library.AdditionalClasses
             }
         }        
     }
+    
 }

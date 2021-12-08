@@ -10,31 +10,43 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using UML_Logic_Library;
 using UML_Logic_Library.AdditionalClasses;
+using UML_Logic_Library.StructuralEntities;
+using Component = UML_Logic_Library.StructuralEntities.Component;
 
 namespace UML_drawing.ViewForm
 {
     public partial class LoadProject : Form
     {
-        Form1 _main;
-        public LoadProject(Form1 main)
+        private MyBoxControl _boxControl;
+        public LoadProject(MyBoxControl boxControl)
         {
             InitializeComponent();
-            _main = main;
+            _boxControl = boxControl;
         }
 
 
         private void button1_Click(object sender, EventArgs e)
-        {   
-            
-            Handler btnclick = new Handler();
-            var test = btnclick.LoadProject(ListProject.SelectedItem.ToString());
-            _main.Test_load_OBJ(test);
-            this.Close();
-
-            //// Осталось понять как делать рисовку обратно.
-            ///
-
-
+        {
+            // Handler btnclick = new Handler();
+            // var elem = btnclick.LoadProject(ListProject.SelectedItem.ToString());
+            var hand = _boxControl.Handler.LoadProject(ListProject.SelectedItem.ToString());
+            _boxControl.Handler = hand;
+            // foreach (var comp in elem.ListObjectFigure)
+            // {
+            //     switch (comp.CompName)
+            //     {
+            //         case "RectangleComponent" :
+            //             var component = ComponentMapper.FromLiveData(comp) as RectangleComponent;
+            //             _boxControl.AddFigure<RectangleComponent>(component.Location);
+            //             break;
+            //         case "RectangleOneField" :
+            //             var component1 = ComponentMapper.FromLiveData(comp) as RectangleOneField;
+            //             _boxControl.AddFigure<RectangleOneField>(component1.Location);
+            //             break;
+            //     }
+            // }
+            Close();
+            // Осталось понять как делать рисовку обратно.
         }
 
         private void button2_Click(object sender, EventArgs e)
