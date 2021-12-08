@@ -29,10 +29,24 @@ namespace UML_drawing.ViewForm
         {
             // Handler btnclick = new Handler();
             // var elem = btnclick.LoadProject(ListProject.SelectedItem.ToString());
-            var hand = _boxControl.Handler.LoadProject(ListProject.SelectedItem.ToString());
-            _boxControl.Handler = hand;
-            // Это не работает
-            
+            try
+            {
+                var hand = _boxControl.Handler.LoadProject(ListProject.SelectedItem.ToString());
+                _boxControl.Handler = hand;
+                Close();
+            }
+            catch (NullReferenceException)
+            {
+                throw new NullReferenceException();
+                //label2.Text = "НЕТ СОЗДАННЫХ ПРОЕКТОВ";
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+          
+          
+
             // foreach (var comp in elem.ListObjectFigure)
             // {
             //     switch (comp.CompName)
@@ -47,7 +61,7 @@ namespace UML_drawing.ViewForm
             //             break;
             //     }
             // }
-            Close();
+
             // Осталось понять как делать рисовку обратно.
         }
 

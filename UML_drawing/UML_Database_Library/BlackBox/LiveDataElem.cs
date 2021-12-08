@@ -1,11 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Drawing2D;
-using System.Linq;
 using System.Runtime.Serialization;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace UML_Database_Library.BlackBox
 {
@@ -20,14 +16,13 @@ namespace UML_Database_Library.BlackBox
     }
     [Serializable]
     public class LiveDataElem
-    {   
+    {
         // Элемент в диаграмме
         public int _id { get; set; }
         public Color _penColor { get; set; }
-        //public Pen _pen { get; set; }
         public string CompName { get; set; }
         public float _penWidth { get; set; }
-      
+
         //public GraphicsPath SerializablePath { get; set; }
         public PointF Location { get; set; }
         public string[] Text = new string[3];
@@ -42,7 +37,7 @@ namespace UML_Database_Library.BlackBox
         public RectangleF[] Rectangles = new RectangleF[3];
         public RectangleF[] TextRectangles = new RectangleF[3];
         public LiveDataElem From { get; set; }
-        public  LiveDataElem To { get; set; }
+        public LiveDataElem To { get; set; }
         public Arrows ArrowType { get; set; }
         public float LedgePositionX { get; set; }
     }
@@ -67,7 +62,7 @@ namespace UML_Database_Library.BlackBox
             else
                 Value = new GraphicsPath();
         }
-        
+
         public void GetObjectData(SerializationInfo info, StreamingContext context)
         {
             if (Value.PointCount > 0)
