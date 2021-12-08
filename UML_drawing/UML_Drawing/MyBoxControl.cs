@@ -1,18 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Drawing.Imaging;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
+using UML_Logic_Library.AdditionalClasses;
 using UML_Logic_Library.Arrows;
 using UML_Logic_Library.Helpers;
 using UML_Logic_Library.Markers;
+using UML_Logic_Library.StructuralEntities;
+using Component = UML_Logic_Library.StructuralEntities.Component;
 
-namespace UML_Logic_Library
+namespace UML_drawing
 {
     public partial class MyBoxControl : UserControl
     {
@@ -21,7 +18,6 @@ namespace UML_Logic_Library
         Component selectedFigure = null;
         //фигура или маркер, который тащится мышью
         Component draggedFigure = null;
-        private Control _control;
 
         List<Marker> markers = new List<Marker>();
         Pen selectRectPen;
@@ -116,7 +112,7 @@ namespace UML_Logic_Library
         {
             base.OnMouseDown(e);
             Point location = e.Location;
-            // location.Offset(-AutoScrollPosition.X, -AutoScrollPosition.Y);
+            location.Offset(-AutoScrollPosition.X, -AutoScrollPosition.Y);
 
             Focus();
             if (e.Button == System.Windows.Forms.MouseButtons.Left)
@@ -163,7 +159,7 @@ namespace UML_Logic_Library
         {
             base.OnMouseMove(e);
             Point location = e.Location;
-            // location.Offset(-AutoScrollPosition.X, -AutoScrollPosition.Y);
+            location.Offset(-AutoScrollPosition.X, -AutoScrollPosition.Y);
             if (e.Button == System.Windows.Forms.MouseButtons.Left)
             {
                 if (draggedFigure != null && (draggedFigure is SimpleRectangle))
@@ -240,12 +236,15 @@ namespace UML_Logic_Library
                     return handler.ComponentsInProj[i];
             return null;
         }
-
+        
+        private int _idCount = 0;
         public void AddFigure<FigureType>(PointF location) where FigureType : SimpleRectangle, new()
         {
             
             FigureType figure = new FigureType();
             figure.Location = location;
+            figure.ItemId = _idCount;
+            _idCount++;
             if (handler != null)
                 handler.ComponentsInProj.Add(figure);
             Invalidate();
@@ -272,52 +271,15 @@ namespace UML_Logic_Library
             }
         }
 
-        public void SelectedBeginEditText(string text)
+        public void SelectedAddLedgeLine(UML_Logic_Library.Arrows.Arrows type)
         {
             if (selectedFigure != null && (selectedFigure is SimpleRectangle))
             {
-                SimpleRectangle figure = (selectedFigure as RectangleComponent);
-                TextBox textBox = new TextBox();
-                textBox.Parent = this;
-                textBox.SetBounds(figure.TextBounds.Left, figure.TextBounds.Top, figure.TextBounds.Width, figure.TextBounds.Height);
-                textBox.Text = text;
-                //textBox.Text = figure.Text.TextFields;
-                textBox.Multiline = true;
-                textBox.TextAlign = HorizontalAlignment.Center;
-                (selectedFigure as SimpleRectangle).Text.TextFields = textBox.Text;
-                textBox.Focus();
-                //textBox.LostFocus += new EventHandler(textBox_LostFocus);
-            }
-        }
-
-
-        public void SelectedAddLedgeLine()
-        {
-            if (selectedFigure != null && (selectedFigure is SimpleRectangle))
-            {
-                Line line = new Line();
+                Line line = new Line(type);
                 line.From = (selectedFigure as SimpleRectangle);
                 EndLineMarker marker = new EndLineMarker(handler, 1);
-                marker.Location = line.From.Location;
-                marker.Location = marker.Location.Offset(0, line.From.Size.Height / 2 + 10);
-                line.To = marker;
-                handler.ComponentsInProj.Add(line);
-                selectedFigure = line;
-                CreateMarkers();
-
-                Invalidate();
-            }
-        }
-
-        public void SelectedAddDashLedgeLine()
-        {
-            if (selectedFigure != null && (selectedFigure is SimpleRectangle))
-            {
-                AssociationArrow line = new AssociationArrow();
-                line.From = (selectedFigure as SimpleRectangle);
-                EndLineMarker marker = new EndLineMarker(handler, 1);
-                marker.Location = line.From.Location;
-                marker.Location = marker.Location.Offset(0, line.From.Size.Height / 2 + 10);
+                marker.Location = (line.From as SimpleRectangle).Location;
+                marker.Location = marker.Location.Offset(0, ((SimpleRectangle) line.From).Size.Height);
                 line.To = marker;
                 handler.ComponentsInProj.Add(line);
                 selectedFigure = line;
@@ -329,7 +291,7 @@ namespace UML_Logic_Library
 
         public void SelectedDelete()
         {
-            if (selectedFigure != null)
+            if (selectedFigure != null || selectedFigure is Line)
             {
                 handler.ComponentsInProj.Remove(selectedFigure);
                 selectedFigure = null;
@@ -340,17 +302,17 @@ namespace UML_Logic_Library
             }
         }
 
-        //public Bitmap GetImage()
-        //{
-        //    selectedFigure = null;
-        //    draggedFigure = null;
-        //    CreateMarkers();
+        public Bitmap GetImage()
+        {
+            selectedFigure = null;
+            draggedFigure = null;
+            CreateMarkers();
 
-        //    Bitmap bmp = new Bitmap(Bounds.Width, Bounds.Height);
-        //    DrawToBitmap(bmp, new Rectangle(0, 0, bmp.Width, bmp.Height));
+            Bitmap bmp = new Bitmap(Bounds.Width, Bounds.Height);
+            DrawToBitmap(bmp, new Rectangle(0, 0, bmp.Width, bmp.Height));
 
-        //    return bmp;
-        //}
+            return bmp;
+        }
 
 
         protected override void OnKeyPress(KeyPressEventArgs e)
@@ -358,12 +320,33 @@ namespace UML_Logic_Library
             base.OnKeyPress(e);
         }
 
+        private bool frontFlag = false;
         protected override void OnKeyUp(KeyEventArgs e)
         {
             base.OnKeyUp(e);
 
+            if (e.KeyData == (Keys.Delete))
+                SelectedDelete();
+            
             if (SelectedFigure == null || !(SelectedFigure is SimpleRectangle))
                 return;
+            
+            if (e.KeyData == (Keys.Enter))
+            {
+                if (!frontFlag)
+                {
+                    SelectedBringToFront();
+                }
+                else
+                {
+                    SelectedSendToBack();
+                }
+
+                frontFlag = !frontFlag;
+            }
+            
+            
+
             int dx = 0;
             int dy = 0;
             if (e.KeyData == Keys.Right)
@@ -374,9 +357,7 @@ namespace UML_Logic_Library
                 dy = -1;
             if (e.KeyData == Keys.Down)
                 dy = +1;
-
-            if (e.KeyData == (Keys.Delete))
-                SelectedDelete();
+            
             
             if (e.KeyData == (Keys.Right | Keys.Shift))
                 dx = +15;

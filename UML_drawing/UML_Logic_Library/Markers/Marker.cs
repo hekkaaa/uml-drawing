@@ -1,13 +1,16 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
 using UML_Logic_Library.Interfaces;
+using UML_Logic_Library.StructuralEntities;
 
 namespace UML_Logic_Library.Markers
 {
+    [Serializable]
     public abstract class Marker : SimpleRectangle
     {
         private readonly int _defaultSize = 3;
-        public Component targetComponent;
+        public Component TargetComponent;
         private List<Marker> _markers;
 
         public virtual System.Windows.Forms.Cursor Cursor

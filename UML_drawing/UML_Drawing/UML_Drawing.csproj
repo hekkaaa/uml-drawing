@@ -58,6 +58,12 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="TextBoxOneField.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TextBoxOneField.Designer.cs">
+      <DependentUpon>TextBoxOneField.cs</DependentUpon>
+    </Compile>
     <Compile Include="InfoForms\AboutBox1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -78,6 +84,12 @@
     </Compile>
     <Compile Include="ViewForm\CreateForm.Designer.cs">
       <DependentUpon>CreateForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ViewForm\TextBoxTwoFields.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ViewForm\TextBoxTwoFields.Designer.cs">
+      <DependentUpon>TextBoxTwoFields.cs</DependentUpon>
     </Compile>
     <Compile Include="ViewForm\TextForm.cs">
       <SubType>Form</SubType>
@@ -112,6 +124,9 @@
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="TextBoxOneField.resx">
+      <DependentUpon>TextBoxOneField.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="InfoForms\AboutBox1.resx">
       <DependentUpon>AboutBox1.cs</DependentUpon>
     </EmbeddedResource>
@@ -129,6 +144,9 @@
     </Compile>
     <EmbeddedResource Include="ViewForm\CreateForm.resx">
       <DependentUpon>CreateForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ViewForm\TextBoxTwoFields.resx">
+      <DependentUpon>TextBoxTwoFields.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ViewForm\TextForm.resx">
       <DependentUpon>TextForm.cs</DependentUpon>

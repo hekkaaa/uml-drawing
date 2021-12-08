@@ -2,25 +2,25 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Drawing2D;
-using System.Net.Mime;
-using Microsoft.SqlServer.Server;
+using UML_Logic_Library.AdditionalClasses;
 using UML_Logic_Library.Interfaces;
 using UML_Logic_Library.Markers;
-using UML_Logic_Library.Requests.Abstract;
 
-namespace UML_Logic_Library
+namespace UML_Logic_Library.StructuralEntities
 {
     [Serializable]
     public abstract class Component : IComponent
     {
         public int ItemId { get; set; }
-        private readonly MyGraphicPath _myGraphicPath = new MyGraphicPath();
-
-        public GraphicsPath Path { get => _myGraphicPath.path; }
-        //public GraphicsPath Path => new GraphicsPath();
+        private MyGraphicPath _myGraphicPath = new MyGraphicPath();
+        public GraphicsPath Path { get => _myGraphicPath.path;
+            set => _myGraphicPath.path = value;
+        }
+        //public GraphicsPath SerializablePath => new GraphicsPath();
         private Color _penColor = Color.Black;
-        protected Pen _pen;
         private float _penWidth = 1;
+        [NonSerialized]
+        protected Pen _pen;
         
         public virtual Pen Pen
         {
@@ -28,6 +28,10 @@ namespace UML_Logic_Library
                 if (_pen == null)
                     _pen = new Pen(_penColor, _penWidth);
                 return _pen;
+            }
+            set
+            {
+                _pen = value;
             }
         }
 

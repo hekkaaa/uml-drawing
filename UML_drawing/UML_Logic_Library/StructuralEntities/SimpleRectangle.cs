@@ -2,27 +2,26 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Drawing2D;
-using System.IO;
+using UML_Logic_Library.AdditionalClasses;
 using UML_Logic_Library.Helpers;
 using UML_Logic_Library.Markers;
-using UML_Logic_Library.Requests;
-using UML_Logic_Library.Requests.Abstract;
 
-namespace UML_Logic_Library
+namespace UML_Logic_Library.StructuralEntities
 {
+    [Serializable]
     public class SimpleRectangle : Component
     {
-        
+        public string CompName => "SimpleRectangle";
         //размер новой фигуры, по умолчанию
         public static int DefaultSize = 80;
         //местоположение центра фигуры
         public PointF Location;
         public TextField Text = new TextField();
         //прямоугольник, в котором расположен текст
-        public RectangleF TextRect;
         private Color _color = Color.White;
+        public RectangleF textRect;
+        [NonSerialized]
         protected Brush _brush;
-        protected RectangleF textRect;
 
         public Color Color
         {
@@ -39,7 +38,7 @@ namespace UML_Logic_Library
             }
         }
         
-        // public SimpleRectangle(){ }
+        public SimpleRectangle(){ }
         
         public override bool PointIsInside(PointF p)
         {
@@ -50,7 +49,7 @@ namespace UML_Logic_Library
         public override IEnumerable<Marker> GetMarkers(Handler handler)
         {
             Marker m = new SizeMarker();
-            m.targetComponent = (SimpleRectangle)this;
+            m.TargetComponent = (SimpleRectangle)this;
             yield return m;
             
         }
@@ -64,18 +63,9 @@ namespace UML_Logic_Library
                 return new RectangleF(bounds.Left + Location.X, bounds.Top + Location.Y, bounds.Width, bounds.Height);
             }
         }
-        //
-        // //прямоугольник текста (в абсолютных координатах)
-        public Rectangle TextBounds
-        {
-            get
-            {
-                return new Rectangle((int)(TextRect.Left + Location.X), (int)(TextRect.Top + Location.Y), (int)TextRect.Width, (int)TextRect.Height);
-            }
-        }
 
         //размер прямоугольника вокруг фигуры
-        public SizeF Size
+        public virtual SizeF Size
         {
             get { return Path.GetBounds().Size; }
             set
@@ -117,7 +107,7 @@ namespace UML_Logic_Library
             gr.TranslateTransform(Location.X, Location.Y);
             gr.FillPath(Brush, Path);
             gr.DrawPath(Pen, Path);
-            gr.DrawString(Text.TextFields, SystemFonts.DefaultFont, Brushes.Black, textRect, Text.StringFormatTitle);
+            gr.DrawString(Text.TextFields, Text.Font, Brushes.Black, textRect, Text.StringFormatTitle);
             gr.Restore(transState);
         }
         

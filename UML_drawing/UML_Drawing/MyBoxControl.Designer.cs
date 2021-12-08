@@ -1,5 +1,5 @@
 ﻿
-namespace UML_Logic_Library
+namespace UML_drawing
 {
     public partial class MyBoxControl
     {

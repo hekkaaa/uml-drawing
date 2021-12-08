@@ -45,6 +45,7 @@
             this.textBoxCreate.Name = "textBoxCreate";
             this.textBoxCreate.Size = new System.Drawing.Size(246, 22);
             this.textBoxCreate.TabIndex = 0;
+            this.textBoxCreate.TextChanged += new System.EventHandler(this.textBoxCreate_TextChanged);
             // 
             // PJname
             // 
@@ -106,18 +107,19 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
-            this.ClientSize = new System.Drawing.Size(483, 192);
+            this.ClientSize = new System.Drawing.Size(483, 190);
             this.Controls.Add(this.infoLabel1);
             this.Controls.Add(this.InfoLabel);
             this.Controls.Add(this.buttonCancel);
             this.Controls.Add(this.buttonCreate);
             this.Controls.Add(this.PJname);
             this.Controls.Add(this.textBoxCreate);
-            this.MaximumSize = new System.Drawing.Size(501, 239);
-            this.MinimumSize = new System.Drawing.Size(501, 239);
+            this.MaximumSize = new System.Drawing.Size(501, 237);
+            this.MinimumSize = new System.Drawing.Size(501, 237);
             this.Name = "CreateForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Создать проект";
+            this.Load += new System.EventHandler(this.CreateForm_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
