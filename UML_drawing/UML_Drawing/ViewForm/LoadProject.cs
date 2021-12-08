@@ -31,6 +31,8 @@ namespace UML_drawing.ViewForm
             // var elem = btnclick.LoadProject(ListProject.SelectedItem.ToString());
             var hand = _boxControl.Handler.LoadProject(ListProject.SelectedItem.ToString());
             _boxControl.Handler = hand;
+            // Это не работает
+            
             // foreach (var comp in elem.ListObjectFigure)
             // {
             //     switch (comp.CompName)
