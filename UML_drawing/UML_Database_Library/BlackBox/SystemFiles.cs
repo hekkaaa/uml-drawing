@@ -15,7 +15,7 @@ namespace UML_Database_Library.BlackBox
             else return false;
         }
 
-        public static bool CreateDirectoryProject(bool obj)
+        internal static bool CreateDirectoryProject(bool obj)
         {
             if (!obj)
             {
@@ -32,7 +32,7 @@ namespace UML_Database_Library.BlackBox
             return false;
         }
 
-        public static string[] GetNameFileProject()
+        internal static string[] GetNameFileProject()
         {
             // получаем имена файлов в папке без расширения.
             string userDirectory = Directory.GetCurrentDirectory();
@@ -40,7 +40,7 @@ namespace UML_Database_Library.BlackBox
             return files;
         }
 
-        public static bool CheckDublicateName(string namepj)
+        internal static bool CheckDublicateName(string namepj)
         {
             // проверка совпадения принятого имени с файлами в проектах. Нужен для того чтобы не дублировать.
             string[] poolname = GetNameFileProject();
