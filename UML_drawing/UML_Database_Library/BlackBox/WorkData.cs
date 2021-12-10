@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
+using System.Security.AccessControl;
+using Microsoft.Win32.SafeHandles;
 
 
 namespace UML_Database_Library.BlackBox
@@ -13,6 +15,7 @@ namespace UML_Database_Library.BlackBox
             try
             {
                 var dataProject = new LiveData();
+
                 using (FileStream fs = new FileStream($@"{Directory.GetCurrentDirectory()}\project\{namefile}.uml", FileMode.Open))
                     dataProject.ListObjectFigure = (List<LiveDataElem>)new BinaryFormatter().Deserialize(fs);
 

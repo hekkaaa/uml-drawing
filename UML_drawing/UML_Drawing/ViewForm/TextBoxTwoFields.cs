@@ -23,8 +23,8 @@ namespace UML_drawing.ViewForm
             _objectInForm = objectFromForm as RectangleTwoFields;
             textBox.Text = _objectInForm.Head.Text.TextFields;
             textBox.Font = _objectInForm.Head.Text.Font;
-            textBox1.Text = _objectInForm.FieldRectangle.Text.TextFieldsProp;
-            textBox1.Font = _objectInForm.FieldRectangle.Text.Font;
+            textBox1.Text = _objectInForm.FieldProp.Text.TextFieldsProp;
+            textBox1.Font = _objectInForm.FieldProp.Text.Font;
             textBox2.Text = _objectInForm.FieldMethods.Text.TextFieldsMethod;
             textBox2.Font = _objectInForm.FieldMethods.Text.Font;
             textBox.TextChanged += textBox_TextChanged;
@@ -40,7 +40,7 @@ namespace UML_drawing.ViewForm
 
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
-            _objectInForm.FieldRectangle.Text.TextFieldsProp = textBox1.Text;
+            _objectInForm.FieldProp.Text.TextFieldsProp = textBox1.Text;
         }
 
         private void textBox2_TextChanged(object sender, EventArgs e)
@@ -51,7 +51,7 @@ namespace UML_drawing.ViewForm
         private void OkTextButton_Click(object sender, EventArgs e)
         {
             _objectInForm.Head.Text.Font = textBox.Font;
-            _objectInForm.FieldRectangle.Text.Font = textBox1.Font;
+            _objectInForm.FieldProp.Text.Font = textBox1.Font;
             _objectInForm.FieldMethods.Text.Font = textBox2.Font;
             this.Close();
         }

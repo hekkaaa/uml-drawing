@@ -11,7 +11,6 @@ namespace UML_Logic_Library.StructuralEntities
     [Serializable]
     public abstract class Component : IComponent
     {
-        public int ItemId { get; set; }
         private MyGraphicPath _myGraphicPath = new MyGraphicPath();
         public GraphicsPath Path { get => _myGraphicPath.path;
             set => _myGraphicPath.path = value;

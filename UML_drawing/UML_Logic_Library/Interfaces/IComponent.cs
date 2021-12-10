@@ -9,7 +9,6 @@ namespace UML_Logic_Library.Interfaces
 {
     public interface IComponent
     {
-       int ItemId { get; set; }
        public GraphicsPath Path { get; }
        public Pen Pen { get; }
        public Color PenColor { get; set; }

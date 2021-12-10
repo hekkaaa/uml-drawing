@@ -12,9 +12,11 @@ namespace UML_drawing.ViewForm
     public partial class CreateForm : Form
     {
         public Handler Handler;
-        public CreateForm()
+        private MyBoxControl _boxControl;
+        public CreateForm(MyBoxControl boxControl)
         {
             InitializeComponent();
+            _boxControl = boxControl;
             textBoxCreate.TextChanged += textBoxCreate_TextChanged;
         }
 
@@ -23,9 +25,10 @@ namespace UML_drawing.ViewForm
             // Сбрасываю на значения по умолчанию при повторном клике.
             InfoLabel.Text = default;
             infoLabel1.Text = default;
-            
+
             Handler = new Handler();
-            Handler.NameProj = textBoxCreate.Text;
+            var s =_boxControl.Handler.SaveProject(this.Handler.NameProj, this.Handler.ComponentsInProj);
+            
             string res = CheckValidName.Check(textBoxCreate.Text);
             if (res != null)
             {
@@ -38,6 +41,8 @@ namespace UML_drawing.ViewForm
                 {
                     Handler.CreateProj(textBoxCreate.Text);
                     Handler.SaveProject(textBoxCreate.Text, Handler.ComponentsInProj);
+                    _boxControl.Handler = Handler;
+                    _boxControl.Handler.NameProj = textBoxCreate.Text;
                     Close();
                 }
                 catch (DuplicateNameException)

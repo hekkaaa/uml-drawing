@@ -25,6 +25,7 @@ namespace UML_Logic_Library.StructuralEntities
             Rect = rect;
             TextRect = textRect;
         }
+        
         public new Rectangle TextBounds
         {
             get

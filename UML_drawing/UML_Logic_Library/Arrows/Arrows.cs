@@ -9,7 +9,7 @@ using UML_Logic_Library.StructuralEntities;
 namespace UML_Logic_Library.Arrows
 {
     [Serializable]
-    public enum Arrows
+    public enum ArrowsTypes
     {
         AssociationArrow,
         AggregationArrow,
@@ -18,32 +18,21 @@ namespace UML_Logic_Library.Arrows
         InheritanceArrow,
         RealizationArrow
     }
-    public class Line : Component
+    public class Arrows : Component
     {
-            public string CompName => "Line";
+            public string CompName => "Arrows";
             public Component From;
             public Component To;
-            public Arrows Type;
+            public ArrowsTypes TypesType;
 
             private PointF[] _points;
-            //static Pen clickPen = new Pen(Color.Transparent, 3);
             internal float LedgePositionX = -1;
             
-            private Color _color = Color.Black;
-            private Brush _brush;
-            public RectangleF TextRect;
+            
 
-            public Color Color
+            public Arrows(ArrowsTypes arrowTypesType)
             {
-                get => _color;
-                set { _color = value; _brush = null; }
-            }
-
-            public Brush Brush => _brush ??= new SolidBrush(_color);
-
-            public Line(Arrows arrowType)
-            {
-                Type = arrowType;
+                TypesType = arrowTypesType;
             }
 
             public override IEnumerable<Marker> GetMarkers(Handler components)
@@ -72,23 +61,23 @@ namespace UML_Logic_Library.Arrows
                 return Path.IsOutlineVisible(p, Pen);            
             }
 
-            private void SetPen(Arrows arrowType)
+            private void SetPen(ArrowsTypes arrowTypesType)
             {
-                switch (arrowType)
+                switch (arrowTypesType)
                 {
-                    case Arrows.AddictionArrow :
+                    case ArrowsTypes.AddictionArrow :
                         Pen p = new Pen(PenColor, PenWidth);
                         p.CustomEndCap = new AdjustableArrowCap(10, 10, false);
                         p.DashStyle = DashStyle.Dash;
                         p.DashPattern = new float[] {2, 3};
                         Pen = p;
                         break;
-                    case Arrows.AssociationArrow :
+                    case ArrowsTypes.AssociationArrow :
                         Pen p1 = new Pen(PenColor, PenWidth);
                         p1.CustomEndCap = new AdjustableArrowCap(10, 10, false);
                         Pen = p1;
                         break;
-                    case Arrows.AggregationArrow :
+                    case ArrowsTypes.AggregationArrow :
                         Pen p2 = new Pen(PenColor, PenWidth);
                         GraphicsPath hPath = new GraphicsPath();
                         hPath.AddLine(new Point(0,0), new Point(7, 5));
@@ -99,7 +88,7 @@ namespace UML_Logic_Library.Arrows
                         p2.CustomEndCap = diamondCap;
                         Pen = p2;
                         break;
-                    case Arrows.CompositionArrow :
+                    case ArrowsTypes.CompositionArrow :
                         Pen p3 = new Pen(PenColor, PenWidth);
                         GraphicsPath dFCap = new GraphicsPath();
                         dFCap.AddLines( new PointF[]
@@ -118,7 +107,7 @@ namespace UML_Logic_Library.Arrows
                         p3.CustomEndCap = diamondFillCap;
                         Pen = p3;
                         break;
-                    case Arrows.InheritanceArrow :
+                    case ArrowsTypes.InheritanceArrow :
                         Pen p4 = new Pen(PenColor, PenWidth);
                         GraphicsPath tCap = new GraphicsPath();
                         // Она оч странно строиться да, как останется время покручу координаты еще
@@ -138,7 +127,7 @@ namespace UML_Logic_Library.Arrows
                         p4.CustomEndCap = triangleCap;
                         Pen = p4;
                         break;
-                    case Arrows.RealizationArrow :
+                    case ArrowsTypes.RealizationArrow :
                         Pen p5 = new Pen(PenColor, PenWidth);
                         GraphicsPath tFCap = new GraphicsPath();
                         // Она оч странно строиться да, как останется время покручу координаты еще
@@ -170,7 +159,7 @@ namespace UML_Logic_Library.Arrows
                     return;
 
                 RecalcPath();
-                SetPen(Type);
+                SetPen(TypesType);
                 gr.DrawLines(Pen, _points);
             }
 
