@@ -18,10 +18,12 @@ namespace UML_drawing.ViewForm
     public partial class LoadProject : Form
     {
         private MyBoxControl _boxControl;
-        public LoadProject(MyBoxControl boxControl)
+        private Form1 _form;
+        public LoadProject(MyBoxControl boxControl, Form1 form)
         {
             InitializeComponent();
             _boxControl = boxControl;
+            _form = form;
         }
 
 
@@ -30,7 +32,7 @@ namespace UML_drawing.ViewForm
             // Handler btnclick = new Handler();
             // var elem = btnclick.LoadProject(ListProject.SelectedItem.ToString());
             try
-            {
+            { 
                 var hand = _boxControl.Handler.LoadProject(ListProject.SelectedItem.ToString());
                 _boxControl.Handler = hand;
                 Close();

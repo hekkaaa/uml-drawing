@@ -1,20 +1,10 @@
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.IO;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using UML_drawing.ViewForm;
-using UML_Logic_Library;
 using UML_Logic_Library.AdditionalClasses;
 using UML_Logic_Library.Arrows;
 using UML_Logic_Library.StructuralEntities;
-using Component = System.ComponentModel.Component;
 
 namespace UML_drawing
 {
@@ -117,25 +107,12 @@ namespace UML_drawing
 
         private void loadProjectToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            //try
-            //{
-                var createform = new LoadProject(myBoxControl);
-                createform.ShowDialog();
-                // openFileDialog1.ShowDialog();
-                // myBoxControl.Handler = Handler.Load(openFileDialog1.FileName);
-            //}
-            //catch (Exception exception)
-            //{
-            //    return;
-            //}
+            var createform = new LoadProject(myBoxControl, this);
+            createform.ShowDialog();
         }
 
         private void saveProjectToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            // if (saveFileDialog1.ShowDialog() == DialogResult.OK)
-            // {
-            //     myBoxControl.Handler.Save(saveFileDialog1.FileName);
-            // }
             var createform = new SavesInfoFrom(myBoxControl.Handler.NameProj, myBoxControl.Handler.ComponentsInProj);
             createform.ShowDialog(this);
         }
@@ -198,8 +175,8 @@ namespace UML_drawing
                 return;
             }
             var createEditorBox = new TextForm(myBoxControl.SelectedFigure);
-            createEditorBox.ShowDialog(); 
-            
+            createEditorBox.ShowDialog();
+
         }
 
         private void associationLineButton_Click(object sender, EventArgs e)
@@ -243,9 +220,6 @@ namespace UML_drawing
             myBoxControl.AddFigure<RectangleTwoFields>(startDragPoint);
         }
 
-        // Тут есть забавный баг, что когда мы закрываем окошко ничего не выбрав,
-        // то оно colorDialog1.Reset() отсюда берет дефолтный цвет (или белый как у форм) и получается, 
-        // что фигура все равно закрашивается)))))))
         private void toolStripButton1_Click(object sender, EventArgs e)
         {
             if (myBoxControl.SelectedFigure == null)
@@ -284,7 +258,7 @@ namespace UML_drawing
         }
         private void ObjectButton_MouseLeave(object sender, EventArgs e)
         {      // Кнопка 1
-             pictureBoxHover.Visible = false;
+            pictureBoxHover.Visible = false;
         }
 
         private void objectOneFieldButton_MouseHover(object sender, EventArgs e)
@@ -298,7 +272,7 @@ namespace UML_drawing
         }
 
         private void objectOneFieldButton_MouseLeave(object sender, EventArgs e)
-        {   
+        {
             // Кнопка 2
             pictureBoxHover.Visible = false;
         }
@@ -414,9 +388,6 @@ namespace UML_drawing
             // Кнопка 4
             pictureBoxHover.Visible = false;
         }
-
-        
-
 
         // ******************************************************************
     }
