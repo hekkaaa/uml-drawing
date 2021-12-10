@@ -71,19 +71,43 @@ namespace UML_drawing
         // ЗАКРЫТИЕ ЧЕРЕЗ КРЕСТИК
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
-            DialogResult dialog = MessageBox.Show(
-            "Вы действительно хотите выйти из программы?",
-            "Завершение программы",
-            MessageBoxButtons.YesNo,
-            MessageBoxIcon.Warning
-           );
-            if (dialog == DialogResult.Yes)
+
+            if (_boolName)
             {
-                e.Cancel = false;
+                DialogResult dialog = MessageBox.Show(
+                "Сохранить изменения перед выходом?",
+                "Изменения не сохранены",
+                MessageBoxButtons.YesNoCancel,
+                MessageBoxIcon.Warning
+               );
+                if (dialog == DialogResult.Yes)
+                {
+                    myBoxControl.Handler.SaveProject(myBoxControl.Handler.NameProj, myBoxControl.Handler.ComponentsInProj);
+                    e.Cancel = false;
+                }
+                else if (dialog == DialogResult.Cancel)
+                {
+                    e.Cancel = true;
+                }
+
             }
             else
             {
-                e.Cancel = true;
+                DialogResult dialog = MessageBox.Show(
+                    "Вы действительно хотите выйти из программы?",
+                    "Завершение программы",
+                    MessageBoxButtons.YesNo,
+                    MessageBoxIcon.Warning
+                   );
+                if (dialog == DialogResult.Yes)
+                {
+                    e.Cancel = false;
+                }
+                else
+                {
+                    e.Cancel = true;
+                }
+
             }
         }
 
@@ -119,17 +143,6 @@ namespace UML_drawing
                 myBoxControl.Handler = createform.Handler;
                 this.Text = "UML Creater" + $" - {myBoxControl.Handler.NameProj}";
             }
-            //try
-            //{
-            //    var createform = new CreateForm(myBoxControl);
-            //    createform.ShowDialog();
-            //    myBoxControl.Handler = createform.Handler;
-            //    //this.Text = "UML Creater" + $" - {myBoxControl.Handler.NameProj}";
-            //}
-            //catch (Exception exception)
-            //{
-            //    return;
-            //}
         }
 
         private void loadProjectToolStripMenuItem_Click(object sender, EventArgs e)

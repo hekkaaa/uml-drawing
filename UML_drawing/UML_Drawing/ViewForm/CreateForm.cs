@@ -1,10 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data;
 using System.Drawing;
 using System.Windows.Forms;
 using UML_drawing.SubLogical;
-using UML_Logic_Library;
 using UML_Logic_Library.AdditionalClasses;
 
 namespace UML_drawing.ViewForm
@@ -17,9 +15,9 @@ namespace UML_drawing.ViewForm
         public CreateForm(MyBoxControl boxControl)
         {
             InitializeComponent();
-           
-                _boxControl = boxControl;
-                textBoxCreate.TextChanged += textBoxCreate_TextChanged;
+
+            _boxControl = boxControl;
+            textBoxCreate.TextChanged += textBoxCreate_TextChanged;
         }
 
         private void buttonCreate_Click(object sender, EventArgs e)
@@ -30,7 +28,7 @@ namespace UML_drawing.ViewForm
 
             Handler = new Handler();
             _boxControl.Handler.SaveProject(this.Handler.NameProj, this.Handler.ComponentsInProj);
-            
+
             string res = CheckValidName.Check(textBoxCreate.Text);
             if (res != null)
             {
@@ -61,7 +59,7 @@ namespace UML_drawing.ViewForm
         }
 
         private void buttonCancel_Click(object sender, EventArgs e)
-        {   
+        {
             this.Close();
         }
 

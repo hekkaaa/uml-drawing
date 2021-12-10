@@ -46,8 +46,7 @@ namespace UML_Logic_Library.AdditionalClasses
             }
             
         }
-        
-        
+         
         public bool SaveProject(string nameProj, List<Component> components)
         {
             try

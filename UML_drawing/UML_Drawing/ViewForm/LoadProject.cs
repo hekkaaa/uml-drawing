@@ -24,7 +24,6 @@ namespace UML_drawing.ViewForm
             {
                 var hand = _boxControl.Handler.LoadProject(ListProject.SelectedItem.ToString());
                 _boxControl.Handler = hand;
-                //_boxControl.Handler.NameProj.ToString()
                 _form.Text = "UML Creater" + $" - {_boxControl.Handler.NameProj}";
                 _form._boolName = false;
                 Close();
@@ -47,19 +46,40 @@ namespace UML_drawing.ViewForm
 
         private void LoadProject_Load(object sender, EventArgs e)
         {
-            string userDirectory = Directory.GetCurrentDirectory();
-            var res = Directory.GetDirectories(userDirectory, "project");
+            ListProject.Visible = true;
+            button1.Enabled = false;
+            var res = Directory.GetDirectories(Directory.GetCurrentDirectory(), "project");
             if (res.Length > 0)
             {
-                string[] files = Directory.GetFiles($@"{userDirectory}\project\").Select(fn => Path.GetFileNameWithoutExtension(fn)).ToArray();
-                for (int i = 0; i < files.Length; i++)
+                string[] files = Directory.GetFiles($@"{Directory.GetCurrentDirectory()}\project\").Select(fn => Path.GetFileNameWithoutExtension(fn)).ToArray();
+                if (files.Length > 0)
                 {
-                    ListProject.Items.Add(files[i]);
+                    label2.Text = "";
+                    for (int i = 0; i < files.Length; i++)
+                    {
+                        ListProject.Items.Add(files[i]);
+                    }
+                }
+                else
+                {
+                    button1.Enabled = false;
+                    label2.Text = "НЕТ СОЗДАННЫХ ПРОЕКТОВ";
+                    ListProject.Visible = false;
                 }
             }
-            else label2.Text = "НЕТ СОЗДАННЫХ ПРОЕКТОВ";
+            else
+            {
+                button1.Enabled = false;
+                label2.Text = "НЕТ СОЗДАННЫХ ПРОЕКТОВ";
+                ListProject.Visible = false;
+            }
             // тут сделать парсин папки на наличие проектов по имени.
             // вывести список в выпадающем списке ListProject
+        }
+
+        private void ListProject_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            button1.Enabled = true;
         }
     }
 }
