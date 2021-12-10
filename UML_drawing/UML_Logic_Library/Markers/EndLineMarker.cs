@@ -22,12 +22,12 @@ namespace UML_Logic_Library.Markers
 
         public override void UpdateLocation()
         {
-            Line line = (TargetComponent as Line);
-            if (line.From == null || line.To == null)
+            Arrows.Arrows arrows = (TargetComponent as Arrows.Arrows);
+            if (arrows.From == null || arrows.To == null)
                 return;//не обновляем маркеры оторванных концов
             //фигура, с которой связана линия
-            var from = line.From as SimpleRectangle;
-            var to = line.To as SimpleRectangle;
+            var from = arrows.From as SimpleRectangle;
+            var to = arrows.To as SimpleRectangle;
             SimpleRectangle figure = pointIndex == 0 ? from : to;
             Location = figure.Location;
         }
@@ -44,19 +44,19 @@ namespace UML_Logic_Library.Markers
                     break;
                 }
 
-            Line line = (TargetComponent as Line);
+            Arrows.Arrows arrows = (TargetComponent as Arrows.Arrows);
             if (figure == null)
                 figure = this;
             //если под маркером нет фигуры, то просто коннектим линию к самому маркеру
 
             //не позволяем конектится самому к себе
-            if (line.From == figure || line.To == figure)
+            if (arrows.From == figure || arrows.To == figure)
                 return;
             //обновляем конекторы линии
             if (pointIndex == 0)
-                line.From = figure;
+                arrows.From = figure;
             else
-                line.To = figure;
+                arrows.To = figure;
 
         }
     }

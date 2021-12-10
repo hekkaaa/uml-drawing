@@ -79,7 +79,7 @@ namespace UML_drawing
             if (handler != null)
             {
                 foreach (Component f in handler.ComponentsInProj)
-                    if (f is Line)
+                    if (f is Arrows)
                         f.Draw(gr);
                 foreach (Component f in handler.ComponentsInProj)
                     if (f is SimpleRectangle)
@@ -232,19 +232,16 @@ namespace UML_drawing
                     return handler.ComponentsInProj[i];
             //затем ищем среди линий
             for (int i = handler.ComponentsInProj.Count - 1; i >= 0; i--)
-                if (handler.ComponentsInProj[i] is Line && handler.ComponentsInProj[i].PointIsInside(p))
+                if (handler.ComponentsInProj[i] is Arrows && handler.ComponentsInProj[i].PointIsInside(p))
                     return handler.ComponentsInProj[i];
             return null;
         }
         
-        private int _idCount = 0;
         public void AddFigure<FigureType>(PointF location) where FigureType : SimpleRectangle, new()
         {
             
             FigureType figure = new FigureType();
             figure.Location = location;
-            figure.ItemId = _idCount;
-            _idCount++;
             if (handler != null)
                 handler.ComponentsInProj.Add(figure);
             Invalidate();
@@ -271,18 +268,18 @@ namespace UML_drawing
             }
         }
 
-        public void SelectedAddLedgeLine(UML_Logic_Library.Arrows.Arrows type)
+        public void SelectedAddLedgeLine(UML_Logic_Library.Arrows.ArrowsTypes type)
         {
             if (selectedFigure != null && (selectedFigure is SimpleRectangle))
             {
-                Line line = new Line(type);
-                line.From = (selectedFigure as SimpleRectangle);
+                Arrows arrows = new Arrows(type);
+                arrows.From = (selectedFigure as SimpleRectangle);
                 EndLineMarker marker = new EndLineMarker(handler, 1);
-                marker.Location = (line.From as SimpleRectangle).Location;
-                marker.Location = marker.Location.Offset(0, ((SimpleRectangle) line.From).Size.Height);
-                line.To = marker;
-                handler.ComponentsInProj.Add(line);
-                selectedFigure = line;
+                marker.Location = (arrows.From as SimpleRectangle).Location;
+                marker.Location = marker.Location.Offset(0, ((SimpleRectangle) arrows.From).Size.Height);
+                arrows.To = marker;
+                handler.ComponentsInProj.Add(arrows);
+                selectedFigure = arrows;
                 CreateMarkers();
 
                 Invalidate();
@@ -291,7 +288,7 @@ namespace UML_drawing
 
         public void SelectedDelete()
         {
-            if (selectedFigure != null || selectedFigure is Line)
+            if (selectedFigure != null || selectedFigure is Arrows)
             {
                 handler.ComponentsInProj.Remove(selectedFigure);
                 selectedFigure = null;

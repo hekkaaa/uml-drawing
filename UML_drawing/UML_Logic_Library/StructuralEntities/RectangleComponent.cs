@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Drawing;
+using UML_Logic_Library.AdditionalClasses;
 
 namespace UML_Logic_Library.StructuralEntities
 {

@@ -51,7 +51,6 @@ namespace UML_Logic_Library.StructuralEntities
             Marker m = new SizeMarker();
             m.TargetComponent = (SimpleRectangle)this;
             yield return m;
-            
         }
         
         //прямоугольник вокруг фигуры 

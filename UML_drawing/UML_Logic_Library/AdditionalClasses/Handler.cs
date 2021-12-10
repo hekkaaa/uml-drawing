@@ -11,7 +11,7 @@ using UML_Logic_Library.StructuralEntities;
 namespace UML_Logic_Library.AdditionalClasses
 {
     [Serializable]
-    public class Handler : IHandler
+    public class Handler
     {
         private ApiData _apiData = new ApiData();
         private LiveData _liveData = new LiveData();
@@ -39,7 +39,7 @@ namespace UML_Logic_Library.AdditionalClasses
             {
                 var listComp = load
                 .ListObjectFigure
-                .Select(component => ComponentMapper.FromLiveData(component))
+                .Select(component => component.FromLiveData())
                 .ToList();
                 return new Handler(nameProj, listComp);
             }
@@ -57,7 +57,7 @@ namespace UML_Logic_Library.AdditionalClasses
             {
                 foreach (var component in components)
                 {
-                    _liveData.ListObjectFigure.Add(ComponentMapper.ToLiveData(component));
+                    _liveData.ListObjectFigure.Add(component.ToLiveData());
                 }
                 return _apiData.SaveProject(nameProj, _liveData.ListObjectFigure);
             }

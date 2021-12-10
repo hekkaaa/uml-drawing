@@ -105,10 +105,9 @@ namespace UML_drawing
         {
             try
             {
-                var createform = new CreateForm();
+                var createform = new CreateForm(myBoxControl);
                 createform.ShowDialog();
-                myBoxControl.Handler = new Handler();
-                myBoxControl.Handler = myBoxControl.Handler;
+                myBoxControl.Handler = createform.Handler;
             }
             catch (Exception exception)
             {
@@ -184,7 +183,7 @@ namespace UML_drawing
 
         private void textEditor_Click(object sender, EventArgs e)
         {
-            if (myBoxControl.SelectedFigure == null || myBoxControl.SelectedFigure is Line)
+            if (myBoxControl.SelectedFigure == null || myBoxControl.SelectedFigure is Arrows)
                 return;
             if (myBoxControl.SelectedFigure is RectangleOneField)
             {
@@ -205,33 +204,33 @@ namespace UML_drawing
 
         private void associationLineButton_Click(object sender, EventArgs e)
         {
-            myBoxControl.SelectedAddLedgeLine(Arrows.AssociationArrow);
-            //myBoxControl.AddFigure<Line>(startDragPoint);
+            myBoxControl.SelectedAddLedgeLine(ArrowsTypes.AssociationArrow);
+            //myBoxControl.AddFigure<Arrows>(startDragPoint);
         }
 
         private void addictionLineButton_Click(object sender, EventArgs e)
         {
-            myBoxControl.SelectedAddLedgeLine(Arrows.AddictionArrow);
+            myBoxControl.SelectedAddLedgeLine(ArrowsTypes.AddictionArrow);
         }
 
         private void inheritanceLineButton_Click(object sender, EventArgs e)
         {
-            myBoxControl.SelectedAddLedgeLine(Arrows.InheritanceArrow);
+            myBoxControl.SelectedAddLedgeLine(ArrowsTypes.InheritanceArrow);
         }
 
         private void realizationLineButton_Click(object sender, EventArgs e)
         {
-            myBoxControl.SelectedAddLedgeLine(Arrows.RealizationArrow);
+            myBoxControl.SelectedAddLedgeLine(ArrowsTypes.RealizationArrow);
         }
 
         private void compositionLineButton_Click(object sender, EventArgs e)
         {
-            myBoxControl.SelectedAddLedgeLine(Arrows.CompositionArrow);
+            myBoxControl.SelectedAddLedgeLine(ArrowsTypes.CompositionArrow);
         }
 
         private void aggregationLineButton_Click(object sender, EventArgs e)
         {
-            myBoxControl.SelectedAddLedgeLine(Arrows.AggregationArrow);
+            myBoxControl.SelectedAddLedgeLine(ArrowsTypes.AggregationArrow);
         }
 
         private void objectOneFieldButton_Click(object sender, EventArgs e)
@@ -262,10 +261,10 @@ namespace UML_drawing
                 colorDialog1.Reset();
             }
 
-            if (obj is Line)
+            if (obj is Arrows)
             {
                 colorDialog1.ShowDialog();
-                (obj as Line).PenColor = colorDialog1.Color;
+                (obj as Arrows).PenColor = colorDialog1.Color;
                 colorDialog1.Reset();
             }
         }
