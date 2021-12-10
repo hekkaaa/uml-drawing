@@ -19,6 +19,8 @@ namespace UML_Database_Library.API
             else
             {
                 LiveData project = new LiveData(nameprodject);
+                var empty_component = new List<LiveDataElem> { new LiveDataElem() };
+                WorkData.Save(nameprodject, empty_component);
                 return project;
             }
         }
