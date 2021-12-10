@@ -16,9 +16,6 @@ namespace UML_Logic_Library.AdditionalClasses
         private ApiData _apiData = new ApiData();
         private LiveData _liveData = new LiveData();
         public List<Component> ComponentsInProj = new List<Component>();
-        private string _nameProj = "Project1";
-
-        //private string _nameProj = "DefaultProject";
         public string NameProj { get { return _liveData.nameproject; } set { _liveData.nameproject = value; } }
         public Handler() { _liveData.nameproject = "DefaultProject"; } // назначаем имя по умолчанию при создании нового проекта.
         public Handler(string nameProj, List<Component> components)

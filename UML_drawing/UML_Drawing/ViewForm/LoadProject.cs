@@ -1,17 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using UML_Logic_Library;
-using UML_Logic_Library.AdditionalClasses;
-using UML_Logic_Library.StructuralEntities;
-using Component = UML_Logic_Library.StructuralEntities.Component;
 
 namespace UML_drawing.ViewForm
 {
@@ -29,42 +20,24 @@ namespace UML_drawing.ViewForm
 
         private void button1_Click(object sender, EventArgs e)
         {
-            // Handler btnclick = new Handler();
-            // var elem = btnclick.LoadProject(ListProject.SelectedItem.ToString());
             try
-            { 
+            {
                 var hand = _boxControl.Handler.LoadProject(ListProject.SelectedItem.ToString());
                 _boxControl.Handler = hand;
+                //_boxControl.Handler.NameProj.ToString()
+                _form.Text = "UML Creater" + $" - {_boxControl.Handler.NameProj}";
+                _form._boolName = false;
                 Close();
             }
             catch (NullReferenceException)
             {
+                label2.Text = "НЕТ СОЗДАННЫХ ПРОЕКТОВ";
                 throw new NullReferenceException();
-                //label2.Text = "НЕТ СОЗДАННЫХ ПРОЕКТОВ";
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
-          
-          
-
-            // foreach (var comp in elem.ListObjectFigure)
-            // {
-            //     switch (comp.CompName)
-            //     {
-            //         case "RectangleComponent" :
-            //             var component = ComponentMapper.FromLiveData(comp) as RectangleComponent;
-            //             _boxControl.AddFigure<RectangleComponent>(component.Location);
-            //             break;
-            //         case "RectangleOneField" :
-            //             var component1 = ComponentMapper.FromLiveData(comp) as RectangleOneField;
-            //             _boxControl.AddFigure<RectangleOneField>(component1.Location);
-            //             break;
-            //     }
-            // }
-
-            // Осталось понять как делать рисовку обратно.
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -79,10 +52,10 @@ namespace UML_drawing.ViewForm
             if (res.Length > 0)
             {
                 string[] files = Directory.GetFiles($@"{userDirectory}\project\").Select(fn => Path.GetFileNameWithoutExtension(fn)).ToArray();
-                for(int i = 0; i < files.Length; i++)
+                for (int i = 0; i < files.Length; i++)
                 {
                     ListProject.Items.Add(files[i]);
-                }   
+                }
             }
             else label2.Text = "НЕТ СОЗДАННЫХ ПРОЕКТОВ";
             // тут сделать парсин папки на наличие проектов по имени.
