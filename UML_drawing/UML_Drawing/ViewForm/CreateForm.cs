@@ -28,7 +28,7 @@ namespace UML_drawing.ViewForm
 
             Handler = new Handler();
             _boxControl.Handler.SaveProject(this.Handler.NameProj, this.Handler.ComponentsInProj);
-
+            
             string res = CheckValidName.Check(textBoxCreate.Text);
             if (res != null)
             {

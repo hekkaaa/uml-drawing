@@ -137,12 +137,14 @@ namespace UML_drawing
         // КНОПКИ В FILE 
         private void createProjectToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            
             var createform = new CreateForm(myBoxControl);
             if (createform.ShowDialog() == DialogResult.OK)
             {
+              
                 myBoxControl.Handler = createform.Handler;
-                this.Text = "UML Creater" + $" - {myBoxControl.Handler.NameProj}";
             }
+            this.Text = "UML Creater" + $" - {myBoxControl.Handler.NameProj}";
         }
 
         private void loadProjectToolStripMenuItem_Click(object sender, EventArgs e)
