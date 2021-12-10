@@ -32,19 +32,39 @@ namespace UML_drawing
         // ЗАКРЫТИЕ ЧЕРЕЗ FILE
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            DialogResult dialog = MessageBox.Show(
-                 "Вы действительно хотите выйти из программы?",
-                 "Завершение программы",
-                 MessageBoxButtons.YesNo,
-                 MessageBoxIcon.Warning
-                );
-            if (dialog == DialogResult.Yes)
+
+            if(_boolName)
             {
-                this.Close();
+                DialogResult dialog = MessageBox.Show(
+                "Сохранить изменения перед выходом?",
+                "Изменения не сохранены",
+                MessageBoxButtons.YesNoCancel,
+                MessageBoxIcon.Warning
+               );
+                if (dialog == DialogResult.Yes)
+                {
+                    myBoxControl.Handler.SaveProject(myBoxControl.Handler.NameProj, myBoxControl.Handler.ComponentsInProj);
+                    Application.Exit();
+                }
+                else if (dialog == DialogResult.No)
+                {   
+                    Application.Exit();
+                }
+               
             }
             else
             {
-                // null;
+                DialogResult dialog = MessageBox.Show(
+                "Вы действительно хотите выйти из программы?",
+                "Завершение программы",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Warning
+               );
+                if (dialog == DialogResult.Yes)
+                {
+                    Application.Exit();
+                }
+               
             }
         }
 
@@ -93,17 +113,23 @@ namespace UML_drawing
         // КНОПКИ В FILE 
         private void createProjectToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            try
+            var createform = new CreateForm(myBoxControl);
+            if (createform.ShowDialog() == DialogResult.OK)
             {
-                var createform = new CreateForm(myBoxControl);
-                createform.ShowDialog();
                 myBoxControl.Handler = createform.Handler;
                 this.Text = "UML Creater" + $" - {myBoxControl.Handler.NameProj}";
             }
-            catch (Exception exception)
-            {
-                return;
-            }
+            //try
+            //{
+            //    var createform = new CreateForm(myBoxControl);
+            //    createform.ShowDialog();
+            //    myBoxControl.Handler = createform.Handler;
+            //    //this.Text = "UML Creater" + $" - {myBoxControl.Handler.NameProj}";
+            //}
+            //catch (Exception exception)
+            //{
+            //    return;
+            //}
         }
 
         private void loadProjectToolStripMenuItem_Click(object sender, EventArgs e)
