@@ -311,12 +311,6 @@ namespace UML_drawing
             return bmp;
         }
 
-
-        protected override void OnKeyPress(KeyPressEventArgs e)
-        {
-            base.OnKeyPress(e);
-        }
-
         private bool frontFlag = false;
         protected override void OnKeyUp(KeyEventArgs e)
         {

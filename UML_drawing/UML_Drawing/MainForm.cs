@@ -139,9 +139,7 @@ namespace UML_drawing
             var createform = new SavesInfoFrom(myBoxControl.Handler.NameProj, myBoxControl.Handler.ComponentsInProj);
             createform.ShowDialog(this);
         }
-
-        // Пхехп, короче, он сохраняет картиночку все ок, но рофл в том, что сохраняет с рамочкой
-        // если джипег сохрянять то вообще со скроллом)))))))))) воть
+        
         private void saveAsImageToolStripMenuItem_Click(object sender, EventArgs e)
         {
             try
@@ -161,7 +159,7 @@ namespace UML_drawing
 
 
 
-        Point startDragPoint = new Point(90, 50);
+        Point startDragPoint = new Point(30, 30);
 
         // TEST OBJECT FOR LOAD
         public void Test_load_OBJ(UML_Database_Library.BlackBox.LiveData obj)
@@ -205,7 +203,6 @@ namespace UML_drawing
         private void associationLineButton_Click(object sender, EventArgs e)
         {
             myBoxControl.SelectedAddLedgeLine(ArrowsTypes.AssociationArrow);
-            //myBoxControl.AddFigure<Arrows>(startDragPoint);
         }
 
         private void addictionLineButton_Click(object sender, EventArgs e)
