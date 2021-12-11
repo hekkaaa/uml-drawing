@@ -11,16 +11,17 @@ using Component = UML_Logic_Library.StructuralEntities.Component;
 
 namespace UML_drawing
 {
-    public partial class MyBoxControl : UserControl
+    public sealed partial class MyBoxControl : UserControl
     {
-        Handler handler;
+        private Handler _handler;
         //выделенная фигура
-        Component selectedFigure = null;
+        private Component _selectedFigure = null;
         //фигура или маркер, который тащится мышью
-        Component draggedFigure = null;
+        private Component _draggedFigure = null;
 
-        List<Marker> markers = new List<Marker>();
-        Pen selectRectPen;
+        public List<Marker> Markers = new List<Marker>();
+        private readonly Pen _selectRectPen;
+        private Point _startDragPoint;
 
         public MyBoxControl()
         {
@@ -31,22 +32,21 @@ namespace UML_drawing
             DoubleBuffered = true;
             ResizeRedraw = true;
 
-            selectRectPen = new Pen(Color.Red, 1f);
-            selectRectPen.DashStyle = System.Drawing.Drawing2D.DashStyle.Dash;
+            _selectRectPen = new Pen(Color.Red, 1f);
+            _selectRectPen.DashStyle = System.Drawing.Drawing2D.DashStyle.Dash;
         }
 
         public event EventHandler SelectedChanged;
 
         public Component SelectedFigure
         {
-            get { return selectedFigure; }
+            get { return _selectedFigure; }
             set
             {
-                selectedFigure = value;
+                _selectedFigure = value;
                 CreateMarkers();
                 Invalidate();
-                if (SelectedChanged != null)
-                    SelectedChanged(this, new EventArgs());
+                SelectedChanged?.Invoke(this, new EventArgs());
             }
         }
 
@@ -54,13 +54,13 @@ namespace UML_drawing
         // Тут типа все элементики в списочке
         public Handler Handler
         {
-            get { return handler; }
+            get { return _handler; }
             set
             {
-                handler = value;
-                selectedFigure = null;
-                draggedFigure = null;
-                markers.Clear();
+                _handler = value;
+                _selectedFigure = null;
+                _draggedFigure = null;
+                Markers.Clear();
                 Invalidate();
             }
         }
@@ -68,38 +68,39 @@ namespace UML_drawing
         protected override void OnPaint(PaintEventArgs e)
         {
             Draw(e.Graphics);
-            //selectedFigure = null;
         }
 
         private void Draw(Graphics gr)
         {
             gr.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighQuality; 
-            // gr.TranslateTransform(AutoScrollPosition.X, AutoScrollPosition.Y);
+            gr.TranslateTransform(AutoScrollPosition.X, AutoScrollPosition.Y);
 
-            if (handler != null)
+            if (_handler != null)
             {
-                foreach (Component f in handler.ComponentsInProj)
+                foreach (Component f in _handler.ComponentsInProj)
                     if (f is Arrows)
                         f.Draw(gr);
-                foreach (Component f in handler.ComponentsInProj)
+                foreach (Component f in _handler.ComponentsInProj)
                     if (f is SimpleRectangle)
                         f.Draw(gr);
             }
 
             // Это выделение блока
-            if (selectedFigure is SimpleRectangle)
+            if (_selectedFigure is SimpleRectangle)
             {
-                SimpleRectangle figure = selectedFigure as SimpleRectangle;
-                RectangleF bounds = figure.Bounds;
-                gr.DrawRectangle(
-                    selectRectPen, bounds.Left - 2, 
-                    bounds.Top - 2, 
-                    bounds.Width + 4, 
-                    bounds.Height + 4
+                if (_selectedFigure is SimpleRectangle figure)
+                {
+                    RectangleF bounds = figure.Bounds;
+                    gr.DrawRectangle(
+                        _selectRectPen, bounds.Left - 2, 
+                        bounds.Top - 2, 
+                        bounds.Width + 4, 
+                        bounds.Height + 4
                     );
+                }
             }
             //рисуем маркеры
-            foreach (Marker m in markers)
+            foreach (Marker m in Markers)
                 try
                 {
                     m.Draw(gr);
@@ -117,10 +118,10 @@ namespace UML_drawing
             Focus();
             if (e.Button == System.Windows.Forms.MouseButtons.Left)
             {
-                draggedFigure = FindFigureByPoint(location);
-                if (!(draggedFigure is Marker))
+                _draggedFigure = FindFigureByPoint(location);
+                if (!(_draggedFigure is Marker))
                 {
-                    selectedFigure = draggedFigure;
+                    _selectedFigure = _draggedFigure;
                     CreateMarkers();
                 }
                 else
@@ -128,32 +129,30 @@ namespace UML_drawing
                     Cursor.Hide();
                 }
 
-                startDragPoint = location;
+                _startDragPoint = location;
                 Invalidate();
                 if (SelectedChanged != null)
                     SelectedChanged(this, new EventArgs());
             }
         }
 
-        public void CreateMarkers()
+        private void CreateMarkers()
         {
-            markers = new List<Marker>();
-            if (selectedFigure != null)
+            Markers = new List<Marker>();
+            if (_selectedFigure != null)
             {
-                foreach (Marker m in selectedFigure.GetMarkers(handler))
-                    markers.Add(m);
+                foreach (Marker m in _selectedFigure.GetMarkers(_handler))
+                    Markers.Add(m);
                 UpdateMarkers();
             }
         }
 
         private void UpdateMarkers()
         {
-            foreach (Marker m in markers)
-                if (draggedFigure != m)//маркер который тащится, обновляется сам
+            foreach (Marker m in Markers)
+                if (_draggedFigure != m)//маркер который тащится, обновляется сам
                     m.UpdateLocation();
         }
-
-        Point startDragPoint;
 
         protected override void OnMouseMove(MouseEventArgs e)
         {
@@ -162,10 +161,10 @@ namespace UML_drawing
             location.Offset(-AutoScrollPosition.X, -AutoScrollPosition.Y);
             if (e.Button == System.Windows.Forms.MouseButtons.Left)
             {
-                if (draggedFigure != null && (draggedFigure is SimpleRectangle))
+                if (_draggedFigure is SimpleRectangle rectangle)
                 {
-                    (draggedFigure as SimpleRectangle).Offset(location.X - startDragPoint.X, 
-                        location.Y - startDragPoint.Y);
+                    rectangle.Offset(location.X - _startDragPoint.X, 
+                        location.Y - _startDragPoint.Y);
                     UpdateMarkers();
                     Invalidate();
                     CalcAutoScrollPosition();
@@ -192,7 +191,7 @@ namespace UML_drawing
                 }
             }
 
-            startDragPoint = location;
+            _startDragPoint = location;
         }
 
         private void CalcAutoScrollPosition()
@@ -201,7 +200,7 @@ namespace UML_drawing
             
             // Перебираем все фигуры, ищем максимальные координаты
             
-            foreach (Component f in handler.ComponentsInProj)
+            foreach (Component f in _handler.ComponentsInProj)
                 if (f != null && f is SimpleRectangle)
                     r = RectangleF.Union(r, (f as SimpleRectangle).Bounds);
 
@@ -214,7 +213,7 @@ namespace UML_drawing
         {
             base.OnMouseUp(e);
             Cursor.Show();
-            draggedFigure = null;
+            _draggedFigure = null;
             UpdateMarkers();
             Invalidate();
         }
@@ -223,17 +222,17 @@ namespace UML_drawing
         public Component FindFigureByPoint(Point p)
         {
             //ищем среди маркеров
-            for (int i = markers.Count - 1; i >= 0; i--)
-                if (markers[i].PointIsInside(p))
-                    return markers[i];
+            for (int i = Markers.Count - 1; i >= 0; i--)
+                if (Markers[i].PointIsInside(p))
+                    return Markers[i];
             //затем ищем среди плоских фигур
-            for (int i = handler.ComponentsInProj.Count - 1; i >= 0; i--)
-                if (handler.ComponentsInProj[i] is SimpleRectangle && handler.ComponentsInProj[i].PointIsInside(p))
-                    return handler.ComponentsInProj[i];
+            for (int i = _handler.ComponentsInProj.Count - 1; i >= 0; i--)
+                if (_handler.ComponentsInProj[i] is SimpleRectangle && _handler.ComponentsInProj[i].PointIsInside(p))
+                    return _handler.ComponentsInProj[i];
             //затем ищем среди линий
-            for (int i = handler.ComponentsInProj.Count - 1; i >= 0; i--)
-                if (handler.ComponentsInProj[i] is Arrows && handler.ComponentsInProj[i].PointIsInside(p))
-                    return handler.ComponentsInProj[i];
+            for (int i = _handler.ComponentsInProj.Count - 1; i >= 0; i--)
+                if (_handler.ComponentsInProj[i] is Arrows && _handler.ComponentsInProj[i].PointIsInside(p))
+                    return _handler.ComponentsInProj[i];
             return null;
         }
         
@@ -242,17 +241,17 @@ namespace UML_drawing
             
             FigureType figure = new FigureType();
             figure.Location = location;
-            if (handler != null)
-                handler.ComponentsInProj.Add(figure);
+            if (_handler != null)
+                _handler.ComponentsInProj.Add(figure);
             Invalidate();
         }
 
         public void SelectedBringToFront()
         {
-            if (selectedFigure != null)
+            if (_selectedFigure != null)
             {
-                handler.ComponentsInProj.Remove(selectedFigure);
-                handler.ComponentsInProj.Add(selectedFigure);
+                _handler.ComponentsInProj.Remove(_selectedFigure);
+                _handler.ComponentsInProj.Add(_selectedFigure);
                 Invalidate();
             }
         }
@@ -260,26 +259,27 @@ namespace UML_drawing
 
         public void SelectedSendToBack()
         {
-            if (selectedFigure != null)
+            if (_selectedFigure != null)
             {
-                handler.ComponentsInProj.Remove(selectedFigure);
-                handler.ComponentsInProj.Insert(0, selectedFigure);
+                _handler.ComponentsInProj.Remove(_selectedFigure);
+                _handler.ComponentsInProj.Insert(0, _selectedFigure);
                 Invalidate();
             }
         }
 
         public void SelectedAddLedgeLine(UML_Logic_Library.Arrows.ArrowsTypes type)
         {
-            if (selectedFigure != null && (selectedFigure is SimpleRectangle))
+            if (_selectedFigure != null && (_selectedFigure is SimpleRectangle))
             {
                 Arrows arrows = new Arrows(type);
-                arrows.From = (selectedFigure as SimpleRectangle);
-                EndLineMarker marker = new EndLineMarker(handler, 1);
-                marker.Location = (arrows.From as SimpleRectangle).Location;
-                marker.Location = marker.Location.Offset(0, ((SimpleRectangle) arrows.From).Size.Height);
+                arrows.From = (_selectedFigure as SimpleRectangle);
+                EndLineMarker marker = new EndLineMarker(_handler, 1);
+                var temp = (SimpleRectangle)arrows.From;
+                marker.Location = new PointF(temp.Location.X + temp.Size.Width/2, temp.Location.Y + temp.Size.Height);
+                marker.Location = marker.Location.Offset(0, temp.Size.Height/2);
                 arrows.To = marker;
-                handler.ComponentsInProj.Add(arrows);
-                selectedFigure = arrows;
+                _handler.ComponentsInProj.Add(arrows);
+                _selectedFigure = arrows;
                 CreateMarkers();
 
                 Invalidate();
@@ -288,11 +288,11 @@ namespace UML_drawing
 
         public void SelectedDelete()
         {
-            if (selectedFigure != null || selectedFigure is Arrows)
+            if (_selectedFigure != null || _selectedFigure is Arrows)
             {
-                handler.ComponentsInProj.Remove(selectedFigure);
-                selectedFigure = null;
-                draggedFigure = null;
+                _handler.ComponentsInProj.Remove(_selectedFigure);
+                _selectedFigure = null;
+                _draggedFigure = null;
                 CreateMarkers();
 
                 Invalidate();
@@ -301,8 +301,8 @@ namespace UML_drawing
 
         public Bitmap GetImage()
         {
-            selectedFigure = null;
-            draggedFigure = null;
+            _selectedFigure = null;
+            _draggedFigure = null;
             CreateMarkers();
 
             Bitmap bmp = new Bitmap(Bounds.Width, Bounds.Height);

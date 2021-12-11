@@ -10,8 +10,8 @@ namespace UML_Logic_Library.StructuralEntities
         public string CompName => "RectangleComponent";
         public RectangleComponent() 
         {
-            Path.AddRectangle(new RectangleF(-DefaultSize, -DefaultSize / 2, 2 * DefaultSize, DefaultSize));
-            textRect = new RectangleF(-DefaultSize + 3, -DefaultSize / 2 + 2, 2 * DefaultSize - 6, DefaultSize - 4);
+            Path.AddRectangle(new RectangleF(0, 0, 2 * DefaultSize, DefaultSize));
+            textRect = new RectangleF(3, 2, 2 * DefaultSize - 6, DefaultSize - 4);
         }
         
         public Rectangle TextBounds

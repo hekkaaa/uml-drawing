@@ -15,8 +15,8 @@ namespace UML_Logic_Library.StructuralEntities
         public RectangleField(int rectHeight)
         {
             var rectHeight1 = rectHeight;
-            Rect = new RectangleF(-DefaultSize, -DefaultSize / 2 + rectHeight1, 2 * DefaultSize, DefaultSize);
-            TextRect = new RectangleF(-DefaultSize + 3, -DefaultSize / 2 + 2 + rectHeight1, 2 * DefaultSize - 6,
+            Rect = new RectangleF(0, 0 + rectHeight1, 2 * DefaultSize, DefaultSize);
+            TextRect = new RectangleF(3, 2 + rectHeight1, 2 * DefaultSize - 6,
                 DefaultSize - 4);
         }
 

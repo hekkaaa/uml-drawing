@@ -10,7 +10,7 @@ namespace UML_Logic_Library.StructuralEntities
     {
         public string CompName => "RectangleOneField";
         public RectangleField Head = new RectangleField(0);
-        public RectangleField FieldRectangle = new RectangleField(DefaultSize);
+        public RectangleField FieldProp = new RectangleField(DefaultSize);
         
         private readonly RectangleF[] _rect = new RectangleF[2];
         private RectangleF[] _textRect = new RectangleF[2];
@@ -18,7 +18,7 @@ namespace UML_Logic_Library.StructuralEntities
         public RectangleOneField()
         {
             _rect[0] = Head.Rect;
-            _rect[1] = FieldRectangle.Rect;
+            _rect[1] = FieldProp.Rect;
             
             Path.AddRectangles(_rect);
         }
@@ -36,11 +36,11 @@ namespace UML_Logic_Library.StructuralEntities
                 Head.TextRect.Width * scaleX, 
                 Head.TextRect.Height * scaleY
                 );
-            FieldRectangle.TextRect = new RectangleF(
-                FieldRectangle.TextRect.Left * scaleX, 
-                FieldRectangle.TextRect.Top * scaleY, 
-                FieldRectangle.TextRect.Width * scaleX, 
-                FieldRectangle.TextRect.Height * scaleY
+            FieldProp.TextRect = new RectangleF(
+                FieldProp.TextRect.Left * scaleX, 
+                FieldProp.TextRect.Top * scaleY, 
+                FieldProp.TextRect.Width * scaleX, 
+                FieldProp.TextRect.Height * scaleY
                 );
 
         }
@@ -53,8 +53,8 @@ namespace UML_Logic_Library.StructuralEntities
             gr.DrawPath(Pen, Path);
             gr.DrawString(Head.Text.TextFields, Head.Text.Font, Brushes.Black, 
                 Head.TextRect, Head.Text.StringFormatTitle);
-            gr.DrawString(FieldRectangle.Text.TextFieldsProp, FieldRectangle.Text.Font, Brushes.Black, 
-                FieldRectangle.TextRect, FieldRectangle.Text.StringFormatField);
+            gr.DrawString(FieldProp.Text.TextFieldsProp, FieldProp.Text.Font, Brushes.Black, 
+                FieldProp.TextRect, FieldProp.Text.StringFormatField);
             gr.Restore(transState);
         }
     }

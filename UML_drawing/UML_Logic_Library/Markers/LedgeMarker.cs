@@ -10,20 +10,20 @@ namespace UML_Logic_Library.Markers
     {
         public override void UpdateLocation()
         {
-            Arrows.Arrows arrows = (TargetComponent as Arrows.Arrows);
-            if (arrows.From == null || arrows.To == null)
+            Arrows.Arrows arrow = (TargetComponent as Arrows.Arrows);
+            if (arrow != null && (arrow.From == null || arrow.To == null))
                 return;
             //не обновляем маркеры оторванных концов
             //фигура, с которой связана линия
-            var from = arrows.From as SimpleRectangle;
-            var to = arrows.To as SimpleRectangle;
-            Location = new PointF(arrows.LedgePositionX, (from.Location.Y + to.Location.Y) / 2);
+            var from = arrow.From as SimpleRectangle;
+            var to = arrow.To as SimpleRectangle;
+            Location = new PointF(arrow.LedgePositionX, (from.Location.Y + from.Size.Height/2 + to.Location.Y) / 2);
         }
 
         public override void Offset(float dx, float dy)
         {
             base.Offset(dx, 0);
-            (TargetComponent as Arrows.Arrows).LedgePositionX += dx;
+            ((Arrows.Arrows) TargetComponent).LedgePositionX += dx;
         }
     }
 }
