@@ -2,6 +2,7 @@
 using System.Data;
 using System.Drawing;
 using System.Windows.Forms;
+using UML_drawing.Canvas;
 using UML_drawing.SubLogical;
 using UML_Logic_Library.AdditionalClasses;
 
@@ -26,9 +27,19 @@ namespace UML_drawing.ViewForm
             InfoLabel.Text = default;
             infoLabel1.Text = default;
 
+            DialogResult dialog = MessageBox.Show(
+                "Сохранить изменения в текущем проекте?",
+                "Изменения не сохранены",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Warning
+            );
+            if (dialog == DialogResult.Yes)
+            {
+                _boxControl.Handler.SaveProject(_boxControl.Handler.NameProj, _boxControl.Handler.ComponentsInProj);
+            }
+
             Handler = new Handler();
-            _boxControl.Handler.SaveProject(_boxControl.Handler.NameProj, _boxControl.Handler.ComponentsInProj);
-            
+
             string res = CheckValidName.Check(textBoxCreate.Text);
             if (res != null)
             {

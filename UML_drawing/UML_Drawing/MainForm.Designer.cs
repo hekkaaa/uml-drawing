@@ -1,4 +1,5 @@
 using System.Windows.Forms;
+using UML_drawing.Canvas;
 using UML_Logic_Library;
 
 namespace UML_drawing
@@ -61,7 +62,7 @@ namespace UML_drawing
             this.saveImage = new System.Windows.Forms.SaveFileDialog();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
-            this.myBoxControl = new UML_drawing.MyBoxControl();
+            this.myBoxControl = new MyBoxControl();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize) (this.bindingSource1)).BeginInit();
             this.toolStrip1.SuspendLayout();

@@ -10,7 +10,7 @@ using UML_Logic_Library.Markers;
 using UML_Logic_Library.StructuralEntities;
 using Component = UML_Logic_Library.StructuralEntities.Component;
 
-namespace UML_drawing
+namespace UML_drawing.Canvas
 {
     public sealed partial class MyBoxControl : UserControl
     {

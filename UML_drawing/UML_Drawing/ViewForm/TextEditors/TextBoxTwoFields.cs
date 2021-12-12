@@ -3,7 +3,7 @@ using System.Windows.Forms;
 using UML_Logic_Library.StructuralEntities;
 using Component = UML_Logic_Library.StructuralEntities.Component;
 
-namespace UML_drawing.ViewForm
+namespace UML_drawing.ViewForm.TextEditors
 {
     public partial class TextBoxTwoFields : Form
     {

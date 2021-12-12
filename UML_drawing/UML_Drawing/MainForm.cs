@@ -2,6 +2,7 @@ using System;
 using System.Drawing;
 using System.Windows.Forms;
 using UML_drawing.ViewForm;
+using UML_drawing.ViewForm.TextEditors;
 using UML_Logic_Library.AdditionalClasses;
 using UML_Logic_Library.Arrows;
 using UML_Logic_Library.StructuralEntities;
