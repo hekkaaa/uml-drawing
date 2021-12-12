@@ -97,12 +97,6 @@
     <Compile Include="ViewForm\LoadProject.Designer.cs">
       <DependentUpon>LoadProject.cs</DependentUpon>
     </Compile>
-    <Compile Include="ViewForm\ObjectForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="ViewForm\ObjectForm.Designer.cs">
-      <DependentUpon>ObjectForm.cs</DependentUpon>
-    </Compile>
     <Compile Include="ViewForm\SavesInfoFrom.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -144,9 +138,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ViewForm\LoadProject.resx">
       <DependentUpon>LoadProject.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ViewForm\ObjectForm.resx">
-      <DependentUpon>ObjectForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ViewForm\SavesInfoFrom.resx">
       <DependentUpon>SavesInfoFrom.cs</DependentUpon>

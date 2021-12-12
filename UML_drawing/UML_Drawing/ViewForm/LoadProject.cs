@@ -20,19 +20,23 @@ namespace UML_drawing.ViewForm
             _form = form;
         }
 
-
+       
         private void button1_Click(object sender, EventArgs e)
-        {
-            DialogResult dialog = MessageBox.Show(
-                "Сохранить изменения в текущем проекте?",
-                "Изменения не сохранены",
-                MessageBoxButtons.YesNo,
-                MessageBoxIcon.Warning
-            );
-            if (dialog == DialogResult.Yes)
-            {
-                _boxControl.Handler.SaveProject(_boxControl.Handler.NameProj, _boxControl.Handler.ComponentsInProj);
+        {   
+            // Форма если есть несохраненные изменения.
+            if(_form.BoolName){
+                DialogResult dialog = MessageBox.Show(
+               "Сохранить изменения в текущем проекте?",
+               "Изменения не сохранены",
+               MessageBoxButtons.YesNo,
+               MessageBoxIcon.Warning
+           );
+                if (dialog == DialogResult.Yes)
+                {
+                    _boxControl.Handler.SaveProject(_boxControl.Handler.NameProj, _boxControl.Handler.ComponentsInProj);
+                }
             }
+
             try
             {
                 var hand = _boxControl.Handler.LoadProject(ListProject.SelectedItem.ToString());
