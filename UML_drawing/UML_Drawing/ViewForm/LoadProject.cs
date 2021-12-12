@@ -10,13 +10,14 @@ namespace UML_drawing.ViewForm
 {
     public partial class LoadProject : Form
     {
-        private MyBoxControl _boxControl;
-        private Form1 _form;
+        private readonly MyBoxControl _boxControl;
+        private readonly Form1 _form;
         public LoadProject(MyBoxControl boxControl, Form1 form)
         {
             InitializeComponent();
             _boxControl = boxControl;
             _form = form;
+            _boxControl.Handler.SaveProject(_boxControl.Handler.NameProj, _boxControl.Handler.ComponentsInProj);
         }
 
 

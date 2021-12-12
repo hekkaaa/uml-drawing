@@ -27,7 +27,7 @@ namespace UML_drawing.ViewForm
             infoLabel1.Text = default;
 
             Handler = new Handler();
-            _boxControl.Handler.SaveProject(this.Handler.NameProj, this.Handler.ComponentsInProj);
+            _boxControl.Handler.SaveProject(_boxControl.Handler.NameProj, _boxControl.Handler.ComponentsInProj);
             
             string res = CheckValidName.Check(textBoxCreate.Text);
             if (res != null)
@@ -40,7 +40,6 @@ namespace UML_drawing.ViewForm
                 try
                 {
                     Handler.CreateProj(textBoxCreate.Text);
-                    Handler.SaveProject(textBoxCreate.Text, Handler.ComponentsInProj);
                     _boxControl.Handler = Handler;
                     _boxControl.Handler.NameProj = textBoxCreate.Text;
                     Close();

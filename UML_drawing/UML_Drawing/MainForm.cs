@@ -28,6 +28,7 @@ namespace UML_drawing
                     textEditor.Enabled = myBoxControl.SelectedFigure is SimpleRectangle;
                     colorEdit.Enabled = !(myBoxControl.SelectedFigure is null);
                 };
+            myBoxControl.KeyUp += myBoxControl_KeyUp;
         }
 
         // ЗАКРЫТИЕ ЧЕРЕЗ FILE
