@@ -112,6 +112,7 @@ namespace UML_drawing
             this.saveProjectToolStripMenuItem.Size = new System.Drawing.Size(187, 26);
             this.saveProjectToolStripMenuItem.Text = "Сохранить";
             this.saveProjectToolStripMenuItem.Click += new System.EventHandler(this.saveProjectToolStripMenuItem_Click);
+            this.saveProjectToolStripMenuItem.ShortcutKeys = Keys.Control | Keys.S;
             // 
             // saveAsImageToolStripMenuItem
             // 
@@ -120,6 +121,7 @@ namespace UML_drawing
             this.saveAsImageToolStripMenuItem.Size = new System.Drawing.Size(187, 26);
             this.saveAsImageToolStripMenuItem.Text = "Экспорт";
             this.saveAsImageToolStripMenuItem.Click += new System.EventHandler(this.saveAsImageToolStripMenuItem_Click);
+            this.saveAsImageToolStripMenuItem.ShortcutKeys = Keys.Control | Keys.S | Keys.Shift;
             // 
             // exitToolStripMenuItem
             // 
@@ -286,7 +288,7 @@ namespace UML_drawing
             this.colorEdit.Name = "colorEdit";
             this.colorEdit.Size = new System.Drawing.Size(29, 28);
             this.colorEdit.Text = "Заливка";
-            this.colorEdit.Click += new System.EventHandler(this.toolStripButton1_Click);
+            this.colorEdit.Click += new System.EventHandler(this.colorEdit_Click);
             // 
             // colorDialog1
             // 

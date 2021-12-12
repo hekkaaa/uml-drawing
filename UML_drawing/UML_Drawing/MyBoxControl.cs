@@ -321,7 +321,7 @@ namespace UML_drawing
             
             if (SelectedFigure == null || !(SelectedFigure is SimpleRectangle))
                 return;
-            
+
             if (e.KeyData == (Keys.Enter))
             {
                 if (!frontFlag)

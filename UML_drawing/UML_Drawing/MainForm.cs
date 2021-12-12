@@ -35,6 +35,8 @@ namespace UML_drawing
                     textEditor.Enabled = myBoxControl.SelectedFigure is SimpleRectangle;
                     colorEdit.Enabled = !(myBoxControl.SelectedFigure is null);
                 };
+            myBoxControl.KeyUp += textEditor_Click;
+            myBoxControl.KeyUp += colorEdit_Click;
         }
 
         // ЗАКРЫТИЕ ЧЕРЕЗ FILE
@@ -132,14 +134,10 @@ namespace UML_drawing
 
         private void saveProjectToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            // if (saveFileDialog1.ShowDialog() == DialogResult.OK)
-            // {
-            //     myBoxControl.Handler.Save(saveFileDialog1.FileName);
-            // }
             var createform = new SavesInfoFrom(myBoxControl.Handler.NameProj, myBoxControl.Handler.ComponentsInProj);
             createform.ShowDialog(this);
         }
-        
+
         private void saveAsImageToolStripMenuItem_Click(object sender, EventArgs e)
         {
             try
@@ -151,8 +149,6 @@ namespace UML_drawing
             {
                 return;
             }
-
-
         }
 
         //***********************************************
@@ -183,6 +179,9 @@ namespace UML_drawing
         {
             if (myBoxControl.SelectedFigure == null || myBoxControl.SelectedFigure is Arrows)
                 return;
+            if ((e as KeyEventArgs).KeyData != Keys.T)
+                return;
+
             if (myBoxControl.SelectedFigure is RectangleOneField)
             {
                 var createEditorBoxOneFieldfields = new TextBoxOneField(myBoxControl.SelectedFigure);
@@ -239,16 +238,15 @@ namespace UML_drawing
         {
             myBoxControl.AddFigure<RectangleTwoFields>(startDragPoint);
         }
-
-        // Тут есть забавный баг, что когда мы закрываем окошко ничего не выбрав,
-        // то оно colorDialog1.Reset() отсюда берет дефолтный цвет (или белый как у форм) и получается, 
-        // что фигура все равно закрашивается)))))))
-        private void toolStripButton1_Click(object sender, EventArgs e)
+        
+        private void colorEdit_Click(object sender, EventArgs e)
         {
             if (myBoxControl.SelectedFigure == null)
             {
                 return;
             }
+            if ((e as KeyEventArgs).KeyData != Keys.C)
+                return;
             var obj = myBoxControl.SelectedFigure;
             if (obj is SimpleRectangle)
             {
@@ -412,9 +410,7 @@ namespace UML_drawing
             pictureBoxHover.Visible = false;
         }
 
-        
-
-
         // ******************************************************************
+        
     }
 }
