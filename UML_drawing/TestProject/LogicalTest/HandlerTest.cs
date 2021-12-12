@@ -1,9 +1,6 @@
 ﻿using NUnit.Framework;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.IO;
 using UML_Logic_Library.AdditionalClasses;
-using UML_Database_Library.BlackBox;
 
 namespace TestProject
 {
@@ -55,7 +52,7 @@ namespace TestProject
             Handler obj = new Handler();
             DeleteProject();
             //obj.CreateProj("UnitTest"); // создаем папку project и файл UnitTest.uml
-  
+
             Assert.Throws<DirectoryNotFoundException>(() => obj.SaveProject("UnitTest", obj.ComponentsInProj));
         }
     }
