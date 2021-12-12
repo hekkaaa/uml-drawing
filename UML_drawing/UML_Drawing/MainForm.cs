@@ -45,7 +45,9 @@ namespace UML_drawing
                );
                 if (dialog == DialogResult.Yes)
                 {
-                    myBoxControl.Handler.SaveProject(myBoxControl.Handler.NameProj, myBoxControl.Handler.ComponentsInProj);
+                    myBoxControl.Handler.SaveProject(
+                        myBoxControl.Handler.NameProj, 
+                        myBoxControl.Handler.ComponentsInProj);
                     Application.Exit();
                 }
                 else if (dialog == DialogResult.No)
@@ -84,7 +86,9 @@ namespace UML_drawing
                );
                 if (dialog == DialogResult.Yes)
                 {
-                    myBoxControl.Handler.SaveProject(myBoxControl.Handler.NameProj, myBoxControl.Handler.ComponentsInProj);
+                    myBoxControl.Handler.SaveProject(
+                        myBoxControl.Handler.NameProj, 
+                        myBoxControl.Handler.ComponentsInProj);
                     e.Cancel = false;
                 }
                 else if (dialog == DialogResult.Cancel)
@@ -157,7 +161,10 @@ namespace UML_drawing
 
         private void saveProjectToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var createform = new SavesInfoFrom(myBoxControl.Handler.NameProj, myBoxControl.Handler.ComponentsInProj, this);
+            var createform = new SavesInfoFrom(
+                myBoxControl.Handler.NameProj, 
+                myBoxControl.Handler.ComponentsInProj, 
+                this);
             createform.ShowDialog(this);
         }
 

@@ -96,6 +96,7 @@ namespace UML_drawing
             this.createProjectToolStripMenuItem.Size = new System.Drawing.Size(187, 26);
             this.createProjectToolStripMenuItem.Text = "Создать";
             this.createProjectToolStripMenuItem.Click += new System.EventHandler(this.createProjectToolStripMenuItem_Click);
+            this.createProjectToolStripMenuItem.ShortcutKeys = Keys.Control | Keys.A;
             // 
             // loadProjectToolStripMenuItem
             // 
@@ -104,6 +105,7 @@ namespace UML_drawing
             this.loadProjectToolStripMenuItem.Size = new System.Drawing.Size(187, 26);
             this.loadProjectToolStripMenuItem.Text = "Открыть";
             this.loadProjectToolStripMenuItem.Click += new System.EventHandler(this.loadProjectToolStripMenuItem_Click);
+            this.loadProjectToolStripMenuItem.ShortcutKeys = Keys.Control | Keys.D;
             // 
             // saveProjectToolStripMenuItem
             // 
@@ -130,6 +132,7 @@ namespace UML_drawing
             this.exitToolStripMenuItem.Size = new System.Drawing.Size(187, 26);
             this.exitToolStripMenuItem.Text = "Выход";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
+            this.exitToolStripMenuItem.ShortcutKeys = Keys.Control | Keys.E;
             // 
             // aboutToolStripMenuItem
             // 
