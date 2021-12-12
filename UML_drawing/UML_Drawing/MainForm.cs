@@ -1,31 +1,23 @@
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.IO;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using UML_drawing.ViewForm;
-using UML_Logic_Library;
 using UML_Logic_Library.AdditionalClasses;
 using UML_Logic_Library.Arrows;
 using UML_Logic_Library.StructuralEntities;
-using Component = System.ComponentModel.Component;
 
 namespace UML_drawing
 {
     public partial class Form1 : Form
     {
         private ToolStripButton[] _arrowButtons;
+        internal bool _boolName = false;
 
         public Form1()
         {
             InitializeComponent();
             Form1_Load(null, null);
+            this.Text = "UML Creater" + " - DefaultProject";
             myBoxControl.SelectedChanged += delegate
                 {
                     foreach (var button in _arrowButtons)
@@ -42,43 +34,84 @@ namespace UML_drawing
         // ЗАКРЫТИЕ ЧЕРЕЗ FILE
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            DialogResult dialog = MessageBox.Show(
-                 "Вы действительно хотите выйти из программы?",
-                 "Завершение программы",
-                 MessageBoxButtons.YesNo,
-                 MessageBoxIcon.Warning
-                );
-            if (dialog == DialogResult.Yes)
+
+            if(_boolName)
             {
-                this.Close();
+                DialogResult dialog = MessageBox.Show(
+                "Сохранить изменения перед выходом?",
+                "Изменения не сохранены",
+                MessageBoxButtons.YesNoCancel,
+                MessageBoxIcon.Warning
+               );
+                if (dialog == DialogResult.Yes)
+                {
+                    myBoxControl.Handler.SaveProject(myBoxControl.Handler.NameProj, myBoxControl.Handler.ComponentsInProj);
+                    Application.Exit();
+                }
+                else if (dialog == DialogResult.No)
+                {   
+                    Application.Exit();
+                }
+               
             }
             else
             {
-                // null;
+                DialogResult dialog = MessageBox.Show(
+                "Вы действительно хотите выйти из программы?",
+                "Завершение программы",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Warning
+               );
+                if (dialog == DialogResult.Yes)
+                {
+                    Application.Exit();
+                }
+               
             }
-
         }
 
         // ЗАКРЫТИЕ ЧЕРЕЗ КРЕСТИК
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
-            DialogResult dialog = MessageBox.Show(
-            "Вы действительно хотите выйти из программы?",
-            "Завершение программы",
-            MessageBoxButtons.YesNo,
-            MessageBoxIcon.Warning
-           );
-            if (dialog == DialogResult.Yes)
+
+            if (_boolName)
             {
-                e.Cancel = false;
+                DialogResult dialog = MessageBox.Show(
+                "Сохранить изменения перед выходом?",
+                "Изменения не сохранены",
+                MessageBoxButtons.YesNoCancel,
+                MessageBoxIcon.Warning
+               );
+                if (dialog == DialogResult.Yes)
+                {
+                    myBoxControl.Handler.SaveProject(myBoxControl.Handler.NameProj, myBoxControl.Handler.ComponentsInProj);
+                    e.Cancel = false;
+                }
+                else if (dialog == DialogResult.Cancel)
+                {
+                    e.Cancel = true;
+                }
+
             }
             else
             {
-                e.Cancel = true;
+                DialogResult dialog = MessageBox.Show(
+                    "Вы действительно хотите выйти из программы?",
+                    "Завершение программы",
+                    MessageBoxButtons.YesNo,
+                    MessageBoxIcon.Warning
+                   );
+                if (dialog == DialogResult.Yes)
+                {
+                    e.Cancel = false;
+                }
+                else
+                {
+                    e.Cancel = true;
+                }
+
             }
         }
-
-
 
         // тут при загрузке формы можно вешкать фоновые методы.
         private void Form1_Load(object sender, EventArgs e)
@@ -102,39 +135,29 @@ namespace UML_drawing
             about.ShowDialog();
         }
 
+
         // КНОПКИ В FILE 
         private void createProjectToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            try
+            
+            var createform = new CreateForm(myBoxControl);
+            if (createform.ShowDialog() == DialogResult.OK)
             {
-                var createform = new CreateForm(myBoxControl);
-                createform.ShowDialog();
+              
                 myBoxControl.Handler = createform.Handler;
             }
-            catch (Exception exception)
-            {
-                return;
-            }
+            this.Text = "UML Creater" + $" - {myBoxControl.Handler.NameProj}";
         }
 
         private void loadProjectToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            //try
-            //{
-                var createform = new LoadProject(myBoxControl);
-                createform.ShowDialog();
-                // openFileDialog1.ShowDialog();
-                // myBoxControl.Handler = Handler.Load(openFileDialog1.FileName);
-            //}
-            //catch (Exception exception)
-            //{
-            //    return;
-            //}
+            var createform = new LoadProject(myBoxControl, this);
+            createform.ShowDialog();
         }
 
         private void saveProjectToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var createform = new SavesInfoFrom(myBoxControl.Handler.NameProj, myBoxControl.Handler.ComponentsInProj);
+            var createform = new SavesInfoFrom(myBoxControl.Handler.NameProj, myBoxControl.Handler.ComponentsInProj, this);
             createform.ShowDialog(this);
         }
 
@@ -152,27 +175,20 @@ namespace UML_drawing
         }
 
         //***********************************************
-
-
-
+        
         Point startDragPoint = new Point(30, 30);
 
-        // TEST OBJECT FOR LOAD
-        public void Test_load_OBJ(UML_Database_Library.BlackBox.LiveData obj)
+        // для показа * о редактировании
+        private void RenameTextEdit()
         {
-            //obj.ListObjectFigure[0];
-            // Пример
-            Point startDragPoint1 = new Point(220, 800);
-            Point startDragPoint2 = new Point(120, 150);
-            myBoxControl.AddFigure<RectangleComponent>(startDragPoint1);
-            myBoxControl.AddFigure<RectangleComponent>(startDragPoint2);
-
+            if (!_boolName) { this.Text = this.Text + "*"; _boolName = true; }
         }
 
         // ******************
         private void ObjectButton_Click(object sender, EventArgs e)
         {
             myBoxControl.AddFigure<RectangleComponent>(startDragPoint);
+            RenameTextEdit();
         }
 
         private void textEditor_Click(object sender, EventArgs e)
@@ -195,48 +211,56 @@ namespace UML_drawing
                 return;
             }
             var createEditorBox = new TextForm(myBoxControl.SelectedFigure);
-            createEditorBox.ShowDialog(); 
-            
+            createEditorBox.ShowDialog();
+
         }
 
         private void associationLineButton_Click(object sender, EventArgs e)
         {
             myBoxControl.SelectedAddLedgeLine(ArrowsTypes.AssociationArrow);
+            RenameTextEdit();
         }
 
         private void addictionLineButton_Click(object sender, EventArgs e)
         {
             myBoxControl.SelectedAddLedgeLine(ArrowsTypes.AddictionArrow);
+            RenameTextEdit();
         }
 
         private void inheritanceLineButton_Click(object sender, EventArgs e)
         {
             myBoxControl.SelectedAddLedgeLine(ArrowsTypes.InheritanceArrow);
+            RenameTextEdit();
         }
 
         private void realizationLineButton_Click(object sender, EventArgs e)
         {
             myBoxControl.SelectedAddLedgeLine(ArrowsTypes.RealizationArrow);
+            RenameTextEdit();
         }
 
         private void compositionLineButton_Click(object sender, EventArgs e)
         {
             myBoxControl.SelectedAddLedgeLine(ArrowsTypes.CompositionArrow);
+            RenameTextEdit();
         }
 
         private void aggregationLineButton_Click(object sender, EventArgs e)
         {
             myBoxControl.SelectedAddLedgeLine(ArrowsTypes.AggregationArrow);
+            RenameTextEdit();
         }
 
         private void objectOneFieldButton_Click(object sender, EventArgs e)
         {
             myBoxControl.AddFigure<RectangleOneField>(startDragPoint);
+            RenameTextEdit();
         }
 
         private void objectTwoFieldsButton_Click(object sender, EventArgs e)
         {
             myBoxControl.AddFigure<RectangleTwoFields>(startDragPoint);
+            RenameTextEdit();
         }
         
         private void colorEdit_Click(object sender, EventArgs e)
@@ -254,6 +278,7 @@ namespace UML_drawing
                 colorDialog1.ShowDialog();
                 (obj as SimpleRectangle).Color = colorDialog1.Color;
                 colorDialog1.Reset();
+                RenameTextEdit();
             }
 
             if (obj is Arrows)
@@ -261,8 +286,10 @@ namespace UML_drawing
                 colorDialog1.ShowDialog();
                 (obj as Arrows).PenColor = colorDialog1.Color;
                 colorDialog1.Reset();
+                RenameTextEdit();
             }
         }
+
         // ******************************************************************
 
 
@@ -279,9 +306,8 @@ namespace UML_drawing
         }
         private void ObjectButton_MouseLeave(object sender, EventArgs e)
         {      // Кнопка 1
-             pictureBoxHover.Visible = false;
+            pictureBoxHover.Visible = false;
         }
-
         private void objectOneFieldButton_MouseHover(object sender, EventArgs e)
         {
             // Кнопка 2
@@ -291,13 +317,11 @@ namespace UML_drawing
             pictureBoxHover.Location = new Point(43, 71);
             pictureBoxHover.Visible = true;
         }
-
         private void objectOneFieldButton_MouseLeave(object sender, EventArgs e)
-        {   
+        {
             // Кнопка 2
             pictureBoxHover.Visible = false;
         }
-
         private void objectTwoFieldsButton_MouseHover(object sender, EventArgs e)
         {
             // Кнопка 3
@@ -307,13 +331,11 @@ namespace UML_drawing
             pictureBoxHover.Location = new Point(68, 71);
             pictureBoxHover.Visible = true;
         }
-
         private void objectTwoFieldsButton_MouseLeave(object sender, EventArgs e)
         {
             // Кнопка 3
             pictureBoxHover.Visible = false;
         }
-
         private void associationLineButton_MouseHover(object sender, EventArgs e)
         {
             // Кнопка 4
@@ -323,13 +345,11 @@ namespace UML_drawing
             pictureBoxHover.Location = new Point(88, 71);
             pictureBoxHover.Visible = true;
         }
-
         private void associationLineButton_MouseLeave(object sender, EventArgs e)
         {
             // Кнопка 4
             pictureBoxHover.Visible = false;
         }
-
         private void addictionLineButton_MouseHover(object sender, EventArgs e)
         {
             // Кнопка 4
@@ -339,13 +359,11 @@ namespace UML_drawing
             pictureBoxHover.Location = new Point(108, 71);
             pictureBoxHover.Visible = true;
         }
-
         private void addictionLineButton_MouseLeave(object sender, EventArgs e)
         {
             // Кнопка 4
             pictureBoxHover.Visible = false;
         }
-
         private void realizationLineButton_MouseHover(object sender, EventArgs e)
         {
             // Кнопка 4
@@ -355,13 +373,11 @@ namespace UML_drawing
             pictureBoxHover.Location = new Point(108, 71);
             pictureBoxHover.Visible = true;
         }
-
         private void realizationLineButton_MouseLeave(object sender, EventArgs e)
         {
             // Кнопка 4
             pictureBoxHover.Visible = false;
         }
-
         private void inheritanceLineButton_MouseHover(object sender, EventArgs e)
         {
             // Кнопка 4
@@ -371,13 +387,11 @@ namespace UML_drawing
             pictureBoxHover.Location = new Point(108, 71);
             pictureBoxHover.Visible = true;
         }
-
         private void inheritanceLineButton_MouseLeave(object sender, EventArgs e)
         {
             // Кнопка 4
             pictureBoxHover.Visible = false;
         }
-
         private void aggregationLineButton_MouseHover(object sender, EventArgs e)
         {
             // Кнопка 4
@@ -387,13 +401,11 @@ namespace UML_drawing
             pictureBoxHover.Location = new Point(108, 71);
             pictureBoxHover.Visible = true;
         }
-
         private void aggregationLineButton_MouseLeave(object sender, EventArgs e)
         {
             // Кнопка 4
             pictureBoxHover.Visible = false;
         }
-
         private void compositionLineButton_MouseHover(object sender, EventArgs e)
         {
             // Кнопка 4
@@ -403,7 +415,6 @@ namespace UML_drawing
             pictureBoxHover.Location = new Point(108, 71);
             pictureBoxHover.Visible = true;
         }
-
         private void compositionLineButton_MouseLeave(object sender, EventArgs e)
         {
             // Кнопка 4
