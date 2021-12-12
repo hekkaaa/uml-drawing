@@ -167,11 +167,7 @@ namespace UML_drawing
             {
                 Component figure = FindFigureByPoint(location);
                 if (figure is Marker)
-                {
                     Cursor = (figure as Marker).Cursor;
-                    if (toolTip1.GetToolTip(this) != (figure as Marker).ToolTip)
-                        toolTip1.SetToolTip(this, (figure as Marker).ToolTip);
-                }
                 else
                 {
                     if (figure != null)

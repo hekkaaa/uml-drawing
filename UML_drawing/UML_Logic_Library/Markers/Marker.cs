@@ -20,11 +20,6 @@ namespace UML_Logic_Library.Markers
             Color = Color.Red;
         }
 
-        public virtual string ToolTip
-        {
-            get { return ToString(); }
-        }
-
         public bool PointIsInside(PointF p)
         {
             if (p.X < Location.X - DefaultSize || p.X > Location.X + DefaultSize)
