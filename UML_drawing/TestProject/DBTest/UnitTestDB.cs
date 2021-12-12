@@ -50,7 +50,6 @@ namespace TestProject
             Assert.AreEqual(expected.GetType(), actual.GetType());
         }
 
-
         [Test]
         public void SaveProject_Tests()
         {   
@@ -91,8 +90,6 @@ namespace TestProject
             Assert.AreEqual(expected, actual.ListObjectFigure.Count);
         }
 
-
-
         // ***********  NEGATIVE ****************
 
         [Test]
@@ -124,16 +121,5 @@ namespace TestProject
 
             Assert.Throws<DuplicateNameException>(() => obj.CreateProj("UnitTest"));
         }
-
-        //[Test]
-        //public void Q_Tests()
-        //{
-        //    var expected = Directory.GetCurrentDirectory();
-        //    var actual = @"D:\GitWork\uml-drawing\UML_drawing\TestProject\";
-        //    Assert.AreEqual(expected, actual);
-
-        //}
-
-
     }
 }
