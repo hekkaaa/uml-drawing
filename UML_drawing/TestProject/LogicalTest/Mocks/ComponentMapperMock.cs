@@ -163,7 +163,7 @@ namespace TestProject.LogicalTest.Mocks
                     && elem.Color == comp.Color
                     && elem.Text.Font.Equals(comp.Text.Font)
                     && elem.Text.TextFields == comp.Text.TextFields
-                    && elem.textRect == comp.textRect
+                    && elem.TextRect == comp.TextRect
                     && elem.Location == comp.Location
                 )
                     return true;

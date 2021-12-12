@@ -20,7 +20,7 @@ namespace UML_Logic_Library
                    comp.Text.TextFields = elem.Text[0];
                    comp.Text.Font = elem.Font[0];
                    comp.Location = elem.Location;
-                   comp.textRect = elem.TextRectangles[0];
+                   comp.TextRect = elem.TextRectangles[0];
                    return comp;
                case "RectangleOneField":
                    var comp1 = new RectangleOneField();
@@ -86,7 +86,7 @@ namespace UML_Logic_Library
                 elem.Text[0] = comp.Text.TextFields;
                 elem.Font[0] = comp.Text.Font;
                 elem.Location = comp.Location;
-                elem.TextRectangles[0] = comp.textRect;
+                elem.TextRectangles[0] = comp.TextRect;
                 return elem;
             }
         
@@ -157,6 +157,62 @@ namespace UML_Logic_Library
                 return elem;
             }
             return null;
+        }
+        
+        public static bool EqualComponents(this Component element, Component component)
+        {
+            if (element is RectangleComponent && component is RectangleComponent rectangleComponent)
+            {
+                var elem = (RectangleComponent) element;
+                if (
+                    elem.Path.GetBounds().Equals(rectangleComponent.Path.GetBounds())
+                    && elem.Color == rectangleComponent.Color
+                    && elem.Text.Font.Equals(rectangleComponent.Text.Font)
+                    && elem.Text.TextFields == rectangleComponent.Text.TextFields
+                    && elem.TextRect == rectangleComponent.TextRect
+                    && elem.Location == rectangleComponent.Location
+                )
+                    return true;
+            }
+
+            if (element is RectangleOneField && component is RectangleOneField rectangleOneField)
+            {
+                var elem = (RectangleOneField) element;
+                if (
+                    elem.Path.GetBounds().Equals(rectangleOneField.Path.GetBounds())
+                    && elem.Color == rectangleOneField.Color
+                    && elem.Head.Text.Font.Equals(rectangleOneField.Head.Text.Font)
+                    && elem.FieldProp.Text.Font.Equals(rectangleOneField.FieldProp.Text.Font)
+                    && elem.Head.Text.TextFields == rectangleOneField.Head.Text.TextFields
+                    && elem.FieldProp.Text.TextFieldsProp == rectangleOneField.FieldProp.Text.TextFieldsProp
+                    && elem.Head.Rect == rectangleOneField.Head.Rect
+                    && elem.FieldProp.Rect == rectangleOneField.FieldProp.Rect
+                    && elem.Location == rectangleOneField.Location
+                )
+                    return true;
+            }
+
+            if (element is RectangleTwoFields && component is RectangleTwoFields rectangleTwoFields)
+            {
+                var elem2 = (RectangleTwoFields) element;
+                if (
+                    elem2.Path.GetBounds().Equals(rectangleTwoFields.Path.GetBounds())
+                    && elem2.Color == rectangleTwoFields.Color
+                    && elem2.Head.Text.Font.Equals(rectangleTwoFields.Head.Text.Font)
+                    && elem2.FieldProp.Text.Font.Equals(rectangleTwoFields.FieldProp.Text.Font)
+                    && elem2.FieldMethods.Text.Font.Equals(rectangleTwoFields.FieldMethods.Text.Font)
+                    && elem2.Head.Text.TextFields == rectangleTwoFields.Head.Text.TextFields
+                    && elem2.FieldProp.Text.TextFieldsProp == rectangleTwoFields.FieldProp.Text.TextFieldsProp
+                    && elem2.FieldMethods.Text.TextFieldsMethod == rectangleTwoFields.FieldMethods.Text.TextFieldsMethod
+                    && elem2.Head.Rect == rectangleTwoFields.Head.Rect
+                    && elem2.FieldProp.Rect == rectangleTwoFields.FieldProp.Rect
+                    && elem2.FieldMethods.Rect == rectangleTwoFields.FieldMethods.Rect
+                    && elem2.Location == rectangleTwoFields.Location
+                )
+                    return true;
+            }
+
+            return false;
         }
     }
 }
