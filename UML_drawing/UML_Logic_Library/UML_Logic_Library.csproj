@@ -11,7 +11,7 @@
     <AssemblyName>UML_Logic_Library</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <LangVersion>8</LangVersion>
+    <LangVersion>latest</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -47,7 +47,6 @@
     <Compile Include="Arrows\Arrows.cs" />
     <Compile Include="ComponentMapper.cs" />
     <Compile Include="Helpers\PointHelper.cs" />
-    <Compile Include="Interfaces\IComponent.cs" />
     <Compile Include="Markers\EndLineMarker.cs" />
     <Compile Include="Markers\LedgeMarker.cs" />
     <Compile Include="Markers\Marker.cs" />

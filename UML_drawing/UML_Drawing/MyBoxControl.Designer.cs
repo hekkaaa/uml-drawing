@@ -1,7 +1,7 @@
 ﻿
 namespace UML_drawing
 {
-    public partial class MyBoxControl
+    public sealed partial class MyBoxControl
     {
         /// <summary> 
         /// Обязательная переменная конструктора.
@@ -40,7 +40,7 @@ namespace UML_drawing
             this.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Name = "MyBoxControl";
-            this.Size = new System.Drawing.Size(753, 539);
+            this.Size = new System.Drawing.Size(354, 249);
             this.ResumeLayout(false);
 
         }

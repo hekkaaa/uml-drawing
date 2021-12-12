@@ -3,6 +3,8 @@ using System.Data;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
+using UML_Logic_Library;
+using UML_Logic_Library.Arrows;
 
 namespace UML_drawing.ViewForm
 {
@@ -23,9 +25,19 @@ namespace UML_drawing.ViewForm
             try
             {
                 var hand = _boxControl.Handler.LoadProject(ListProject.SelectedItem.ToString());
+                foreach (var arrow in hand.ComponentsInProj.OfType<Arrows>())
+                {
+                    foreach (var comp in hand.ComponentsInProj)
+                    {
+                        if (arrow.From.EqualComponents(comp))
+                            arrow.From = comp;
+                        if (arrow.To.EqualComponents(comp))
+                            arrow.To = comp;
+                    }
+                }
                 _boxControl.Handler = hand;
                 _form.Text = "UML Creater" + $" - {_boxControl.Handler.NameProj}";
-                _form._boolName = false;
+                _form.BoolName = false;
                 Close();
             }
             catch (NullReferenceException)

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
-using UML_Logic_Library.Interfaces;
+using System.Windows.Forms;
 using UML_Logic_Library.StructuralEntities;
 
 namespace UML_Logic_Library.Markers
@@ -13,19 +13,11 @@ namespace UML_Logic_Library.Markers
         public Component TargetComponent;
         private List<Marker> _markers;
 
-        public virtual System.Windows.Forms.Cursor Cursor
-        {
-            get { return System.Windows.Forms.Cursors.SizeNWSE; }
-        }
+        public virtual Cursor Cursor => Cursors.SizeNWSE;
 
         public Marker()
         {
             Color = Color.Red;
-        }
-
-        public virtual string ToolTip
-        {
-            get { return ToString(); }
         }
 
         public bool PointIsInside(PointF p)

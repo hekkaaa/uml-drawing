@@ -11,7 +11,8 @@ namespace UML_drawing
     public partial class Form1 : Form
     {
         private ToolStripButton[] _arrowButtons;
-        internal bool _boolName = false;
+        internal bool BoolName;
+        private readonly Point _startPoint = new Point(15,15);
 
         public Form1()
         {
@@ -33,7 +34,7 @@ namespace UML_drawing
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
         {
 
-            if(_boolName)
+            if(BoolName)
             {
                 DialogResult dialog = MessageBox.Show(
                 "Сохранить изменения перед выходом?",
@@ -43,7 +44,9 @@ namespace UML_drawing
                );
                 if (dialog == DialogResult.Yes)
                 {
-                    myBoxControl.Handler.SaveProject(myBoxControl.Handler.NameProj, myBoxControl.Handler.ComponentsInProj);
+                    myBoxControl.Handler.SaveProject(
+                        myBoxControl.Handler.NameProj, 
+                        myBoxControl.Handler.ComponentsInProj);
                     Application.Exit();
                 }
                 else if (dialog == DialogResult.No)
@@ -72,7 +75,7 @@ namespace UML_drawing
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
 
-            if (_boolName)
+            if (BoolName)
             {
                 DialogResult dialog = MessageBox.Show(
                 "Сохранить изменения перед выходом?",
@@ -82,7 +85,9 @@ namespace UML_drawing
                );
                 if (dialog == DialogResult.Yes)
                 {
-                    myBoxControl.Handler.SaveProject(myBoxControl.Handler.NameProj, myBoxControl.Handler.ComponentsInProj);
+                    myBoxControl.Handler.SaveProject(
+                        myBoxControl.Handler.NameProj, 
+                        myBoxControl.Handler.ComponentsInProj);
                     e.Cancel = false;
                 }
                 else if (dialog == DialogResult.Cancel)
@@ -155,7 +160,10 @@ namespace UML_drawing
 
         private void saveProjectToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var createform = new SavesInfoFrom(myBoxControl.Handler.NameProj, myBoxControl.Handler.ComponentsInProj, this);
+            var createform = new SavesInfoFrom(
+                myBoxControl.Handler.NameProj, 
+                myBoxControl.Handler.ComponentsInProj, 
+                this);
             createform.ShowDialog(this);
         }
 
@@ -170,24 +178,20 @@ namespace UML_drawing
             {
                 return;
             }
-
-
         }
 
         //***********************************************
 
-        Point startDragPoint = new Point(90, 50);
-
         // для показа * о редактировании
         private void RenameTextEdit()
         {
-            if (!_boolName) { this.Text = this.Text + "*"; _boolName = true; }
+            if (!BoolName) { this.Text = this.Text + "*"; BoolName = true; }
         }
 
         // ******************
         private void ObjectButton_Click(object sender, EventArgs e)
         {
-            myBoxControl.AddFigure<RectangleComponent>(startDragPoint);
+            myBoxControl.AddFigure<RectangleComponent>(_startPoint);
             RenameTextEdit();
         }
 
@@ -195,6 +199,7 @@ namespace UML_drawing
         {
             if (myBoxControl.SelectedFigure == null || myBoxControl.SelectedFigure is Arrows)
                 return;
+
             if (myBoxControl.SelectedFigure is RectangleOneField)
             {
                 var createEditorBoxOneFieldfields = new TextBoxOneField(myBoxControl.SelectedFigure);
@@ -250,22 +255,23 @@ namespace UML_drawing
 
         private void objectOneFieldButton_Click(object sender, EventArgs e)
         {
-            myBoxControl.AddFigure<RectangleOneField>(startDragPoint);
+            myBoxControl.AddFigure<RectangleOneField>(_startPoint);
             RenameTextEdit();
         }
 
         private void objectTwoFieldsButton_Click(object sender, EventArgs e)
         {
-            myBoxControl.AddFigure<RectangleTwoFields>(startDragPoint);
+            myBoxControl.AddFigure<RectangleTwoFields>(_startPoint);
             RenameTextEdit();
         }
-
-        private void toolStripButton1_Click(object sender, EventArgs e)
+        
+        private void colorEdit_Click(object sender, EventArgs e)
         {
             if (myBoxControl.SelectedFigure == null)
             {
                 return;
             }
+            
             var obj = myBoxControl.SelectedFigure;
             if (obj is SimpleRectangle)
             {
@@ -416,6 +422,15 @@ namespace UML_drawing
             pictureBoxHover.Visible = false;
         }
 
+        private void myBoxControl_KeyUp(object sender, KeyEventArgs e)
+        {
+            if ((e as KeyEventArgs).KeyData == Keys.C)
+                this.colorEdit_Click(sender, e);
+            if ((e as KeyEventArgs).KeyData == Keys.T)
+                this.textEditor_Click(sender, e);
+        }
+
         // ******************************************************************
+
     }
 }

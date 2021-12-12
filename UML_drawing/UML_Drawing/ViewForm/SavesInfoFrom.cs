@@ -31,7 +31,7 @@ namespace UML_drawing.ViewForm
                 Update();
             }
             _form.Text = "UML Creater" + $" - {_handler.NameProj}";
-            _form._boolName = false;
+            _form.BoolName = false;
             Close();
         }
     }

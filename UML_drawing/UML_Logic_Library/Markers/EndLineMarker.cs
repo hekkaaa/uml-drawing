@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using UML_Logic_Library.AdditionalClasses;
 using UML_Logic_Library.Arrows;
-using UML_Logic_Library.Interfaces;
 using UML_Logic_Library.StructuralEntities;
 
 namespace UML_Logic_Library.Markers
@@ -24,12 +24,29 @@ namespace UML_Logic_Library.Markers
         {
             Arrows.Arrows arrows = (TargetComponent as Arrows.Arrows);
             if (arrows.From == null || arrows.To == null)
-                return;//не обновляем маркеры оторванных концов
+                return;
+            //не обновляем маркеры оторванных концов
             //фигура, с которой связана линия
             var from = arrows.From as SimpleRectangle;
             var to = arrows.To as SimpleRectangle;
             SimpleRectangle figure = pointIndex == 0 ? from : to;
-            Location = figure.Location;
+            if (pointIndex == 0)
+            {
+                Location = new PointF(figure.Location.X + figure.Size.Width/2, figure.Location.Y + figure.Size.Height/2);
+            }
+            else
+            {
+                if (figure is RectangleComponent || figure is RectangleOneField || figure is RectangleTwoFields)
+                {
+                    if (to.Location.X > from.Location.X)
+                        Location = new PointF(figure.Location.X, figure.Location.Y + figure.Size.Height / 2   + 10);
+                    else
+                        Location = new PointF(figure.Location.X + figure.Size.Width, figure.Location.Y + figure.Size.Height / 2   + 10);
+                }
+                else
+                    Location = figure.Location;
+            }
+            
         }
 
         public override void Offset(float dx, float dy)

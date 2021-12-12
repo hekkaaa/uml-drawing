@@ -59,13 +59,13 @@ namespace UML_drawing
             this.colorDialog1 = new System.Windows.Forms.ColorDialog();
             this.pictureBoxHover = new System.Windows.Forms.PictureBox();
             this.saveImage = new System.Windows.Forms.SaveFileDialog();
-            this.myBoxControl = new UML_drawing.MyBoxControl();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
+            this.myBoxControl = new UML_drawing.MyBoxControl();
             this.menuStrip1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize) (this.bindingSource1)).BeginInit();
             this.toolStrip1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxHover)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize) (this.pictureBoxHover)).BeginInit();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -84,61 +84,61 @@ namespace UML_drawing
             // 
             // createToolStripMenuItem
             // 
-            this.createToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.createProjectToolStripMenuItem,
-            this.loadProjectToolStripMenuItem,
-            this.saveProjectToolStripMenuItem,
-            this.saveAsImageToolStripMenuItem,
-            this.exitToolStripMenuItem});
+            this.createToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {this.createProjectToolStripMenuItem, this.loadProjectToolStripMenuItem, this.saveProjectToolStripMenuItem, this.saveAsImageToolStripMenuItem, this.exitToolStripMenuItem});
             this.createToolStripMenuItem.Name = "createToolStripMenuItem";
             this.createToolStripMenuItem.Size = new System.Drawing.Size(46, 24);
-            this.createToolStripMenuItem.Text = "File";
+            this.createToolStripMenuItem.Text = "Файл";
             // 
             // createProjectToolStripMenuItem
             // 
-            this.createProjectToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("createProjectToolStripMenuItem.Image")));
+            this.createProjectToolStripMenuItem.Image = ((System.Drawing.Image) (resources.GetObject("createProjectToolStripMenuItem.Image")));
             this.createProjectToolStripMenuItem.Name = "createProjectToolStripMenuItem";
             this.createProjectToolStripMenuItem.Size = new System.Drawing.Size(187, 26);
-            this.createProjectToolStripMenuItem.Text = "Create Project";
+            this.createProjectToolStripMenuItem.Text = "Создать";
             this.createProjectToolStripMenuItem.Click += new System.EventHandler(this.createProjectToolStripMenuItem_Click);
+            this.createProjectToolStripMenuItem.ShortcutKeys = Keys.Control | Keys.A;
             // 
             // loadProjectToolStripMenuItem
             // 
-            this.loadProjectToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("loadProjectToolStripMenuItem.Image")));
+            this.loadProjectToolStripMenuItem.Image = ((System.Drawing.Image) (resources.GetObject("loadProjectToolStripMenuItem.Image")));
             this.loadProjectToolStripMenuItem.Name = "loadProjectToolStripMenuItem";
             this.loadProjectToolStripMenuItem.Size = new System.Drawing.Size(187, 26);
-            this.loadProjectToolStripMenuItem.Text = "Load Project";
+            this.loadProjectToolStripMenuItem.Text = "Открыть";
             this.loadProjectToolStripMenuItem.Click += new System.EventHandler(this.loadProjectToolStripMenuItem_Click);
+            this.loadProjectToolStripMenuItem.ShortcutKeys = Keys.Control | Keys.D;
             // 
             // saveProjectToolStripMenuItem
             // 
-            this.saveProjectToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("saveProjectToolStripMenuItem.Image")));
+            this.saveProjectToolStripMenuItem.Image = ((System.Drawing.Image) (resources.GetObject("saveProjectToolStripMenuItem.Image")));
             this.saveProjectToolStripMenuItem.Name = "saveProjectToolStripMenuItem";
             this.saveProjectToolStripMenuItem.Size = new System.Drawing.Size(187, 26);
-            this.saveProjectToolStripMenuItem.Text = "Save Project";
+            this.saveProjectToolStripMenuItem.Text = "Сохранить";
             this.saveProjectToolStripMenuItem.Click += new System.EventHandler(this.saveProjectToolStripMenuItem_Click);
+            this.saveProjectToolStripMenuItem.ShortcutKeys = Keys.Control | Keys.S;
             // 
             // saveAsImageToolStripMenuItem
             // 
-            this.saveAsImageToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("saveAsImageToolStripMenuItem.Image")));
+            this.saveAsImageToolStripMenuItem.Image = ((System.Drawing.Image) (resources.GetObject("saveAsImageToolStripMenuItem.Image")));
             this.saveAsImageToolStripMenuItem.Name = "saveAsImageToolStripMenuItem";
             this.saveAsImageToolStripMenuItem.Size = new System.Drawing.Size(187, 26);
-            this.saveAsImageToolStripMenuItem.Text = "Save as image";
+            this.saveAsImageToolStripMenuItem.Text = "Экспорт";
             this.saveAsImageToolStripMenuItem.Click += new System.EventHandler(this.saveAsImageToolStripMenuItem_Click);
+            this.saveAsImageToolStripMenuItem.ShortcutKeys = Keys.Control | Keys.S | Keys.Shift;
             // 
             // exitToolStripMenuItem
             // 
-            this.exitToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("exitToolStripMenuItem.Image")));
+            this.exitToolStripMenuItem.Image = ((System.Drawing.Image) (resources.GetObject("exitToolStripMenuItem.Image")));
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
             this.exitToolStripMenuItem.Size = new System.Drawing.Size(187, 26);
-            this.exitToolStripMenuItem.Text = "Exit";
+            this.exitToolStripMenuItem.Text = "Выход";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
+            this.exitToolStripMenuItem.ShortcutKeys = Keys.Control | Keys.E;
             // 
             // aboutToolStripMenuItem
             // 
             this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
             this.aboutToolStripMenuItem.Size = new System.Drawing.Size(64, 24);
-            this.aboutToolStripMenuItem.Text = "About";
+            this.aboutToolStripMenuItem.Text = "О приложении";
             this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
             // 
             // label3
@@ -153,18 +153,7 @@ namespace UML_drawing
             // toolStrip1
             // 
             this.toolStrip1.ImageScalingSize = new System.Drawing.Size(24, 24);
-            this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.ObjectButton,
-            this.objectOneFieldButton,
-            this.objectTwoFieldsButton,
-            this.associationLineButton,
-            this.addictionLineButton,
-            this.realizationLineButton,
-            this.inheritanceLineButton,
-            this.compositionLineButton,
-            this.aggregationLineButton,
-            this.textEditor,
-            this.colorEdit});
+            this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {this.ObjectButton, this.objectOneFieldButton, this.objectTwoFieldsButton, this.associationLineButton, this.addictionLineButton, this.realizationLineButton, this.inheritanceLineButton, this.compositionLineButton, this.aggregationLineButton, this.textEditor, this.colorEdit});
             this.toolStrip1.Location = new System.Drawing.Point(0, 30);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Size = new System.Drawing.Size(1205, 31);
@@ -174,11 +163,10 @@ namespace UML_drawing
             // ObjectButton
             // 
             this.ObjectButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.ObjectButton.Image = ((System.Drawing.Image)(resources.GetObject("ObjectButton.Image")));
+            this.ObjectButton.Image = ((System.Drawing.Image) (resources.GetObject("ObjectButton.Image")));
             this.ObjectButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.ObjectButton.Name = "ObjectButton";
             this.ObjectButton.Size = new System.Drawing.Size(29, 28);
-            this.ObjectButton.Text = "Object";
             this.ObjectButton.Click += new System.EventHandler(this.ObjectButton_Click);
             this.ObjectButton.MouseLeave += new System.EventHandler(this.ObjectButton_MouseLeave);
             this.ObjectButton.MouseHover += new System.EventHandler(this.ObjectButton_MouseHover);
@@ -186,11 +174,10 @@ namespace UML_drawing
             // objectOneFieldButton
             // 
             this.objectOneFieldButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.objectOneFieldButton.Image = ((System.Drawing.Image)(resources.GetObject("objectOneFieldButton.Image")));
+            this.objectOneFieldButton.Image = ((System.Drawing.Image) (resources.GetObject("objectOneFieldButton.Image")));
             this.objectOneFieldButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.objectOneFieldButton.Name = "objectOneFieldButton";
             this.objectOneFieldButton.Size = new System.Drawing.Size(29, 28);
-            this.objectOneFieldButton.Text = "toolStripButton2";
             this.objectOneFieldButton.Click += new System.EventHandler(this.objectOneFieldButton_Click);
             this.objectOneFieldButton.MouseLeave += new System.EventHandler(this.objectOneFieldButton_MouseLeave);
             this.objectOneFieldButton.MouseHover += new System.EventHandler(this.objectOneFieldButton_MouseHover);
@@ -198,11 +185,10 @@ namespace UML_drawing
             // objectTwoFieldsButton
             // 
             this.objectTwoFieldsButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.objectTwoFieldsButton.Image = ((System.Drawing.Image)(resources.GetObject("objectTwoFieldsButton.Image")));
+            this.objectTwoFieldsButton.Image = ((System.Drawing.Image) (resources.GetObject("objectTwoFieldsButton.Image")));
             this.objectTwoFieldsButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.objectTwoFieldsButton.Name = "objectTwoFieldsButton";
             this.objectTwoFieldsButton.Size = new System.Drawing.Size(29, 28);
-            this.objectTwoFieldsButton.Text = "toolStripButton2";
             this.objectTwoFieldsButton.Click += new System.EventHandler(this.objectTwoFieldsButton_Click);
             this.objectTwoFieldsButton.MouseLeave += new System.EventHandler(this.objectTwoFieldsButton_MouseLeave);
             this.objectTwoFieldsButton.MouseHover += new System.EventHandler(this.objectTwoFieldsButton_MouseHover);
@@ -211,11 +197,11 @@ namespace UML_drawing
             // 
             this.associationLineButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.associationLineButton.Enabled = false;
-            this.associationLineButton.Image = ((System.Drawing.Image)(resources.GetObject("associationLineButton.Image")));
+            this.associationLineButton.Image = ((System.Drawing.Image) (resources.GetObject("associationLineButton.Image")));
             this.associationLineButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.associationLineButton.Name = "associationLineButton";
             this.associationLineButton.Size = new System.Drawing.Size(29, 28);
-            this.associationLineButton.Text = "toolStripButton1";
+            this.associationLineButton.Text = "Ассоциация";
             this.associationLineButton.Click += new System.EventHandler(this.associationLineButton_Click);
             this.associationLineButton.MouseLeave += new System.EventHandler(this.associationLineButton_MouseLeave);
             this.associationLineButton.MouseHover += new System.EventHandler(this.associationLineButton_MouseHover);
@@ -224,11 +210,11 @@ namespace UML_drawing
             // 
             this.addictionLineButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.addictionLineButton.Enabled = false;
-            this.addictionLineButton.Image = ((System.Drawing.Image)(resources.GetObject("addictionLineButton.Image")));
+            this.addictionLineButton.Image = ((System.Drawing.Image) (resources.GetObject("addictionLineButton.Image")));
             this.addictionLineButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.addictionLineButton.Name = "addictionLineButton";
             this.addictionLineButton.Size = new System.Drawing.Size(29, 28);
-            this.addictionLineButton.Text = "toolStripButton1";
+            this.addictionLineButton.Text = "Зависимость";
             this.addictionLineButton.Click += new System.EventHandler(this.addictionLineButton_Click);
             this.addictionLineButton.MouseLeave += new System.EventHandler(this.addictionLineButton_MouseLeave);
             this.addictionLineButton.MouseHover += new System.EventHandler(this.addictionLineButton_MouseHover);
@@ -237,11 +223,11 @@ namespace UML_drawing
             // 
             this.realizationLineButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.realizationLineButton.Enabled = false;
-            this.realizationLineButton.Image = ((System.Drawing.Image)(resources.GetObject("realizationLineButton.Image")));
+            this.realizationLineButton.Image = ((System.Drawing.Image) (resources.GetObject("realizationLineButton.Image")));
             this.realizationLineButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.realizationLineButton.Name = "realizationLineButton";
             this.realizationLineButton.Size = new System.Drawing.Size(29, 28);
-            this.realizationLineButton.Text = "toolStripButton2";
+            this.realizationLineButton.Text = "Реализация";
             this.realizationLineButton.Click += new System.EventHandler(this.realizationLineButton_Click);
             this.realizationLineButton.MouseLeave += new System.EventHandler(this.realizationLineButton_MouseLeave);
             this.realizationLineButton.MouseHover += new System.EventHandler(this.realizationLineButton_MouseHover);
@@ -250,11 +236,11 @@ namespace UML_drawing
             // 
             this.inheritanceLineButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.inheritanceLineButton.Enabled = false;
-            this.inheritanceLineButton.Image = ((System.Drawing.Image)(resources.GetObject("inheritanceLineButton.Image")));
+            this.inheritanceLineButton.Image = ((System.Drawing.Image) (resources.GetObject("inheritanceLineButton.Image")));
             this.inheritanceLineButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.inheritanceLineButton.Name = "inheritanceLineButton";
             this.inheritanceLineButton.Size = new System.Drawing.Size(29, 28);
-            this.inheritanceLineButton.Text = "toolStripButton2";
+            this.inheritanceLineButton.Text = "Наследование";
             this.inheritanceLineButton.Click += new System.EventHandler(this.inheritanceLineButton_Click);
             this.inheritanceLineButton.MouseLeave += new System.EventHandler(this.inheritanceLineButton_MouseLeave);
             this.inheritanceLineButton.MouseHover += new System.EventHandler(this.inheritanceLineButton_MouseHover);
@@ -263,11 +249,11 @@ namespace UML_drawing
             // 
             this.compositionLineButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.compositionLineButton.Enabled = false;
-            this.compositionLineButton.Image = ((System.Drawing.Image)(resources.GetObject("compositionLineButton.Image")));
+            this.compositionLineButton.Image = ((System.Drawing.Image) (resources.GetObject("compositionLineButton.Image")));
             this.compositionLineButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.compositionLineButton.Name = "compositionLineButton";
             this.compositionLineButton.Size = new System.Drawing.Size(29, 28);
-            this.compositionLineButton.Text = "toolStripButton3";
+            this.compositionLineButton.Text = "Композиция";
             this.compositionLineButton.Click += new System.EventHandler(this.compositionLineButton_Click);
             this.compositionLineButton.MouseLeave += new System.EventHandler(this.compositionLineButton_MouseLeave);
             this.compositionLineButton.MouseHover += new System.EventHandler(this.compositionLineButton_MouseHover);
@@ -276,11 +262,11 @@ namespace UML_drawing
             // 
             this.aggregationLineButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.aggregationLineButton.Enabled = false;
-            this.aggregationLineButton.Image = ((System.Drawing.Image)(resources.GetObject("aggregationLineButton.Image")));
+            this.aggregationLineButton.Image = ((System.Drawing.Image) (resources.GetObject("aggregationLineButton.Image")));
             this.aggregationLineButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.aggregationLineButton.Name = "aggregationLineButton";
             this.aggregationLineButton.Size = new System.Drawing.Size(29, 28);
-            this.aggregationLineButton.Text = "toolStripButton4";
+            this.aggregationLineButton.Text = "Агрегация";
             this.aggregationLineButton.Click += new System.EventHandler(this.aggregationLineButton_Click);
             this.aggregationLineButton.MouseLeave += new System.EventHandler(this.aggregationLineButton_MouseLeave);
             this.aggregationLineButton.MouseHover += new System.EventHandler(this.aggregationLineButton_MouseHover);
@@ -289,23 +275,23 @@ namespace UML_drawing
             // 
             this.textEditor.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.textEditor.Enabled = false;
-            this.textEditor.Image = ((System.Drawing.Image)(resources.GetObject("textEditor.Image")));
+            this.textEditor.Image = ((System.Drawing.Image) (resources.GetObject("textEditor.Image")));
             this.textEditor.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.textEditor.Name = "textEditor";
             this.textEditor.Size = new System.Drawing.Size(29, 28);
-            this.textEditor.Text = "toolStripButton2";
+            this.textEditor.Text = "Текст";
             this.textEditor.Click += new System.EventHandler(this.textEditor_Click);
             // 
             // colorEdit
             // 
             this.colorEdit.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.colorEdit.Enabled = false;
-            this.colorEdit.Image = ((System.Drawing.Image)(resources.GetObject("colorEdit.Image")));
+            this.colorEdit.Image = ((System.Drawing.Image) (resources.GetObject("colorEdit.Image")));
             this.colorEdit.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.colorEdit.Name = "colorEdit";
             this.colorEdit.Size = new System.Drawing.Size(29, 28);
-            this.colorEdit.Text = "toolStripButton1";
-            this.colorEdit.Click += new System.EventHandler(this.toolStripButton1_Click);
+            this.colorEdit.Text = "Заливка";
+            this.colorEdit.Click += new System.EventHandler(this.colorEdit_Click);
             // 
             // colorDialog1
             // 
@@ -325,22 +311,6 @@ namespace UML_drawing
             // 
             this.saveImage.Filter = "PNG Image(*.png)|*.png";
             // 
-            // myBoxControl
-            // 
-            this.myBoxControl.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.myBoxControl.AutoScroll = true;
-            this.myBoxControl.BackColor = System.Drawing.Color.White;
-            this.myBoxControl.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.myBoxControl.Handler = null;
-            this.myBoxControl.Location = new System.Drawing.Point(13, 71);
-            this.myBoxControl.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.myBoxControl.Name = "myBoxControl";
-            this.myBoxControl.SelectedFigure = null;
-            this.myBoxControl.Size = new System.Drawing.Size(1181, 541);
-            this.myBoxControl.TabIndex = 7;
-            // 
             // openFileDialog1
             // 
             this.openFileDialog1.DefaultExt = "uml";
@@ -352,6 +322,20 @@ namespace UML_drawing
             this.saveFileDialog1.DefaultExt = "uml";
             this.saveFileDialog1.Filter = "UML-diagram|*.uml";
             // 
+            // myBoxControl
+            // 
+            this.myBoxControl.Anchor = ((System.Windows.Forms.AnchorStyles) ((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) | System.Windows.Forms.AnchorStyles.Left) | System.Windows.Forms.AnchorStyles.Right)));
+            this.myBoxControl.AutoScroll = true;
+            this.myBoxControl.BackColor = System.Drawing.Color.White;
+            this.myBoxControl.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.myBoxControl.Handler = null;
+            this.myBoxControl.Location = new System.Drawing.Point(13, 71);
+            this.myBoxControl.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.myBoxControl.Name = "myBoxControl";
+            this.myBoxControl.SelectedFigure = null;
+            this.myBoxControl.Size = new System.Drawing.Size(1181, 541);
+            this.myBoxControl.TabIndex = 7;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -362,7 +346,7 @@ namespace UML_drawing
             this.Controls.Add(this.myBoxControl);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.menuStrip1);
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Icon = ((System.Drawing.Icon) (resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
             this.MinimumSize = new System.Drawing.Size(700, 496);
             this.Name = "Form1";
@@ -372,13 +356,12 @@ namespace UML_drawing
             this.Load += new System.EventHandler(this.Form1_Load);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize) (this.bindingSource1)).EndInit();
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxHover)).EndInit();
+            ((System.ComponentModel.ISupportInitialize) (this.pictureBoxHover)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
-
         }
 
         #endregion
@@ -393,20 +376,20 @@ namespace UML_drawing
         private System.Windows.Forms.Label label3;
         private MyBoxControl myBoxControl;
         private ToolStrip toolStrip1;
-        private ToolStripButton ObjectButton;
-        private ToolStripButton associationLineButton;
-        private ToolStripButton addictionLineButton;
-        private ToolStripButton objectOneFieldButton;
-        private ToolStripButton objectTwoFieldsButton;
+        private System.Windows.Forms.ToolStripButton ObjectButton;
+        private System.Windows.Forms.ToolStripButton associationLineButton;
+        private System.Windows.Forms.ToolStripButton addictionLineButton;
+        private System.Windows.Forms.ToolStripButton objectOneFieldButton;
+        private System.Windows.Forms.ToolStripButton objectTwoFieldsButton;
         private ToolStripMenuItem saveProjectToolStripMenuItem;
-        private ToolStripButton colorEdit;
+        private System.Windows.Forms.ToolStripButton colorEdit;
         private ColorDialog colorDialog1;
         private System.Windows.Forms.PictureBox pictureBoxHover;
-        private ToolStripButton realizationLineButton;
-        private ToolStripButton inheritanceLineButton;
-        private ToolStripButton compositionLineButton;
-        private ToolStripButton aggregationLineButton;
-        private ToolStripButton textEditor;
+        private System.Windows.Forms.ToolStripButton realizationLineButton;
+        private System.Windows.Forms.ToolStripButton inheritanceLineButton;
+        private System.Windows.Forms.ToolStripButton compositionLineButton;
+        private System.Windows.Forms.ToolStripButton aggregationLineButton;
+        private System.Windows.Forms.ToolStripButton textEditor;
         private ToolStripMenuItem saveAsImageToolStripMenuItem;
         private SaveFileDialog saveImage;
         private OpenFileDialog openFileDialog1;

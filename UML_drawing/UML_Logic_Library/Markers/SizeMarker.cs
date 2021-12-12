@@ -17,7 +17,7 @@ namespace UML_Logic_Library.Markers
         {
             base.Offset(dx, dy);
             ((SimpleRectangle) TargetComponent).Size =
-                SizeF.Add(((SimpleRectangle) TargetComponent).Size, new SizeF(dx * 2, dy * 2));
+                SizeF.Add(((SimpleRectangle) TargetComponent).Size, new SizeF(dx, dy));
         }
     }
 }
