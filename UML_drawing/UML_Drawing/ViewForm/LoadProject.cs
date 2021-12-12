@@ -3,6 +3,7 @@ using System.Data;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
+using UML_drawing.Canvas;
 using UML_Logic_Library;
 using UML_Logic_Library.Arrows;
 
@@ -10,8 +11,8 @@ namespace UML_drawing.ViewForm
 {
     public partial class LoadProject : Form
     {
-        private MyBoxControl _boxControl;
-        private Form1 _form;
+        private readonly MyBoxControl _boxControl;
+        private readonly Form1 _form;
         public LoadProject(MyBoxControl boxControl, Form1 form)
         {
             InitializeComponent();
@@ -22,6 +23,16 @@ namespace UML_drawing.ViewForm
 
         private void button1_Click(object sender, EventArgs e)
         {
+            DialogResult dialog = MessageBox.Show(
+                "Сохранить изменения в текущем проекте?",
+                "Изменения не сохранены",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Warning
+            );
+            if (dialog == DialogResult.Yes)
+            {
+                _boxControl.Handler.SaveProject(_boxControl.Handler.NameProj, _boxControl.Handler.ComponentsInProj);
+            }
             try
             {
                 var hand = _boxControl.Handler.LoadProject(ListProject.SelectedItem.ToString());

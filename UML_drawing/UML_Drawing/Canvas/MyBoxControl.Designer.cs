@@ -1,5 +1,5 @@
 ﻿
-namespace UML_drawing
+namespace UML_drawing.Canvas
 {
     public sealed partial class MyBoxControl
     {

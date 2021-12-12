@@ -1,5 +1,5 @@
 ﻿
-namespace UML_drawing
+namespace UML_drawing.ViewForm.TextEditors
 {
     partial class TextBoxOneField
     {

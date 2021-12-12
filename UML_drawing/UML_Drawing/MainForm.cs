@@ -2,6 +2,7 @@ using System;
 using System.Drawing;
 using System.Windows.Forms;
 using UML_drawing.ViewForm;
+using UML_drawing.ViewForm.TextEditors;
 using UML_Logic_Library.AdditionalClasses;
 using UML_Logic_Library.Arrows;
 using UML_Logic_Library.StructuralEntities;
@@ -28,6 +29,7 @@ namespace UML_drawing
                     textEditor.Enabled = myBoxControl.SelectedFigure is SimpleRectangle;
                     colorEdit.Enabled = !(myBoxControl.SelectedFigure is null);
                 };
+            myBoxControl.KeyUp += myBoxControl_KeyUp;
         }
 
         // ЗАКРЫТИЕ ЧЕРЕЗ FILE
