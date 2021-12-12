@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
+using System.Security.AccessControl;
+using Microsoft.Win32.SafeHandles;
 
 
 namespace UML_Database_Library.BlackBox
@@ -13,8 +15,8 @@ namespace UML_Database_Library.BlackBox
             try
             {
                 var dataProject = new LiveData();
-                string userDirectory1 = Directory.GetCurrentDirectory();
-                using (FileStream fs = new FileStream($@"{userDirectory1}\project\{namefile}.uml", FileMode.Open))
+
+                using (FileStream fs = new FileStream($@"{Directory.GetCurrentDirectory()}\project\{namefile}.uml", FileMode.Open))
                     dataProject.ListObjectFigure = (List<LiveDataElem>)new BinaryFormatter().Deserialize(fs);
 
                 return dataProject;
@@ -35,10 +37,26 @@ namespace UML_Database_Library.BlackBox
 
         internal static bool Save(string namefile, List<LiveDataElem> components)
         {
-            using (FileStream fs = new FileStream($@"{Directory.GetCurrentDirectory()}\project\{namefile}.uml", FileMode.Create))
-                new BinaryFormatter().Serialize(fs, components);
+            try
+            {
+                using (FileStream fs = new FileStream($@"{Directory.GetCurrentDirectory()}\project\{namefile}.uml", FileMode.Create))
+                    new BinaryFormatter().Serialize(fs, components);
 
-            return true;
+                return true;
+            }
+            catch (FileNotFoundException ex)
+            {
+                throw new FileNotFoundException($"Файл с именем проекта {namefile} не найден || " + ex.Message);
+            }
+            catch (InvalidOperationException ex)
+            {
+                throw new InvalidOperationException($"Файл с именем проекта {namefile} не может быть обработан, либо поврежден || " + ex.Message);
+            }
+            catch (DirectoryNotFoundException ex)
+            {
+                throw new DirectoryNotFoundException($"Не найдена папка по указанному пути | " + ex.Message);
+            }
+
         }
     }
 }

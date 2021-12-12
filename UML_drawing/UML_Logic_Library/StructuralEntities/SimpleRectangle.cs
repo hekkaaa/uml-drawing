@@ -11,33 +11,23 @@ namespace UML_Logic_Library.StructuralEntities
     [Serializable]
     public class SimpleRectangle : Component
     {
-        public string CompName => "SimpleRectangle";
         //размер новой фигуры, по умолчанию
         public static int DefaultSize = 80;
-        //местоположение центра фигуры
         public PointF Location;
         public TextField Text = new TextField();
-        //прямоугольник, в котором расположен текст
         private Color _color = Color.White;
-        public RectangleF textRect;
+        public RectangleF TextRect;
         [NonSerialized]
         protected Brush _brush;
 
         public Color Color
         {
-            get { return _color; }
+            get => _color;
             set { _color = value; _brush = null; }
         }
 
-        public virtual Brush Brush
-        {
-            get {
-                if (_brush == null)
-                    _brush = new SolidBrush(_color);
-                return _brush;
-            }
-        }
-        
+        public virtual Brush Brush => _brush ??= new SolidBrush(_color);
+
         public SimpleRectangle(){ }
         
         public override bool PointIsInside(PointF p)
@@ -51,7 +41,6 @@ namespace UML_Logic_Library.StructuralEntities
             Marker m = new SizeMarker();
             m.TargetComponent = (SimpleRectangle)this;
             yield return m;
-            
         }
         
         //прямоугольник вокруг фигуры 
@@ -88,7 +77,7 @@ namespace UML_Logic_Library.StructuralEntities
             m.Scale(scaleX, scaleY);
             Path.Transform(m);
             //масштабируем прямоугольник текста
-            textRect = new RectangleF(textRect.Left * scaleX, textRect.Top * scaleY, textRect.Width * scaleX, textRect.Height * scaleY);
+            TextRect = new RectangleF(TextRect.Left * scaleX, TextRect.Top * scaleY, TextRect.Width * scaleX, TextRect.Height * scaleY);
         }
         
         //сдвиг местоположения фигуры
@@ -107,7 +96,7 @@ namespace UML_Logic_Library.StructuralEntities
             gr.TranslateTransform(Location.X, Location.Y);
             gr.FillPath(Brush, Path);
             gr.DrawPath(Pen, Path);
-            gr.DrawString(Text.TextFields, Text.Font, Brushes.Black, textRect, Text.StringFormatTitle);
+            gr.DrawString(Text.TextFields, Text.Font, Brushes.Black, TextRect, Text.StringFormatTitle);
             gr.Restore(transState);
         }
         

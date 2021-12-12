@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
@@ -52,29 +52,23 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Form1.cs">
+    <Compile Include="Canvas\MyBoxControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Canvas\MyBoxControl.Designer.cs">
+      <DependentUpon>MyBoxControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="TextBoxOneField.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="TextBoxOneField.Designer.cs">
-      <DependentUpon>TextBoxOneField.cs</DependentUpon>
+    <Compile Include="MainForm.Designer.cs">
+      <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
     <Compile Include="InfoForms\AboutBox1.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="InfoForms\AboutBox1.Designer.cs">
       <DependentUpon>AboutBox1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="MyBoxControl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="MyBoxControl.Designer.cs">
-      <DependentUpon>MyBoxControl.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -85,23 +79,17 @@
     <Compile Include="ViewForm\CreateForm.Designer.cs">
       <DependentUpon>CreateForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="ViewForm\TextBoxTwoFields.cs">
+    <Compile Include="ViewForm\TextEditors\TextBoxOneField.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ViewForm\TextBoxTwoFields.Designer.cs">
+    <Compile Include="ViewForm\TextEditors\TextBoxOneField.Designer.cs">
+      <DependentUpon>TextBoxOneField.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ViewForm\TextEditors\TextBoxTwoFields.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ViewForm\TextEditors\TextBoxTwoFields.Designer.cs">
       <DependentUpon>TextBoxTwoFields.cs</DependentUpon>
-    </Compile>
-    <Compile Include="ViewForm\TextForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="ViewForm\TextForm.Designer.cs">
-      <DependentUpon>TextForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="ViewForm\LineForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="ViewForm\LineForm.Designer.cs">
-      <DependentUpon>LineForm.cs</DependentUpon>
     </Compile>
     <Compile Include="ViewForm\LoadProject.cs">
       <SubType>Form</SubType>
@@ -109,29 +97,26 @@
     <Compile Include="ViewForm\LoadProject.Designer.cs">
       <DependentUpon>LoadProject.cs</DependentUpon>
     </Compile>
-    <Compile Include="ViewForm\ObjectForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="ViewForm\ObjectForm.Designer.cs">
-      <DependentUpon>ObjectForm.cs</DependentUpon>
-    </Compile>
     <Compile Include="ViewForm\SavesInfoFrom.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="ViewForm\SavesInfoFrom.Designer.cs">
       <DependentUpon>SavesInfoFrom.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="Form1.resx">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="ViewForm\TextEditors\TextForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ViewForm\TextEditors\TextForm.Designer.cs">
+      <DependentUpon>TextForm.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="Canvas\MyBoxControl.resx">
+      <DependentUpon>MyBoxControl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="TextBoxOneField.resx">
-      <DependentUpon>TextBoxOneField.cs</DependentUpon>
+    <EmbeddedResource Include="MainForm.resx">
+      <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="InfoForms\AboutBox1.resx">
       <DependentUpon>AboutBox1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="MyBoxControl.resx">
-      <DependentUpon>MyBoxControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -145,23 +130,20 @@
     <EmbeddedResource Include="ViewForm\CreateForm.resx">
       <DependentUpon>CreateForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ViewForm\TextBoxTwoFields.resx">
+    <EmbeddedResource Include="ViewForm\TextEditors\TextBoxOneField.resx">
+      <DependentUpon>TextBoxOneField.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ViewForm\TextEditors\TextBoxTwoFields.resx">
       <DependentUpon>TextBoxTwoFields.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ViewForm\TextForm.resx">
-      <DependentUpon>TextForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ViewForm\LineForm.resx">
-      <DependentUpon>LineForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ViewForm\LoadProject.resx">
       <DependentUpon>LoadProject.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ViewForm\ObjectForm.resx">
-      <DependentUpon>ObjectForm.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="ViewForm\SavesInfoFrom.resx">
       <DependentUpon>SavesInfoFrom.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ViewForm\TextEditors\TextForm.resx">
+      <DependentUpon>TextForm.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">

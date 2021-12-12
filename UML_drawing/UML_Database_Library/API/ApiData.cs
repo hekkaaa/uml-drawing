@@ -19,24 +19,10 @@ namespace UML_Database_Library.API
             else
             {
                 LiveData project = new LiveData(nameprodject);
+                var empty_component = new List<LiveDataElem> { new LiveDataElem() };
+                WorkData.Save(nameprodject, empty_component);
                 return project;
             }
-        }
-
-        //public LiveDataElem CreateElem(LiveData obj)
-        //{
-        //    LiveDataElem elem = new LiveDataElem();
-        //    int newid = CreateId.CreaterId(obj);
-        //    elem._id = newid;  // Узнаем свободный ID у присваиваем
-
-        //    obj.ListObjectFigure.Add(elem);
-        //    return elem;
-        //}
-
-        public LiveDataElem CreateElem()
-        {
-            LiveDataElem elem = new LiveDataElem();
-            return elem;
         }
 
         public LiveData LoadProject(string nameproject)

@@ -11,13 +11,5 @@ namespace UML_Logic_Library.Helpers
             p.Y = p.Y + y;
             return p;
         }
-
-        public static PointF[] FlipByX(this PointF[] points)
-        {
-            Array.Reverse(points);
-            for (int i = 0; i < points.Length; i++)
-                points[i].X *= -1f;
-            return points;
-        }
     }
 }

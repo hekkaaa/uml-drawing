@@ -48,10 +48,12 @@
             // ListProject
             // 
             this.ListProject.FormattingEnabled = true;
+            this.ListProject.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.ListProject.Location = new System.Drawing.Point(104, 98);
             this.ListProject.Name = "ListProject";
             this.ListProject.Size = new System.Drawing.Size(197, 24);
             this.ListProject.TabIndex = 2;
+            this.ListProject.SelectionChangeCommitted += new System.EventHandler(this.ListProject_SelectionChangeCommitted);
             // 
             // button1
             // 
@@ -59,7 +61,7 @@
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(91, 29);
             this.button1.TabIndex = 3;
-            this.button1.Text = "Load";
+            this.button1.Text = "Открыть";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
@@ -69,16 +71,17 @@
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(91, 29);
             this.button2.TabIndex = 4;
-            this.button2.Text = "Cancel";
+            this.button2.Text = "Отмена";
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(94, 130);
+            this.label2.Font = new System.Drawing.Font("Verdana", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label2.Location = new System.Drawing.Point(43, 97);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(0, 16);
+            this.label2.Size = new System.Drawing.Size(0, 25);
             this.label2.TabIndex = 5;
             // 
             // LoadProject

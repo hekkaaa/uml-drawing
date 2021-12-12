@@ -5,20 +5,17 @@ using System.Linq;
 using System.Runtime.Serialization.Formatters.Binary;
 using UML_Database_Library.API;
 using UML_Database_Library.BlackBox;
-using UML_Logic_Library.Interfaces;
+using UML_Logic_Library.Markers;
 using UML_Logic_Library.StructuralEntities;
 
 namespace UML_Logic_Library.AdditionalClasses
 {
     [Serializable]
-    public class Handler : IHandler
+    public class Handler
     {
         private ApiData _apiData = new ApiData();
         private LiveData _liveData = new LiveData();
         public List<Component> ComponentsInProj = new List<Component>();
-        private string _nameProj = "Project1";
-
-        //private string _nameProj = "DefaultProject";
         public string NameProj { get { return _liveData.nameproject; } set { _liveData.nameproject = value; } }
         public Handler() { _liveData.nameproject = "DefaultProject"; } // назначаем имя по умолчанию при создании нового проекта.
         public Handler(string nameProj, List<Component> components)
@@ -39,7 +36,7 @@ namespace UML_Logic_Library.AdditionalClasses
             {
                 var listComp = load
                 .ListObjectFigure
-                .Select(component => ComponentMapper.FromLiveData(component))
+                .Select(component => component.FromLiveData())
                 .ToList();
                 return new Handler(nameProj, listComp);
             }
@@ -49,15 +46,14 @@ namespace UML_Logic_Library.AdditionalClasses
             }
             
         }
-        
-        
+         
         public bool SaveProject(string nameProj, List<Component> components)
         {
             try
             {
                 foreach (var component in components)
                 {
-                    _liveData.ListObjectFigure.Add(ComponentMapper.ToLiveData(component));
+                    _liveData.ListObjectFigure.Add(component.ToLiveData());
                 }
                 return _apiData.SaveProject(nameProj, _liveData.ListObjectFigure);
             }
