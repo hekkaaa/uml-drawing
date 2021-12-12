@@ -6,7 +6,7 @@ using UML_drawing.ViewForm.TextEditors;
 using UML_Logic_Library.AdditionalClasses;
 using UML_Logic_Library.Arrows;
 using UML_Logic_Library.StructuralEntities;
-
+// Авторы: Потокий А и Сайгафарова А.
 namespace UML_drawing
 {
     public partial class Form1 : Form
