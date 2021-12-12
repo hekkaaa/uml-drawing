@@ -21,7 +21,6 @@ namespace UML_Logic_Library.Arrows
 
     public class Arrows : Component
     {
-        public string CompName => "Arrows";
         public Component From;
         public Component To;
         public ArrowsTypes TypesType;
@@ -141,7 +140,7 @@ namespace UML_Logic_Library.Arrows
 
             RecalcPath();
             SetPen(TypesType);
-            gr.DrawLines(Pen, _points);
+            gr.DrawPath(Pen, Path);
         }
 
         private void RecalcPath()
