@@ -8,7 +8,6 @@ namespace UML_Logic_Library.StructuralEntities
     [Serializable]
     public class RectangleOneField : SimpleRectangle
     {
-        public string CompName => "RectangleOneField";
         public RectangleField Head = new RectangleField(0);
         public RectangleField FieldProp = new RectangleField(DefaultSize);
         
@@ -29,7 +28,7 @@ namespace UML_Logic_Library.StructuralEntities
             Matrix m = new Matrix();
             m.Scale(scaleX, scaleY);
             Path.Transform(m);
-            //масштабируем прямоугольник текста
+            //масштабируем прямоугольники текста
             Head.TextRect = new RectangleF(
                 Head.TextRect.Left * scaleX, 
                 Head.TextRect.Top * scaleY,

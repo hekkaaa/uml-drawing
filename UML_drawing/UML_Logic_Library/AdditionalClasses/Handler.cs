@@ -5,7 +5,7 @@ using System.Linq;
 using System.Runtime.Serialization.Formatters.Binary;
 using UML_Database_Library.API;
 using UML_Database_Library.BlackBox;
-using UML_Logic_Library.Interfaces;
+using UML_Logic_Library.Markers;
 using UML_Logic_Library.StructuralEntities;
 
 namespace UML_Logic_Library.AdditionalClasses

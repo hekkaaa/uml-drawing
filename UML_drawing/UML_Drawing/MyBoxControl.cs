@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Linq;
 using System.Windows.Forms;
 using UML_Logic_Library.AdditionalClasses;
 using UML_Logic_Library.Arrows;
@@ -15,9 +16,10 @@ namespace UML_drawing
     {
         private Handler _handler;
         //выделенная фигура
-        private Component _selectedFigure = null;
+        private Component _selectedFigure;
         //фигура или маркер, который тащится мышью
-        private Component _draggedFigure = null;
+        private Component _draggedFigure;
+        public event EventHandler SelectedChanged;
 
         public List<Marker> Markers = new List<Marker>();
         private readonly Pen _selectRectPen;
@@ -35,12 +37,10 @@ namespace UML_drawing
             _selectRectPen = new Pen(Color.Red, 1f);
             _selectRectPen.DashStyle = System.Drawing.Drawing2D.DashStyle.Dash;
         }
-
-        public event EventHandler SelectedChanged;
-
+        
         public Component SelectedFigure
         {
-            get { return _selectedFigure; }
+            get => _selectedFigure;
             set
             {
                 _selectedFigure = value;
@@ -54,7 +54,7 @@ namespace UML_drawing
         // Тут типа все элементики в списочке
         public Handler Handler
         {
-            get { return _handler; }
+            get => _handler;
             set
             {
                 _handler = value;
@@ -77,12 +77,10 @@ namespace UML_drawing
 
             if (_handler != null)
             {
-                foreach (Component f in _handler.ComponentsInProj)
-                    if (f is Arrows)
-                        f.Draw(gr);
-                foreach (Component f in _handler.ComponentsInProj)
-                    if (f is SimpleRectangle)
-                        f.Draw(gr);
+                foreach (var f in _handler.ComponentsInProj.OfType<Arrows>())
+                    f.Draw(gr);
+                foreach (var f in _handler.ComponentsInProj.OfType<SimpleRectangle>())
+                    f.Draw(gr);
             }
 
             // Это выделение блока
@@ -101,12 +99,7 @@ namespace UML_drawing
             }
             //рисуем маркеры
             foreach (Marker m in Markers)
-                try
-                {
-                    m.Draw(gr);
-                }
-                catch {; }
-
+                m.Draw(gr);
         }
 
         protected override void OnMouseDown(MouseEventArgs e)
@@ -116,7 +109,7 @@ namespace UML_drawing
             location.Offset(-AutoScrollPosition.X, -AutoScrollPosition.Y);
 
             Focus();
-            if (e.Button == System.Windows.Forms.MouseButtons.Left)
+            if (e.Button == MouseButtons.Left)
             {
                 _draggedFigure = FindFigureByPoint(location);
                 if (!(_draggedFigure is Marker))
@@ -150,7 +143,7 @@ namespace UML_drawing
         private void UpdateMarkers()
         {
             foreach (Marker m in Markers)
-                if (_draggedFigure != m)//маркер который тащится, обновляется сам
+                if (_draggedFigure != m) //маркер который тащится, обновляется сам
                     m.UpdateLocation();
         }
 
@@ -159,7 +152,7 @@ namespace UML_drawing
             base.OnMouseMove(e);
             Point location = e.Location;
             location.Offset(-AutoScrollPosition.X, -AutoScrollPosition.Y);
-            if (e.Button == System.Windows.Forms.MouseButtons.Left)
+            if (e.Button == MouseButtons.Left)
             {
                 if (_draggedFigure is SimpleRectangle rectangle)
                 {
@@ -186,8 +179,7 @@ namespace UML_drawing
                     else
                         Cursor = Cursors.Default;
 
-                    if (toolTip1.GetToolTip(this) != null)
-                        toolTip1.SetToolTip(this, null);
+                    toolTip1.SetToolTip(this, null);
                 }
             }
 
@@ -219,7 +211,7 @@ namespace UML_drawing
         }
 
         // Поиск фигуры по точке
-        public Component FindFigureByPoint(Point p)
+        private Component FindFigureByPoint(Point p)
         {
             //ищем среди маркеров
             for (int i = Markers.Count - 1; i >= 0; i--)
@@ -246,7 +238,7 @@ namespace UML_drawing
             Invalidate();
         }
 
-        public void SelectedBringToFront()
+        private void SelectedBringToFront()
         {
             if (_selectedFigure != null)
             {
@@ -257,7 +249,7 @@ namespace UML_drawing
         }
 
 
-        public void SelectedSendToBack()
+        private void SelectedSendToBack()
         {
             if (_selectedFigure != null)
             {
@@ -286,7 +278,7 @@ namespace UML_drawing
             }
         }
 
-        public void SelectedDelete()
+        private void SelectedDelete()
         {
             if (_selectedFigure != null || _selectedFigure is Arrows)
             {
@@ -336,8 +328,6 @@ namespace UML_drawing
                 frontFlag = !frontFlag;
             }
             
-            
-
             int dx = 0;
             int dy = 0;
             if (e.KeyData == Keys.Right)
@@ -348,7 +338,6 @@ namespace UML_drawing
                 dy = -1;
             if (e.KeyData == Keys.Down)
                 dy = +1;
-            
             
             if (e.KeyData == (Keys.Right | Keys.Shift))
                 dx = +15;

@@ -7,7 +7,6 @@ namespace UML_Logic_Library.StructuralEntities
     [Serializable]
     public class RectangleField : RectangleComponent
     {
-        public string CompName => "RectangleField";
         public new readonly TextField Text = new TextField();
         public RectangleF Rect;
         public RectangleF TextRect;
@@ -26,12 +25,6 @@ namespace UML_Logic_Library.StructuralEntities
             TextRect = textRect;
         }
         
-        public new Rectangle TextBounds
-        {
-            get
-            {
-                return new Rectangle((int)(TextRect.Left + Location.X), (int)(TextRect.Top + Location.Y), (int)TextRect.Width, (int)TextRect.Height);
-            }
-        }
+        public new Rectangle TextBounds => new Rectangle((int)(TextRect.Left + Location.X), (int)(TextRect.Top + Location.Y), (int)TextRect.Width, (int)TextRect.Height);
     }
 }

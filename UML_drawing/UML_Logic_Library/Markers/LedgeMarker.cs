@@ -13,9 +13,8 @@ namespace UML_Logic_Library.Markers
             Arrows.Arrows arrow = (TargetComponent as Arrows.Arrows);
             if (arrow != null && (arrow.From == null || arrow.To == null))
                 return;
-            //не обновляем маркеры оторванных концов
-            //фигура, с которой связана линия
             var from = arrow.From as SimpleRectangle;
+            //фигура, с которой связана линия
             var to = arrow.To as SimpleRectangle;
             Location = new PointF(arrow.LedgePositionX, (from.Location.Y + from.Size.Height/2 + to.Location.Y) / 2);
         }

@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Drawing;
 using UML_Logic_Library.AdditionalClasses;
 using UML_Logic_Library.Arrows;
-using UML_Logic_Library.Interfaces;
 using UML_Logic_Library.StructuralEntities;
 
 namespace UML_Logic_Library.Markers
@@ -25,7 +24,8 @@ namespace UML_Logic_Library.Markers
         {
             Arrows.Arrows arrows = (TargetComponent as Arrows.Arrows);
             if (arrows.From == null || arrows.To == null)
-                return;//не обновляем маркеры оторванных концов
+                return;
+            //не обновляем маркеры оторванных концов
             //фигура, с которой связана линия
             var from = arrows.From as SimpleRectangle;
             var to = arrows.To as SimpleRectangle;

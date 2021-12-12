@@ -8,7 +8,6 @@ namespace UML_Logic_Library.StructuralEntities
     [Serializable]
     public class RectangleTwoFields : SimpleRectangle
     {
-        public string CompName => "RectangleTwoFields";
         public  RectangleField Head = new RectangleField(0);
         public  RectangleField FieldProp = new RectangleField(DefaultSize);
         public  RectangleField FieldMethods = new RectangleField(DefaultSize * 2);
